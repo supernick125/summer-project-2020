@@ -1,0 +1,70 @@
+html, body {
+  font-family: 'Libre Baskerville', serif;
+  height: 100%;
+  margin: 0px;
+}
+
+h1 {
+  font-size: 4.5vmin;
+  /* 2.5rem 5vmin*/
+}
+
+h2 {
+  font-size: 3.5vmin;
+  /* 2rem 4vmin */
+}
+
+h3 {
+  font-size: 3vmin;
+  /* 1.75rem 3.5vmin*/
+}
+
+h4 {
+  font-size: 2.5vmin;
+  /* 1.5rem 3vmin */
+}
+
+.countryBlue {
+  background-color: #0167b2;
+}
+
+.columbiaBlue {
+  background-color: #aad5e8;
+}
+
+.countryBlueText {
+  color: #0167b2;
+}
+
+.columbiaBlueText {
+  color: #aad5e8;
+}
+
+.paleBlueText {
+  color: #ebf7fc;
+}
+
+.whiteText {
+  color: white;
+}
+
+.bubble {
+  padding: 0.8rem 3rem 0.8rem 0.8rem;
+  margin: 0.5rem;
+  background-color: #aad5e8;
+  border: 2px solid #aad5e8;
+  font-size: 2.5vmin;
+  /* 1rem 2vmin*/
+}
+
+.number {
+  font-size: 6rem;
+  padding-right: 3rem;
+  margin-right: 2rem;
+}
+
+#description {
+  background-image: url("arch.png");
+  background-position: center;
+  background-size: 100% 150%;
+}
