@@ -2,11 +2,11 @@ const {
   getStudents,
   createStudent,
   deleteStudent
-} = require('../controllers/users');
+} = require('../controllers/user');
 const router = require('express').Router();
 
 //Register
-app.get('/register', createStudent);
+router.get('/register', createStudent);
 
 
 

@@ -3,7 +3,7 @@ const {
 } = require('../controllers/meeting');
 const router = require('express').Router();
 
-//Register a meeting
-app.get('/register', createStudent);
+//Get all meetings
+router.get('/register', getMeetings);
 
 module.exports = router;

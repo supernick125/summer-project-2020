@@ -1,4 +1,4 @@
-const pool = require('../index');
+const pool = require('../db/');
 
 //Return all students
 const getStudents = async (req, res) => {
