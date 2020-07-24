@@ -11,23 +11,22 @@ class AlumniForm extends React.Component {
     };
   }
 
-  // createStudent() {
-  //   ud = {this.state.firstName, this.state.lastName, this.state.email, this.state.link};
-  //   fetch("http://localhost:3001/students", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(ud),
-  //   })
-  //   .then(response => {
-  //     return response.text();
-  //   })
-  //   .then(data => {
-  //     alert(data);
-  //     getStudent();
-  //   });
-  // }
+  createStudent = () => {
+    fetch("http://localhost:3001/students", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({this.state.firstName, this.state.lastName, this.state.email, this.state.link}),
+    })
+    .then(response => {
+      return response.text();
+    })
+    .then(data => {
+      alert(data);
+      getStudent();
+    });
+  }
 
   handleChange = (event) => {
     this.setState({[event.target.name]: event.target.value});
