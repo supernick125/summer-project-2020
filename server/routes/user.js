@@ -1,53 +1,23 @@
 const {
-  getStudents,
-  createStudent,
-  deleteStudent
+  getUsers,
+  createUser,
+  deleteUser,
+  getName,
+  getEmail,
 } = require('../controllers/user');
 const router = require('express').Router();
 
-//Register
-router.get('/register', createStudent);
+//Get all users
+router.get('/get', getUsers);
 
+//Create new user
+router.post('/register', createUser);
 
+//Get user information
+router.get('/info/name', getName);
+router.get('/info/email', getEmail);
 
-// app.get('/', (req, res) => {
-//   student_model.getStudents()
-//   .then(response => {
-//     res.status(200).send(response);
-//   })
-//   .catch(error => {
-//     res.status(500).send(error);
-//   })
-// })
-//
-// app.post("/create", (req, res) => {
-//   student_model.createStudent(req.body)
-//   .then(response => {
-//     res.status(200).send(response);
-//   })
-//   .catch(error => {
-//     res.status(500).send(error);
-//   })
-// })
-//
-// app.delete("/students/:id", (req, res) => {
-//   student_model.deleteStudent(req.params.id)
-//   .then(response => {
-//     res.status(200).send(response);
-//   })
-//   .catch(error => {
-//     res.status(500).send(error);
-//   })
-// })
-
-// router.get(url, async (req, res) => {
-//   try {
-//     let data = await handler(req);
-//     res.status(200).json(data);
-//   } catch (error) {
-//     console.log(error)
-//     res.status(400).json({ error: error.message || error });
-//   }
-// });
+//Update information
+//ADD LATER
 
 module.exports = router;

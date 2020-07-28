@@ -1,10 +1,10 @@
 const pool = require('../db/');
 
-//Return all students
-const getStudents = async (req, res) => {
+//getUsers - return all users
+const getUsers = async (req, res) => {
   try {
-    const students = await pool.query(
-      'SELECT * FROM STUDENTS ORDER BY student_id ASC'
+    const users = await pool.query(
+      'SELECT * FROM account ORDER BY id ASC'
     )
 
   } catch (error) {
@@ -12,16 +12,16 @@ const getStudents = async (req, res) => {
   }
 }
 
-//Register a new student
-const createStudent = async (req, res) => {
-  const { firstname, lastname, username, email, password } = req.body
+//createUser - create new user
+const createUser = async (req, res) => {
+  const { firstname, lastname, email, username, password } = req.body
   try {
     //check username
     //check email
     //hash password
     const user = await pool.query(
-      'INSERT INTO STUDENTS (first_name, last_name, username, email_address, password, registered_on) VALUES ($1, $2, $3, $4, $5, $6) RETURNING user_id',
-      [firstname, lastname, username, email, password, Date.now()]
+      'INSERT INTO account (first_name, last_name, email_address, username, password, registered_on) VALUES ($1, $2, $3, $4, $5, $6) RETURNING user_id',
+      [firstname, lastname, username, email, password, Date.now()]//USE PSQL FOR TIMESTAMP
     )
 
   } catch (error) {
@@ -29,12 +29,12 @@ const createStudent = async (req, res) => {
   }
 }
 
-//Delete a student
-const deleteStudent = async (req, res) => {
+//deleteUser - delete a user
+const deleteUser = async (req, res) => {
   try {
 
     const user = await pool.query(
-      'DELETE FROM STUDENTS WHERE student_id = $1', [id]
+      'DELETE FROM account WHERE student_id = $1', [id]
     )
 
   } catch (error) {
@@ -42,11 +42,24 @@ const deleteStudent = async (req, res) => {
   }
 }
 
+//FUNCTIONS TO ADD
+
+//getName - return user's name
+
+//getEmail - return user's email
+
+//Export functions
 module.exports = {
-  getStudents,
-  createStudent,
-  deleteStudent
+  getUsers,
+  createUser,
+  deleteUser,
+  getName,
+  getEmail
 }
+
+
+
+//OLD FUNCTIONS MIGHT BE USEFUL:
 
 // const getStudents = () => {
 //   return new Promise(function(resolve, reject) {
@@ -81,3 +94,44 @@ module.exports = {
 //     })
 //   })
 // }
+
+
+// app.get('/', (req, res) => {
+//   student_model.getStudents()
+//   .then(response => {
+//     res.status(200).send(response);
+//   })
+//   .catch(error => {
+//     res.status(500).send(error);
+//   })
+// })
+//
+// app.post("/create", (req, res) => {
+//   student_model.createStudent(req.body)
+//   .then(response => {
+//     res.status(200).send(response);
+//   })
+//   .catch(error => {
+//     res.status(500).send(error);
+//   })
+// })
+//
+// app.delete("/students/:id", (req, res) => {
+//   student_model.deleteStudent(req.params.id)
+//   .then(response => {
+//     res.status(200).send(response);
+//   })
+//   .catch(error => {
+//     res.status(500).send(error);
+//   })
+// })
+
+// router.get(url, async (req, res) => {
+//   try {
+//     let data = await handler(req);
+//     res.status(200).json(data);
+//   } catch (error) {
+//     console.log(error)
+//     res.status(400).json({ error: error.message || error });
+//   }
+// });

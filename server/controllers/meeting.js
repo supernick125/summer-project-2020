@@ -1,5 +1,6 @@
 const pool = require('../db/');
 
+//getMeetings - return all meetings
 const getMeetings = async (req, res) => {
   try {
     const meetings = await pool.query(
@@ -10,6 +11,27 @@ const getMeetings = async (req, res) => {
   }
 }
 
+//FUNCTIONS TO ADD
+
+//createMeeting - create new meeting
+
+//deleteMeeting - delete a meeting
+
+//getTime - return time meeting takes place
+
+//getLocation - return location of meeting or say its virtual
+
+//getHost - return list of host id
+
+//getAttendees - return list of attendee ids
+
+//Export functions
 module.exports = {
-  getMeetings
+  getMeetings,
+  createMeeting,
+  deleteMeeting,
+  getTime,
+  getLocation,
+  getHost,
+  getAttendees
 }
