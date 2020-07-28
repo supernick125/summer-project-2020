@@ -14,16 +14,34 @@ const getMeetings = async (req, res) => {
 //FUNCTIONS TO ADD
 
 //createMeeting - create new meeting
+const createMeeting = () => {
+
+}
 
 //deleteMeeting - delete a meeting
+const deleteMeeting = () => {
+
+}
 
 //getTime - return time meeting takes place
+const getTime = () => {
+
+}
 
 //getLocation - return location of meeting or say its virtual
+const getLocation = () => {
+
+}
 
 //getHost - return list of host id
+const getHost = () => {
+
+}
 
 //getAttendees - return list of attendee ids
+const getAttendees = () => {
+
+}
 
 //Export functions
 module.exports = {

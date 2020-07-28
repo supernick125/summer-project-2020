@@ -20,8 +20,8 @@ const createUser = async (req, res) => {
     //check email
     //hash password
     const user = await pool.query(
-      'INSERT INTO account (first_name, last_name, email_address, username, password, registered_on) VALUES ($1, $2, $3, $4, $5, $6) RETURNING user_id',
-      [firstname, lastname, username, email, password, Date.now()]//USE PSQL FOR TIMESTAMP
+      'INSERT INTO account (first_name, last_name, email_address, username, password, registered) VALUES ($1, $2, $3, $4, $5, $6) RETURNING user_id',
+      [firstname, lastname, username, email, password]
     )
 
   } catch (error) {
@@ -45,8 +45,14 @@ const deleteUser = async (req, res) => {
 //FUNCTIONS TO ADD
 
 //getName - return user's name
+getName = () => {
+
+}
 
 //getEmail - return user's email
+getEmail = () => {
+
+}
 
 //Export functions
 module.exports = {
