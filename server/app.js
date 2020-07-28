@@ -1,6 +1,17 @@
-const express = require("express")
-const app = express()
-const port = process.env.PORT || 3001
+const express = require("express");
+//cors?
+const app = express();
+
+//Set env variables from .env file
+const dotenv = require('dotenv');
+dotenv.config();
+// if (app.get('env') == 'development') {
+//   require('dotenv').config();
+//   console.log('Starting in dev mode.');
+// }
+
+//Port setup
+const port = process.env.PORT || 3001;
 
 //MIDDLEWARE
 app.use(express.json())
