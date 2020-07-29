@@ -5,7 +5,7 @@ import AlumniForm from './AlumniForm';
 class App extends React.Component {
   render() {
     return (
-        <div class="container-fluid h-100">
+        <div class="container-fluid h-100 mb-0">
           <div class="row h-100">
             <div id="description" class="col-md-7 p-3">
               <DescriptionComp />
