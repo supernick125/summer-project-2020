@@ -1,5 +1,5 @@
-const express = require("express");
-//cors?
+const express = require('express');
+const cors = require('cors');
 const app = express();
 
 //Set env variables from .env file
@@ -14,7 +14,8 @@ dotenv.config();
 const port = process.env.PORT || 3001;
 
 //MIDDLEWARE
-app.use(express.json())
+app.use(cors());
+app.use(express.json());
 app.use(function(req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");

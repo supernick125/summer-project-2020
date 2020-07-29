@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/supernick125/summer-project-2020#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "pg": "^8.2.1"
