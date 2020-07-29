@@ -3,27 +3,45 @@ const pool = require('../db/');
 //getUsers - return all users
 const getUsers = async (req, res) => {
   try {
-    const users = await pool.query(
+    const response = await pool.query(
       'SELECT * FROM account ORDER BY id ASC'
     )
 
+    res.status(200).json({ data: response});
   } catch (error) {
-    return res.status(500).json({ message: 'There was an error while searching. Please try again later.'})
+    res.status(500).json({ message: 'There was an error while searching. Please try again later.'})
   }
 }
 
 //createUser - create new user
 const createUser = async (req, res) => {
-  const { firstname, lastname, email, username, password } = req.body
   try {
+    const { firstName, lastName, email, username, password } = req.body
     //check username
     //check email
     //hash password
     const user = await pool.query(
-      'INSERT INTO account (first_name, last_name, email_address, username, password, registered) VALUES ($1, $2, $3, $4, $5, $6) RETURNING user_id',
-      [firstname, lastname, username, email, password]
+      'INSERT INTO account (first_name, last_name, email_address, username, password, registered) VALUES ($1, $2, $3, $4, $5, now()) RETURNING id',
+      [firstName, lastName, email, username, password], (err, result) => {
+        if (err) {
+          return console.error('Error during query', err.stack)
+        }
+        //return result.rows[0];
+      }
     )
 
+    const response = {
+      user: {
+        id: user,
+        username: username,
+        firstname: firstName,
+        lastname: lastName
+      }
+    }
+
+    console.log(response);
+    //201
+    return res.status(200).json(response);
   } catch (error) {
     return res.status(500).json({ message: 'There was an error while registering. Please try again later.' });
   }
@@ -38,7 +56,7 @@ const deleteUser = async (req, res) => {
     )
 
   } catch (error) {
-    return res.status(500).json({ message: 'There was an error while deleting. Please try again later.' });
+    res.status(500).json({ message: 'There was an error while deleting. Please try again later.' });
   }
 }
 

@@ -8,7 +8,11 @@ router.use('/meeting', meeting);
 
 //Test for communications
 router.get('/hello', (req, res) => {
-  res.send({ message: "Hello there!" });
+  try {
+    res.json('Hello there!');
+  } catch (error) {
+    console.error(error.message);
+  }
 });
 
 module.exports = router;

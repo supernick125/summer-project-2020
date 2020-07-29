@@ -8,7 +8,7 @@ const {
 const router = require('express').Router();
 
 //Get all users
-router.get('/get', getUsers);
+router.get('/list', getUsers);
 
 //Create new user
 router.post('/register', createUser);
