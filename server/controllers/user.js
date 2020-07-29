@@ -66,7 +66,7 @@ const deleteUser = async (req, res) => {
 const getName = async (req, res) => {
   try {
     const response = await pool.query(
-      'SELECT NAME FROM account WHERE student_id = $1', [id]
+      'SELECT first_name, last_name FROM account WHERE student_id = $1', [id]
     )
   } catch (error) {
     res.status(500).json({message: 'There was an error while retrieving name. Please try again later.'});
