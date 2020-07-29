@@ -68,13 +68,14 @@ const getName = async (req, res) => {
     const response = await pool.query(
       'SELECT first_name, last_name FROM account WHERE student_id = $1', [id]
     )
+    res.status(200).json({data: response});
   } catch (error) {
-    res.status(500).json({message: 'There was an error while retrieving name. Please try again later.'});
+    res.status(500).json({ message: 'There was an error while retrieving name. Please try again later.'});
   }
 }
 
 //getEmail - return user's email
-getEmail = () => {
+const getEmail = async (req, res) => {
 
 }
 
