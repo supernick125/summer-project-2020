@@ -68,18 +68,28 @@ class AlumniForm extends React.Component {
     event.preventDefault();
 
     const data = this.state;
-    fetch('/api/user/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
+    // fetch('/api/user/register', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(data)
+    // })
+    // .then(response => {
+    //   return response.text();
+    // })
+    // .catch(error => {
+    //   console.log(error);
+    // });
+    
+    fetch("http://localhost:3001/api/hello", {
+      method: 'GET'
     })
     .then(response => {
-      return response.text();
+      console.log(response);
     })
     .catch(error => {
-      console.log(error);
+        console.log(error);
     });
 
     this.setState({
