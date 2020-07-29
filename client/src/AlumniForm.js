@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import axios from 'axios';
 
 //const AlumniForm = () =>
 class AlumniForm extends React.Component {
@@ -17,43 +18,48 @@ class AlumniForm extends React.Component {
   }
 
   //Log test message
-  getHello = async () => {
-    try {
-      const response = await fetch('http://localhost:3001/api/hello');
-      const jsonData = await response.json();
-
-      console.log(jsonData);
-    } catch (error) {
-      console.error(error.message);
-    }
+  getHello = () => {
+    axios.get('http://localhost:3001/api/hello')
+      .then(response => {
+        console.log(response);
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 
   //Log list of all users
-  getUsers = async () => {
-    try {
-      const response = await fetch('http://localhost:3001/api/user/list');
-      const jsonData = await response.json();
-
-      console.log(jsonData);
-    } catch (error) {
-      console.error(error.message);
-    }
+  getUsers = () => {
+    axios.get('http://localhost:3001/api/user/list')
+      .then(response => {
+        console.log(response);
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 
   //Create new user
-  createUser = async () => {
-    try {
-      const data = this.state;
-      const response = await fetch('http://localhost:3001/api/user/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+  createUser = () => {
+    const data = this.state;
+    axios.post('http://localhost:3001/api/user/register', data)
+      .then(response => {
+        console.log(response);
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error(error);
       });
-
-      console.log(response);
-    } catch (error) {
-      console.error(error.message);
-    }
+      //reset state
+      this.setState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        username: '',
+        password: ''
+      });
   }
 
   //Handle input change
