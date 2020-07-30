@@ -62,6 +62,19 @@ class AlumniForm extends React.Component {
       });
   }
 
+  // log of user's name but not working correctly??? Check if getName() functions
+  // inself is working or if there is an issue with the link
+  getName = () => {
+    axios.get('http://localhost:3001/api/user/info/name')
+      .then(response => {
+        console.log(response);
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+  
   //Handle input change
   handleChange = (event) => {
     this.setState({[event.target.name]: event.target.value});
@@ -73,6 +86,7 @@ class AlumniForm extends React.Component {
     event.preventDefault();
 
     this.createUser();
+    // this.getName();
     //this.getHello();
   }
 
