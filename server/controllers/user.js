@@ -7,7 +7,7 @@ const getUsers = async (req, res) => {
       'SELECT * FROM account ORDER BY id ASC'
     )
 
-    res.status(200).json({ data: response});
+    res.status(200).json(response.rows);
   } catch (error) {
     res.status(500).json({ message: 'There was an error while searching. Please try again later.'})
   }
@@ -49,38 +49,51 @@ const createUser = async (req, res) => {
 
 //deleteUser - delete a user
 const deleteUser = async (req, res) => {
-  try {
-
-    const user = await pool.query(
-      'DELETE FROM account WHERE student_id = $1', [id]
-    )
-
-  } catch (error) {
-    res.status(500).json({ message: 'There was an error while deleting. Please try again later.' });
-  }
+  // try {
+  //
+  //   const user = await pool.query(
+  //     'DELETE FROM account WHERE id = $1', [id]
+  //   )
+  //
+  // } catch (error) {
+  //   res.status(500).json({ message: 'There was an error while deleting. Please try again later.' });
+  // }
 }
-
-//FUNCTIONS TO ADD
 
 //getName - return user's name
 const getName = async (req, res) => {
   try {
+    const id = req.params.id;
     const response = await pool.query(
-      'SELECT first_name, last_name FROM account WHERE student_id = $1', [id]
+      'SELECT first_name, last_name FROM account WHERE id = $1', [id]
     )
-    res.status(200).json({data: response});
+    if (response.rowCount == 0) return res.status(404).json({ message: 'User not found' });
+
+    const name = {
+      first_name: response.rows[0].first_name,
+      last_name: response.rows[0].last_name
+    }
+
+    return res.status(200).json(name);
   } catch (error) {
-    res.status(500).json({ message: 'There was an error while retrieving name. Please try again later.'});
+    return res.status(500).json({ message: 'There was an error while retrieving name. Please try again later.'});
   }
 }
 
 //getEmail - return user's email
 const getEmail = async (req, res) => {
   try {
+    const id = req.params.id;
     const response = await pool.query(
-      'SELECT email_address FROM account WHERE student_id = $1', [id]
+      'SELECT email_address FROM account WHERE id = $1', [id]
     )
-    res.status(200).json({data: response});
+    if (response.rowCount == 0) return res.status(404).json({ message: 'User not found' });
+
+    const email = {
+      email_address: response.rows[0].email_address
+    }
+
+    res.status(200).json(email);
   } catch (error) {
     res.status(500).json({ message: 'There was an error while retrieving email. Please try again later.'});
   }
@@ -94,82 +107,3 @@ module.exports = {
   getName,
   getEmail
 }
-
-
-
-//OLD FUNCTIONS MIGHT BE USEFUL:
-
-// const getStudents = () => {
-//   return new Promise(function(resolve, reject) {
-//     pool.query("SELECT * FROM students ORDER BY id ASC", (error, results) => {
-//       if (error) {
-//         reject(error)
-//       }
-//       resolve(results.rows);
-//     })
-//   })
-// }
-//
-// const createStudent = (body) => {
-//   return new Promise(function(resolve, reject) {
-//     const { name, email } = body
-//     pool.query(`INSERT INTO students (name, email) VALUES ($1, $2) RETURNING *`, [name, email], (error, results) => {
-//       if (error) {
-//         reject(error)
-//       }
-//       resolve(`A new student has been added: ${results.rows[0]}`)
-//     })
-//   })
-// }
-//
-// const deleteStudent = (id) => {
-//   return new Promise(function(resolve, reject) {
-//     pool.query("DELETE FROM students WHERE id = $1", [id], (error, results) => {
-//       if (error) {
-//         reject(error)
-//       }
-//       resolve(`Student deleted with ID: ${id}`)
-//     })
-//   })
-// }
-
-
-// app.get('/', (req, res) => {
-//   student_model.getStudents()
-//   .then(response => {
-//     res.status(200).send(response);
-//   })
-//   .catch(error => {
-//     res.status(500).send(error);
-//   })
-// })
-//
-// app.post("/create", (req, res) => {
-//   student_model.createStudent(req.body)
-//   .then(response => {
-//     res.status(200).send(response);
-//   })
-//   .catch(error => {
-//     res.status(500).send(error);
-//   })
-// })
-//
-// app.delete("/students/:id", (req, res) => {
-//   student_model.deleteStudent(req.params.id)
-//   .then(response => {
-//     res.status(200).send(response);
-//   })
-//   .catch(error => {
-//     res.status(500).send(error);
-//   })
-// })
-
-// router.get(url, async (req, res) => {
-//   try {
-//     let data = await handler(req);
-//     res.status(200).json(data);
-//   } catch (error) {
-//     console.log(error)
-//     res.status(400).json({ error: error.message || error });
-//   }
-// });

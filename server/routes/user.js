@@ -14,8 +14,8 @@ router.get('/list', getUsers);
 router.post('/register', createUser);
 
 //Get user information
-router.get('/info/name', getName);
-router.get('/info/email', getEmail);
+router.get('/info/name/:id', getName);
+router.get('/info/email/:id', getEmail);
 
 //Update information
 //ADD LATER

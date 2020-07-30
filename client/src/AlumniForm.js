@@ -15,6 +15,8 @@ class AlumniForm extends React.Component {
     this.getHello = this.getHello.bind(this);
     this.getUsers = this.getUsers.bind(this);
     this.createUser = this.createUser.bind(this);
+    this.getName = this.getName.bind(this);
+    this.getEmail = this.getEmail.bind(this);
   }
 
   //Log test message
@@ -62,10 +64,10 @@ class AlumniForm extends React.Component {
       });
   }
 
-  // log of user's name but not working correctly??? Check if getName() functions
-  // itself is working or if there is an issue
+  //Log user name with given id
   getName = () => {
-    axios.get('http://localhost:3001/api/user/info/name')
+    const id = parseInt(prompt("id: "));
+    axios.get(`http://localhost:3001/api/user/info/name/${id}`)
       .then(response => {
         console.log(response);
         console.log(response.data);
@@ -74,7 +76,19 @@ class AlumniForm extends React.Component {
         console.error(error);
       });
   }
-  
+
+  getEmail = () => {
+    const id = parseInt(prompt("id: "));
+    axios.get(`http://localhost:3001/api/user/info/email/${id}`)
+      .then(response => {
+        console.log(response);
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
   //Handle input change
   handleChange = (event) => {
     this.setState({[event.target.name]: event.target.value});
@@ -86,7 +100,7 @@ class AlumniForm extends React.Component {
     event.preventDefault();
 
     this.createUser();
-    // this.getName();  
+    // this.getName();
     //this.getHello();
   }
 
@@ -119,6 +133,8 @@ class AlumniForm extends React.Component {
         </form>
         <button onClick={this.getUsers}>list</button>
         <button onClick={this.getHello}>hello</button>
+        <button onClick={this.getName}>name</button>
+        <button onClick={this.getEmail}>email</button>
       </Fragment>
     );
   }
