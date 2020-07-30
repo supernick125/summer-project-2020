@@ -63,7 +63,7 @@ class AlumniForm extends React.Component {
   }
 
   // log of user's name but not working correctly??? Check if getName() functions
-  // inself is working or if there is an issue with the link
+  // inself is working or if there is an issue
   getName = () => {
     axios.get('http://localhost:3001/api/user/info/name')
       .then(response => {
@@ -86,7 +86,7 @@ class AlumniForm extends React.Component {
     event.preventDefault();
 
     this.createUser();
-    // this.getName();
+    this.getName();  
     //this.getHello();
   }
 
