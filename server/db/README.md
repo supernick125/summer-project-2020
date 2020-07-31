@@ -42,7 +42,7 @@ CREATE TABLE meetings
   host_id INTEGER,
   schedule_dt TIMESTAMPTZ,
   created_dt TIMESTAMPTZ,
-  is_virtual BIT,
+  is_virtual BOOLEAN,
   location_id INTEGER,
   attendee_num <!-- WHAT DATA TYPE SHOULD WE USE FOR THIS -->
 );
