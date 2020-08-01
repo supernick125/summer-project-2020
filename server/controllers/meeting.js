@@ -4,7 +4,7 @@ const pool = require('../db/');
 const getMeetings = async (req, res) => {
   try {
     const meetings = await pool.query(
-      'SELECT * FROM meetings ORDER BY id ASC'
+      'SELECT * FROM meeting ORDER BY id ASC'
     )
     res.status(200).json(response.rows);
   } catch (error) {
@@ -19,8 +19,8 @@ const createMeeting = async (req, res) => {
   try {
     const { host, scheduledTime, virtual, location, attendeeNum } = req.body;
     
-    const meetings = await pool.query(
-      'INSERT INTO meetings (host_id, schedule_dt, created_dt, is_virtual, location_id, attendee_num) VALUES ($1, $2, now(), $3, $4, $5) RETURNING id',
+    const meeting = await pool.query(
+      'INSERT INTO meeting (host_id, schedule_dt, created_dt, is_virtual, location_id, attendee_num) VALUES ($1, $2, now(), $3, $4, $5) RETURNING id',
       [ host, scheduledTime, createdTime, virtual, location, attendeeNum ], (err, result) => {
         if (err) {
           return console.error('Error during query', err.stack)
@@ -29,8 +29,8 @@ const createMeeting = async (req, res) => {
     )
     
     const response = {
-      meetings: {
-        id: meetings,
+      meeting: {
+        id: meeting,
         host_id: host,
         schedule_dt: scheduledTime,
         is_virtual: virtual,
@@ -50,7 +50,7 @@ const createMeeting = async (req, res) => {
 const deleteMeeting = async (req, res) => {
   try {
     const meetings = await pool.query(
-      'DELETE FROM meetings WHERE id = $1', [id];
+      'DELETE FROM meeting WHERE id = $1', [id];
     )
     
   } catch (error) {
@@ -62,7 +62,7 @@ const deleteMeeting = async (req, res) => {
 const getTime = async (req, res) => {
   try {
     const meetings = await pool.query(
-      'SELECT schedule_dt FROM meetings WHERE id = $1', [id];
+      'SELECT schedule_dt FROM meeting WHERE id = $1', [id];
     )
     if (response.rowCount == 0) return res.status(404).json({ message: 'User not found' });
     
@@ -78,7 +78,7 @@ const getTime = async (req, res) => {
 //getLocation - return location of meeting or say its virtual
 const getLocation = async (req, res) => {
   // try {
-  //   const meetings = await pool.query(
+  //   const meeting = await pool.query(
   //     'SELECT location_id FROM meetings WHERE id = $1', [id];
   //   )
   //   if (response.rowCount == 0) return res.status(404).json({ message: 'User not found' });
