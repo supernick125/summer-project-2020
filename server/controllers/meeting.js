@@ -50,7 +50,7 @@ const createMeeting = async (req, res) => {
 const deleteMeeting = async (req, res) => {
   try {
     const meetings = await pool.query(
-      'DELETE FROM meeting WHERE id = $1', [id];
+      'DELETE FROM meeting WHERE id = $1', [id]
     )
     
   } catch (error) {
@@ -62,7 +62,7 @@ const deleteMeeting = async (req, res) => {
 const getTime = async (req, res) => {
   try {
     const meetings = await pool.query(
-      'SELECT schedule_dt FROM meeting WHERE id = $1', [id];
+      'SELECT schedule_dt FROM meeting WHERE id = $1', [id]
     )
     if (response.rowCount == 0) return res.status(404).json({ message: 'User not found' });
     
@@ -76,7 +76,7 @@ const getTime = async (req, res) => {
 }
 
 //getLocation - return location of meeting or say its virtual
-const getLocation = async (req, res) => {
+const getLocation = () => {
   // try {
   //   const meeting = await pool.query(
   //     'SELECT location_id FROM meetings WHERE id = $1', [id];
