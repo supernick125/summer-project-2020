@@ -23,14 +23,13 @@
 psql -U postgres
 <password you chose during install>
 CREATE DATABASE alumni_connector;
-CREATE USER <name> WITH PASSWORD '<password2>';
 \q
 psql -U postgres -d alumni_connector -f <file path of db-schema.sql>
 (DB schema is now created)
 
 For all future logins:
-psql -U <name> -d alumni_connector
-<password2>
+psql -U postgres -d alumni_connector
+<password>
 
 ## Some helpful sample links
 
