@@ -1,22 +1,38 @@
 import React from 'react';
-import DescriptionComp from './DescriptionComp';
-import AlumniForm from './AlumniForm';
 
-class App extends React.Component {
-  render() {
-    return (
-        <div class="container-fluid h-100 mb-0">
-          <div class="row h-100">
-            <div id="description" class="col-md-7 p-3">
-              <DescriptionComp />
-            </div>
-            <div class="col-md-5 columbiaBlue p-3">
-              <AlumniForm />
-            </div>
-          </div>
-        </div>
-    );
-  }
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import RegisterPage from './pages/Register';
+import HomePage from './pages/Home';
+
+export default (props) => {
+  return (
+    <div>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={RegisterPage} />
+          <Route path="/home" component={HomePage} />
+          <Route path='*'>
+            <h1>Not Found</h1>
+          </Route>
+        </Switch>
+      </Router>
+    </div>
+  );
 }
 
-export default App;
+// class App extends React.Component {
+//   render() {
+//     return (
+//         <div class="container-fluid h-100 mb-0">
+//           <div class="row h-100">
+//             <div id="description" class="col-md-7 p-3">
+//               <DescriptionComp />
+//             </div>
+//             <div class="col-md-5 columbiaBlue p-3">
+//               <AlumniForm />
+//             </div>
+//           </div>
+//         </div>
+//     );
+//   }
+// }
