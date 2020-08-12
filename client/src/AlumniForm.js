@@ -8,8 +8,8 @@ class AlumniForm extends React.Component {
     this.state = {
       firstName: '',
       lastName: '',
+      graduationYear: '',
       email: '',
-      username: '',
       password: ''
     };
     this.getHello = this.getHello.bind(this);
@@ -58,8 +58,8 @@ class AlumniForm extends React.Component {
       this.setState({
         firstName: '',
         lastName: '',
+        graduationYear: '',
         email: '',
-        username: '',
         password: ''
       });
   }
@@ -96,7 +96,7 @@ class AlumniForm extends React.Component {
 
   //Handle form submit
   handleSubmit = (event) => {
-    console.log(`Name: ${this.state.firstName} ${this.state.lastName} Email: ${this.state.email} Username: ${this.state.username} Password: ${this.state.password}`);
+    console.log(`Name: ${this.state.firstName} ${this.state.lastName} Email: ${this.state.email} Password: ${this.state.password}`);
     event.preventDefault();
 
     this.createUser();
@@ -117,13 +117,13 @@ class AlumniForm extends React.Component {
             <input type='text' class='form-control' id='lastName' name='lastName' value={this.state.lastName} onChange={this.handleChange}/>
           </div>
           <div class='form-group'>
+            <label for='bio'>Graduation Year:</label>
+            <input type='text' class='form-control' id='graduationYear' name='graduationYear' value={this.state.graduationYear} onChange={this.handleChange}/>
+          </div>
+          <div class='form-group'>
             <label for='email'>Email Address:</label>
             <input type='text' class='form-control' id='email' aria-describedby='emailHelp' name='email' value={this.state.email} onChange={this.handleChange}/>
             <small id='emailHelp' class='form-text text-muted'>We'll never share your email with anyone else.</small>
-          </div>
-          <div class='form-group'>
-            <label for='bio'>Username:</label>
-            <input type='text' class='form-control' id='username' name='username' value={this.state.username} onChange={this.handleChange}/>
           </div>
           <div class='form-group'>
             <label for='bio'>Password:</label>
