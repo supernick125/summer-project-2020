@@ -16,13 +16,13 @@ const getUsers = async (req, res) => {
 //createUser - create new user
 const createUser = async (req, res) => {
   try {
-    const { firstName, lastName, email, username, password } = req.body
+    const { firstName, lastName, graduationYear, email, password } = req.body
     //check username
     //check email
     //hash password
     const user = await pool.query(
-      'INSERT INTO account (first_name, last_name, email_address, username, password, registered) VALUES ($1, $2, $3, $4, $5, now()) RETURNING id',
-      [firstName, lastName, email, username, password], (err, result) => {
+      'INSERT INTO account (account_type_id, school_id, graduation_year, first_name, last_name, email_address, password, registered) VALUES (1, 1, $1, $2, $3, $4, $5, now()) RETURNING id',
+      [graduationYear, firstName, lastName, email, password], (err, result) => {
         if (err) {
           return console.error('Error during query', err.stack)
         }
@@ -33,7 +33,7 @@ const createUser = async (req, res) => {
     const response = {
       user: {
         id: user,
-        username: username,
+        graduationYear: graduationYear,
         firstname: firstName,
         lastname: lastName
       }
