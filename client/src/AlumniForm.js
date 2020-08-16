@@ -6,6 +6,7 @@ class AlumniForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      userType: '',
       firstName: '',
       lastName: '',
       graduationYear: '',
@@ -56,6 +57,7 @@ class AlumniForm extends React.Component {
       });
       //reset state
       this.setState({
+        userType: '',
         firstName: '',
         lastName: '',
         graduationYear: '',
@@ -88,6 +90,20 @@ class AlumniForm extends React.Component {
         console.error(error);
       });
   }
+  
+  //Set students
+  setStudent = () => {
+    this.setState({
+      userType: '1'
+    }, () => console.log(this.state.userType))
+  }
+  
+  //Set alumni
+  setAlumni = () => {
+    this.setState({
+      userType: '2'
+    }, () => console.log(this.state.userType))
+  }
 
   //Handle input change
   handleChange = (event) => {
@@ -103,11 +119,17 @@ class AlumniForm extends React.Component {
     // this.getName();
     //this.getHello();
   }
+  
 
   render() {
     return (
       <Fragment>
         <form action='' class='m-4' onSubmit={this.handleSubmit}>
+          <div class='form-group'>
+            <label for='userType'>Are you a student or alumni:</label>
+            <button as="input" type="button" onClick={this.setStudent}>Student</button>
+            <button as="input" type="button" onClick={this.setAlumni}>Alumni</button>
+          </div>
           <div class='form-group'>
             <label for='firstName'>First Name:</label>
             <input type='text' class='form-control' id='firstName' name='firstName' value={this.state.firstName} onChange={this.handleChange}/>
@@ -117,7 +139,7 @@ class AlumniForm extends React.Component {
             <input type='text' class='form-control' id='lastName' name='lastName' value={this.state.lastName} onChange={this.handleChange}/>
           </div>
           <div class='form-group'>
-            <label for='bio'>Graduation Year:</label>
+            <label for='graduationYear'>Graduation Year:</label>
             <input type='text' class='form-control' id='graduationYear' name='graduationYear' value={this.state.graduationYear} onChange={this.handleChange}/>
           </div>
           <div class='form-group'>
