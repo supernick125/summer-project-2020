@@ -1,7 +1,7 @@
 import React from 'react';
-
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import RegisterPage from './pages/Register';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import RegisterPage from './pages/Register/RegisterPage';
 import HomePage from './pages/Home';
 
 export default (props) => {
