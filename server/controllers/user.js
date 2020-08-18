@@ -21,8 +21,8 @@ const createUser = async (req, res) => {
     //check email
     //hash password
     const user = await pool.query(
-      'INSERT INTO account (first_name, last_name, email_address, username, password, registered) VALUES ($1, $2, $3, $4, $5, now()) RETURNING id',
-      [firstName, lastName, email, username, password], (err, result) => {
+      'INSERT INTO account (account_type_id, school_id, graduation_year, first_name, last_name, email_address, password) VALUES ($1, 1, $2, $3, $4, $5, $6 RETURNING id',
+      [userType, graduationYear, firstName, lastName, email, password], (err, result) => {
         if (err) {
           return console.error('Error during query', err.stack)
         }
