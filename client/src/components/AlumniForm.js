@@ -6,10 +6,10 @@ class AlumniForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      userType: '',
       firstName: '',
       lastName: '',
-      email: '',
-      username: '',
+      graduationYear: '',
       password: ''
     };
     this.getHello = this.getHello.bind(this);
@@ -56,10 +56,10 @@ class AlumniForm extends React.Component {
       });
       //reset state
       this.setState({
+        userType: '',
         firstName: '',
         lastName: '',
-        email: '',
-        username: '',
+        graduationYear: '',
         password: ''
       });
   }
@@ -88,7 +88,21 @@ class AlumniForm extends React.Component {
         console.error(error);
       });
   }
-
+  
+  //Set to student
+  setStudent = () => {
+    this.setState({
+      userType: 1
+    }, () => console.log(this.userType))
+  }
+  
+  //Set to alumni
+  setAlumni = () => {
+    this.setState({
+      userType: 2
+    }, () => console.log(this.userType))
+  }
+  
   //Handle input change
   handleChange = (event) => {
     this.setState({[event.target.name]: event.target.value});
@@ -109,6 +123,11 @@ class AlumniForm extends React.Component {
       <Fragment>
         <form action='' class='m-4' onSubmit={this.handleSubmit}>
           <div class='form-group'>
+            <label for='userType'>Are you a student or alumni:</label>
+            <button as="input" type="button" onClick={this.setStudent}>Student</button>
+            <button as="input" type="button" onClick={this.setAlumni}>Alumni</button>
+          </div>
+          <div class='form-group'>
             <label for='firstName'>First Name:</label>
             <input type='text' class='form-control' id='firstName' name='firstName' value={this.state.firstName} onChange={this.handleChange}/>
           </div>
@@ -122,8 +141,8 @@ class AlumniForm extends React.Component {
             <small id='emailHelp' class='form-text text-muted'>We'll never share your email with anyone else.</small>
           </div>
           <div class='form-group'>
-            <label for='bio'>Username:</label>
-            <input type='text' class='form-control' id='username' name='username' value={this.state.username} onChange={this.handleChange}/>
+            <label for='bio'>Graduation Year:</label>
+            <input type='text' class='form-control' id='graduationYear' name='graduationYear' value={this.state.graduationYear} onChange={this.handleChange}/>
           </div>
           <div class='form-group'>
             <label for='bio'>Password:</label>
