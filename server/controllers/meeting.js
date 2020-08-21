@@ -76,10 +76,10 @@ const getTime = async (req, res) => {
 
 //getLocation - return location of meeting or say its virtual
 //only got the function to work when virtual is false and gives a location. Not sure how to do the other way around, or what to output.
-const getLocation = () => {
+const getLocation = async (req, res) => {
   try {
     const meeting = await pool.query(
-      'SELECT address_id FROM meeting WHERE id = $1 and virtual = false', [id];
+      'SELECT address_id FROM meeting WHERE id = $1 and virtual = false', [id]
     )
     if (response.rowCount == 0) return res.status(404).json({ message: 'User not found' });
   
@@ -96,11 +96,11 @@ const getLocation = () => {
 const getHost = async (req, res) => {
   try {
     const meeting = await pool.query(
-      'SELECT host_id FROM meeting WHERE active = true ORDER BY id ASC';
+      'SELECT host_id FROM meeting WHERE active = true ORDER BY id ASC'
     )
     res.status(200).json(response.rows);
   } catch (error) {
-    res.status(500).json(message:'There was an error while searching. Please try again later.')
+    res.status(500).json({message:'There was an error while searching. Please try again later.'})
   }
 }
 
@@ -108,7 +108,7 @@ const getHost = async (req, res) => {
 const getAttendees = async (req, res) => {
   try {
     const meeting = await pool.query(
-      'SELECT account_id FROM account_meeting WHERE meeting_id = $1 ORDER BY id ASC', [id];
+      'SELECT account_id FROM account_meeting WHERE meeting_id = $1 ORDER BY id ASC', [id]
     )
     res.status(200).json(response.rows);
   } catch (error) {
