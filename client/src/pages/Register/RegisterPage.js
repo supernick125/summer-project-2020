@@ -1,20 +1,22 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
+import RegisterForm from '../../components/RegisterForm'
 
-const RegisterPage = (props) => {
-
-  return (
-    <Container>
-      <Row>
-        <Col>
-        Hello
-        </Col>
-        <Col>
-        WORLD
-        </Col>
-      </Row>
-    </Container>
-  )
+class RegisterPage extends React.Component {
+  render() {
+    return (
+      <Container>
+        <Row>
+          <Col md={7}>
+            <h1>Description will go here</h1>
+          </Col>
+          <Col md={5}>
+            <RegisterForm />
+          </Col>
+        </Row>
+      </Container>
+    )
+  }
 }
 
 export default RegisterPage
