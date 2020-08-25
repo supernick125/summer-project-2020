@@ -16,7 +16,7 @@ const getUsers = async (req, res) => {
 //createUser - create new user
 const createUser = async (req, res) => {
   try {
-    const { firstName, lastName, email, username, password } = req.body
+    const {userType, graduationYear, firstName, lastName, email, password } = req.body
     //check username
     //check email
     //hash password
@@ -33,7 +33,7 @@ const createUser = async (req, res) => {
     const response = {
       user: {
         id: user,
-        username: username,
+        graduationYear: graduationYear,
         firstname: firstName,
         lastname: lastName
       }
