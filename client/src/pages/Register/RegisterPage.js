@@ -1,6 +1,7 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import RegisterForm from '../../components/RegisterForm'
+import RegisterDescription from '../../components/RegisterDescription/RegisterDescription'
 
 class RegisterPage extends React.Component {
   render() {
@@ -8,7 +9,7 @@ class RegisterPage extends React.Component {
       <Container>
         <Row>
           <Col md={7}>
-            <h1>Description will go here</h1>
+            <RegisterDescription />
           </Col>
           <Col md={5}>
             <RegisterForm />
