@@ -19,7 +19,7 @@ class RegisterForm extends React.Component {
   }
 
   handleSubmit(event) {
-    alert(`
+    console.log(`
       First Name: ${this.state.firstName}
       Last Name: ${this.state.lastName}
       Email: ${this.state.email}
