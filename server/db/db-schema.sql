@@ -236,6 +236,8 @@ CREATE TABLE newsletter_account (
   last_update timestamptz DEFAULT now() NOT NULL
 );
 
+ALTER TABLE public.newsletter_account OWNER TO postgres;
+
 --
 -- FUNCTIONS
 --
