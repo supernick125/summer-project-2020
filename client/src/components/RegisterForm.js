@@ -132,6 +132,8 @@ class RegisterForm extends React.Component {
         </Form>
         <Button onClick={this.getHello}>Hello</Button>
         <Button onClick={this.getNewsLetterUsers}>List</Button>
+        <Button onClick={this.getNewsLetterUsersName}>Name</Button>
+        <Button onClicl={this.getNewsLetterUsersEmail}>Email</Button>
       </Container>
     )
   }

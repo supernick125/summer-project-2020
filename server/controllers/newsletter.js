@@ -35,7 +35,7 @@ const createNewsLetterUsers = async (req, res) => {
         id: user,
         firstname: firstName,
         lastname: lastName,
-        email: emaail
+        email: email
       }
     }
 
