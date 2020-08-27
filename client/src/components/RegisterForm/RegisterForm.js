@@ -1,5 +1,6 @@
 import React from 'react'
 import { Container, Form, Button } from 'react-bootstrap'
+import './style.css'
 import axios from 'axios';
 
 class RegisterForm extends React.Component {
@@ -106,8 +107,8 @@ class RegisterForm extends React.Component {
 
   render() {
     return (
-      <Container fluid className='m-4'>
-        <Form onSubmit={this.handleSubmit}>
+      <Container fluid className='body'>
+        <Form className='form' onSubmit={this.handleSubmit}>
           <Form.Group>
             <Form.Label>First Name</Form.Label>
             <Form.Control type="text" name="firstName" value={this.state.firstName} onChange={this.handleChange}/>
@@ -130,10 +131,7 @@ class RegisterForm extends React.Component {
             Submit
           </Button>
         </Form>
-        <Button onClick={this.getHello}>Hello</Button>
-        <Button onClick={this.getNewsLetterUsers}>List</Button>
-        <Button onClick={this.getNewsLetterUsersName}>Name</Button>
-        <Button onClick={this.getNewsLetterUsersEmail}>Email</Button>
+
       </Container>
     )
   }
@@ -141,3 +139,7 @@ class RegisterForm extends React.Component {
 
 export default RegisterForm
 
+// <Button onClick={this.getHello}>Hello</Button>
+// <Button onClick={this.getNewsLetterUsers}>List</Button>
+// <Button onClick={this.getNewsLetterUsersName}>Name</Button>
+// <Button onClick={this.getNewsLetterUsersEmail}>Email</Button>

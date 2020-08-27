@@ -1,0 +1,14 @@
+.body {
+  font-family: 'Libre Baskerville', serif;
+  height: 100%;
+  margin: none;
+  padding: none;
+}
+
+.countryBlue {
+  background-color: #0167b2;
+}
+
+.columbiaBlue {
+  background-color: #aad5e8;
+}

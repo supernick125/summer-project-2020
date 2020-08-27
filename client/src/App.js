@@ -6,7 +6,7 @@ import HomePage from './pages/Home';
 
 export default (props) => {
   return (
-    <div>
+    <div class='h-100'>
       <Router>
         <Switch>
           <Route exact path="/" component={RegisterPage} />

@@ -1,38 +1,41 @@
 import React from 'react'
 import { Container, Row, Col, Card } from 'react-bootstrap'
+import './style.css'
 
 class RegisterDescription extends React.Component {
 
   render() {
     return (
-      <Container fluid className='m-0'>
-        <h2 className="columbiaBlueText m-4">Meet with <span className="paleBlueText">engaging talented clever driven curious intelligent receptive</span> students from your Alma Mater.</h2>
-        
-        <Container>
-          <Row>
-            <Col>
-              <Card>
-                <Card.Body>
-                  <strong>Set</strong> a time and date at your convenience.
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col>
-              <Card>
-                <Card.Body>
-                  <strong>Meet.</strong> Talk to current Columbia students for 30 minutes.<p><em>No further obligation.</em></p>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
-        </Container>
+      <Container fluid className='body'>
 
-        <h3 className="m-4">That's it! We'll take care of scheduling, coordination, and communication.</h3>
+        <div className='white'>
 
-        <h1 className="whiteText m-4">We know life is busy, so <br/> We made it easier <em>to connect.</em></h1>
+          <h1>Meet with Columbia Alumni who are Industry Leaders:</h1>
 
-        <h4 className="whiteText m-4 pl-5">- Made by Students, for Students</h4>
+          <br></br>
 
+          <h2>1. Sign up for our newsletter with your Columbia email</h2>
+
+          <h2>2. Check your inbox for upcoming conversations</h2>
+
+          <br></br>
+
+        </div>
+
+        <div className='orange'>
+
+          <h4><em>Our Past Conversations:</em></h4>
+
+          <h2>Dr. Ricardo Hornos</h2>
+          <h4>Tony Award-Winning Producer and Screenwriter</h4>
+
+          <h2>Nick LaCava</h2>
+          <h4>Former Olympian and Delivery Unit Advisor at International Rescure Committee</h4>
+
+          <h2>Basil Hosmer</h2>
+          <h4>Facebook Software Engineer and Programming Language Inventor</h4>
+
+        </div>
       </Container>
     )
   }
@@ -67,3 +70,32 @@ export default RegisterDescription;
 
 // <h4 class="whiteText m-4 pl-5">- Made by Students, for Students</h4>
 // </div>
+
+//---------------------------------------------------------------------------------
+
+// <h2 className="columbiaBlueText m-4">Meet with <span className="paleBlueText">engaging talented clever driven curious intelligent receptive</span> students from your Alma Mater.</h2>
+        
+// <Container>
+//   <Row>
+//     <Col>
+//       <Card>
+//         <Card.Body>
+//           <strong>Set</strong> a time and date at your convenience.
+//         </Card.Body>
+//       </Card>
+//     </Col>
+//     <Col>
+//       <Card>
+//         <Card.Body>
+//           <strong>Meet.</strong> Talk to current Columbia students for 30 minutes.<p><em>No further obligation.</em></p>
+//         </Card.Body>
+//       </Card>
+//     </Col>
+//   </Row>
+// </Container>
+
+// <h3 className="m-4">That's it! We'll take care of scheduling, coordination, and communication.</h3>
+
+// <h1 className="whiteText m-4">We know life is busy, so <br/> We made it easier <em>to connect.</em></h1>
+
+// <h4 className="whiteText m-4 pl-5">- Made by Students, for Students</h4>
