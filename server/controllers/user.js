@@ -16,12 +16,12 @@ const getUsers = async (req, res) => {
 //createUser - create new user
 const createUser = async (req, res) => {
   try {
-    const {userType, graduationYear, firstName, lastName, email, password } = req.body
+    const {userType, firstName, lastName, graduationYear, email, password } = req.body
     //check username
     //check email
     //hash password
     const user = await pool.query(
-      'INSERT INTO account (account_type_id, school_id, graduation_year, first_name, last_name, email_address, password) VALUES ($1, 1, $2, $3, $4, $5, $6 RETURNING id',
+      'INSERT INTO account (account_type_id, school_id, graduation_year, first_name, last_name, email_address, password, registered) VALUES ($1, 1, $2, $3, $4, $5, $6, now()) RETURNING id',
       [userType, graduationYear, firstName, lastName, email, password], (err, result) => {
         if (err) {
           return console.error('Error during query', err.stack)
