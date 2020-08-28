@@ -1,0 +1,13 @@
+.body {
+  height: 100%;
+}
+
+.orange {
+  color: #ffcc00;
+  padding: 1em;
+}
+
+.white {
+  color: white;
+  padding: 2em 1em 1em 1em;
+}

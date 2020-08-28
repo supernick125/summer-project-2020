@@ -90,19 +90,19 @@ class AlumniForm extends React.Component {
         console.error(error);
       });
   }
-  
-  //Set students
+
+  //Set to student
   setStudent = () => {
     this.setState({
-      userType: '1'
-    }, () => console.log(this.state.userType))
+      userType: 1
+    }, () => console.log(this.userType))
   }
-  
-  //Set alumni
+
+  //Set to alumni
   setAlumni = () => {
     this.setState({
-      userType: '2'
-    }, () => console.log(this.state.userType))
+      userType: 2
+    }, () => console.log(this.userType))
   }
 
   //Handle input change
@@ -119,7 +119,7 @@ class AlumniForm extends React.Component {
     // this.getName();
     //this.getHello();
   }
-  
+
 
   render() {
     return (
@@ -146,6 +146,10 @@ class AlumniForm extends React.Component {
             <label for='email'>Email Address:</label>
             <input type='text' class='form-control' id='email' aria-describedby='emailHelp' name='email' value={this.state.email} onChange={this.handleChange}/>
             <small id='emailHelp' class='form-text text-muted'>We'll never share your email with anyone else.</small>
+          </div>
+          <div class='form-group'>
+            <label for='bio'>Graduation Year:</label>
+            <input type='text' class='form-control' id='graduationYear' name='graduationYear' value={this.state.graduationYear} onChange={this.handleChange}/>
           </div>
           <div class='form-group'>
             <label for='bio'>Password:</label>

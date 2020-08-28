@@ -1,0 +1,40 @@
+html, body {
+  font-family: 'Libre Baskerville', serif;
+}
+
+.hexPad {
+  padding: 2rem;
+  margin: 15%;
+  width: 14rem;
+  height: 14rem;
+  font-size: 0.75em;
+  border: 1px solid #e3bfa2;
+  border-width: 3px;
+  background-image: url("LunchTable-06.png");
+  background-size: 500%;
+  background-position: center;
+}
+
+.hexPad:hover {
+  color: #0167b2;
+}
+
+.filler {
+  padding: 1rem;
+  margin: 15%;
+  width: 12rem;
+  height: 12rem;
+}
+
+.tiles {
+  background-image: url("temp.jpg");
+  background-size: 25%;
+}
+
+.countryBlueBG {
+  background-color: #0167b2; 
+}
+
+/* .test {
+  font-size: 5vw;
+} */
