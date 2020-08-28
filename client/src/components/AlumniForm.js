@@ -94,15 +94,15 @@ class AlumniForm extends React.Component {
   //Set to student
   setStudent = () => {
     this.setState({
-      userType: 1
-    }, () => console.log(this.userType))
+      userType: '1'
+    }, () => console.log(this.state.userType))
   }
 
   //Set to alumni
   setAlumni = () => {
     this.setState({
-      userType: 2
-    }, () => console.log(this.userType))
+      userType: '2'
+    }, () => console.log(this.state.userType))
   }
 
   //Handle input change
