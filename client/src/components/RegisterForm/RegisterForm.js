@@ -110,17 +110,17 @@ class RegisterForm extends React.Component {
       <Container fluid className='body'>
         <Form className='form' onSubmit={this.handleSubmit}>
           <Form.Group>
-            <Form.Label>First Name</Form.Label>
+            <Form.Label>First Name:</Form.Label>
             <Form.Control type="text" name="firstName" value={this.state.firstName} onChange={this.handleChange}/>
           </Form.Group>
 
           <Form.Group>
-            <Form.Label>Last Name</Form.Label>
+            <Form.Label>Last Name:</Form.Label>
             <Form.Control type="text" name="lastName" value={this.state.lastName} onChange={this.handleChange}/>
           </Form.Group>
 
           <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
+            <Form.Label>Email Address:</Form.Label>
             <Form.Control type="email" name="email" value={this.state.email} onChange={this.handleChange}/>
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.

@@ -14,7 +14,7 @@ class RegisterDescription extends React.Component {
 
           <br></br>
 
-          <h2>1. Sign up for our newsletter with your Columbia email</h2>
+          <h2>1. Sign up with your Columbia email</h2>
 
           <h2>2. Check your inbox for upcoming conversations</h2>
 
@@ -30,7 +30,7 @@ class RegisterDescription extends React.Component {
           <h4>Tony Award-Winning Producer and Screenwriter</h4>
 
           <h2>Nick LaCava</h2>
-          <h4>Former Olympian and Delivery Unit Advisor at International Rescure Committee</h4>
+          <h4>Former Olympian and Delivery Unit Advisor at International Rescue Committee</h4>
 
           <h2>Basil Hosmer</h2>
           <h4>Facebook Software Engineer and Programming Language Inventor</h4>
