@@ -74,7 +74,7 @@ export default RegisterDescription;
 //---------------------------------------------------------------------------------
 
 // <h2 className="columbiaBlueText m-4">Meet with <span className="paleBlueText">engaging talented clever driven curious intelligent receptive</span> students from your Alma Mater.</h2>
-        
+
 // <Container>
 //   <Row>
 //     <Col>
