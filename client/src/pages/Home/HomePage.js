@@ -1,11 +1,12 @@
 import React from 'react';
-import Axios from 'axios';
+import DiningHall from '../../components/DiningHall/DiningHall';
+import './style.css';
 
 export default () => {
-
   return (
     <div>
       <h1>Homepage</h1>
+      <DiningHall />
     </div>
   );
 }
