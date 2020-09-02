@@ -1,47 +1,30 @@
-import React from 'react'
-import { Container, Row, Col, Card } from 'react-bootstrap'
-import './style.css'
+import React from 'react';
+import { Container, Row, Col, Card } from 'react-bootstrap';
+import './style.css';
 
-class RegisterDescription extends React.Component {
+export default () => {
 
-  render() {
-    return (
-      <Container fluid className='body'>
-
-        <div className='white'>
-
-          <h1>Meet with Columbia Alumni who are Industry Leaders:</h1>
-
-          <br></br>
-
-          <h2>1. Sign up with your Columbia email</h2>
-
-          <h2>2. Check your inbox for upcoming conversations</h2>
-
-          <br></br>
-
-        </div>
-
-        <div className='orange'>
-
-          <h4><em>Our Past Conversations:</em></h4>
-
-          <h2>Dr. Ricardo Hornos</h2>
-          <h4>Tony Award-Winning Producer and Screenwriter</h4>
-
-          <h2>Nick LaCava</h2>
-          <h4>Former Olympian and Delivery Unit Advisor at International Rescue Committee</h4>
-
-          <h2>Basil Hosmer</h2>
-          <h4>Facebook Software Engineer and Programming Language Inventor</h4>
-
-        </div>
-      </Container>
-    )
-  }
+  return (
+    <Container fluid className='body'>
+      <div className='white'>
+        <h1>Meet with Columbia Alumni who are Industry Leaders:</h1>
+        <br></br>
+        <h2>1. Sign up with your Columbia email</h2>
+        <h2>2. Check your inbox for upcoming conversations</h2>
+        <br></br>
+      </div>
+      <div className='orange'>
+        <h4><em>Our Past Conversations:</em></h4>
+        <h2>Dr. Ricardo Hornos</h2>
+        <h4>Tony Award-Winning Producer and Screenwriter</h4>
+        <h2>Nick LaCava</h2>
+        <h4>Former Olympian and Delivery Unit Advisor at International Rescue Committee</h4>
+        <h2>Basil Hosmer</h2>
+        <h4>Facebook Software Engineer and Programming Language Inventor</h4>
+      </div>
+    </Container>
+  );
 }
-
-export default RegisterDescription;
 
 // <div>
 // <h2 class="columbiaBlueText m-4">Meet with <span class="paleBlueText">engaging talented clever driven curious intelligent receptive</span> students from your Alma Mater.</h2>

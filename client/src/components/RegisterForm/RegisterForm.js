@@ -1,26 +1,19 @@
-import React from 'react'
-import { Container, Form, Button } from 'react-bootstrap'
-import './style.css'
-import axios from 'axios';
+import React, { useState } from 'react';
+import Axios from 'axios';
+import { Container, Form, Button } from 'react-bootstrap';
+import './style.css';
 
-class RegisterForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      firstName: '',
-      lastName: '',
-      email: ''
-    };
-    
-    this.createNewsLetterUsers = this.createNewsLetterUsers.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  
-  // Create and log new newsletter user
-  createNewsLetterUsers = () => {
-    const data = this.state;
-    axios.post('http://localhost:3001/api/newsletter/register', data)
+export default () => {
+
+  const [user, setUser] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: ''
+  });
+
+  const registerUser = () => {
+    Axios.post('http://localhost:3001/api/user/register', user)
       .then(response => {
         console.log(response);
         console.log(response.data);
@@ -28,59 +21,74 @@ class RegisterForm extends React.Component {
       .catch(error => {
         console.error(error);
       });
-      
-      // reset state
+      //reset state
       this.setState({
         firstName: '',
         lastName: '',
-        email: ''
+        email: '',
+        password: ''
       });
   }
-  
-  handleChange(event) {
-    this.setState({[event.target.name]: event.target.value});
+
+  //Handle input change
+  const handleChange = (event) => {
+    setUser({ ...user, [event.target.name]: event.target.value });
   }
 
-  handleSubmit(event) {
-    console.log(`
-      First Name: ${this.state.firstName}
-      Last Name: ${this.state.lastName}
-      Email: ${this.state.email}
-    `);
+  //Handle form submit
+  const handleSubmit = (event) => {
+    console.log(`Name: ${user.firstName} ${user.lastName} Email: ${user.email} Password: ${user.password}`);
     event.preventDefault();
-    this.createNewsLetterUsers();
+    //Register new user
+    //registerUser();
   }
 
-  render() {
-    return (
-      <Container fluid className='body'>
-        <Form className='form' onSubmit={this.handleSubmit}>
-          <Form.Group>
-            <Form.Label>First Name:</Form.Label>
-            <Form.Control type="text" name="firstName" value={this.state.firstName} onChange={this.handleChange}/>
-          </Form.Group>
+  return (
+    // <div>
+    //   <form onSubmit={handleSubmit}>
+    //     <div className=''>
+    //       <label>First Name</label>
+    //       <input type='text' name='firstName' value={user.firstName} onChange={handleChange} required />
+    //     </div>
+    //     <div className=''>
+    //       <label>Last Name</label>
+    //       <input type='text' name='lastName' value={user.lastName} onChange={handleChange} required />
+    //     </div>
+    //     <div className=''>
+    //       <label>Email Address</label>
+    //       <input type='text' name='email' value={user.email} onChange={handleChange} required />
+    //     </div>
+    //     <div className=''>
+    //       <label>Password</label>
+    //       <input type='text' name='password' value={user.password} onChange={handleChange} required />
+    //     </div>
+    //     <button type='submit'>Submit</button>
+    //   </form>
+    // </div>
 
-          <Form.Group>
-            <Form.Label>Last Name:</Form.Label>
-            <Form.Control type="text" name="lastName" value={this.state.lastName} onChange={this.handleChange}/>
-          </Form.Group>
-
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email Address:</Form.Label>
-            <Form.Control type="email" name="email" value={this.state.email} onChange={this.handleChange}/>
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
-
-          <Button variant="primary" type="submit" value="Submit">
-            Submit
-          </Button>
-        </Form>
-
-      </Container>
-    )
-  }
+    <Container fluid className='body'>
+      <Form className='form' onSubmit={handleSubmit}>
+        <Form.Group>
+          <Form.Label>First Name:</Form.Label>
+          <Form.Control type="text" name="firstName" value={user.firstName} onChange={handleChange}/>
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Last Name:</Form.Label>
+          <Form.Control type="text" name="lastName" value={user.lastName} onChange={handleChange}/>
+        </Form.Group>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>Email Address:</Form.Label>
+          <Form.Control type="email" name="email" value={user.email} onChange={handleChange}/>
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else.
+          </Form.Text>
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Password:</Form.Label>
+          <Form.Control type="text" name="password" value={user.password} onChange={handleChange}/>
+        </Form.Group>
+        <Button variant="primary" type="submit" value="Submit">Submit</Button>
+      </Form>
+    </Container>
+  );
 }
-
-export default RegisterForm
