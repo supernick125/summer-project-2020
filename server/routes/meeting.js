@@ -1,4 +1,5 @@
 const {
+  getActiveMeetings,
   getMeetings,
   createMeeting,
   deleteMeeting,
@@ -8,6 +9,9 @@ const {
   getAttendees
 } = require('../controllers/meeting');
 const router = require('express').Router();
+
+//Get all active meetings
+router.get('/active', getActiveMeetings);
 
 //Get all meetings
 router.get('/get', getMeetings);
