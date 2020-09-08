@@ -8,9 +8,19 @@ export default () => {
   const [user, setUser] = useState({
     firstName: '',
     lastName: '',
+    gradYear: '',
     email: '',
-    password: ''
+    password: '',
+    passwordCheck: ''
   });
+
+  const emailCheck = function() {
+    return(user.email.includes('columbia.edu') || user.email.includes('barnard.edu'))
+  }
+
+  const passwordCheck = function () {
+    return(user.password === user.passwordCheck)
+  }
 
   const registerUser = () => {
     Axios.post('http://localhost:3001/api/user/register', user)
@@ -37,35 +47,19 @@ export default () => {
 
   //Handle form submit
   const handleSubmit = (event) => {
-    console.log(`Name: ${user.firstName} ${user.lastName} Email: ${user.email} Password: ${user.password}`);
+    if (emailCheck() && passwordCheck()) {
+      console.log(`Name: ${user.firstName} ${user.lastName} Email: ${user.email} Password: ${user.password}`);
+      //Register new user
+      //registerUser();
+    } else if (!emailCheck()) {
+      alert('Please use your columbia.edu or barnard.edu email!')
+    } else {
+      alert('Please re-enter the same password!')
+    }
     event.preventDefault();
-    //Register new user
-    //registerUser();
   }
 
   return (
-    // <div>
-    //   <form onSubmit={handleSubmit}>
-    //     <div className=''>
-    //       <label>First Name</label>
-    //       <input type='text' name='firstName' value={user.firstName} onChange={handleChange} required />
-    //     </div>
-    //     <div className=''>
-    //       <label>Last Name</label>
-    //       <input type='text' name='lastName' value={user.lastName} onChange={handleChange} required />
-    //     </div>
-    //     <div className=''>
-    //       <label>Email Address</label>
-    //       <input type='text' name='email' value={user.email} onChange={handleChange} required />
-    //     </div>
-    //     <div className=''>
-    //       <label>Password</label>
-    //       <input type='text' name='password' value={user.password} onChange={handleChange} required />
-    //     </div>
-    //     <button type='submit'>Submit</button>
-    //   </form>
-    // </div>
-
     <Container fluid className='body'>
       <Form className='form' onSubmit={handleSubmit}>
         <Form.Group>
@@ -76,8 +70,12 @@ export default () => {
           <Form.Label>Last Name:</Form.Label>
           <Form.Control type="text" name="lastName" value={user.lastName} onChange={handleChange}/>
         </Form.Group>
+        <Form.Group>
+          <Form.Label>Graduation Year:</Form.Label>
+          <Form.Control type="text" name="gradYear" value={user.gradYear} onChange={handleChange}/>
+        </Form.Group>
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email Address:</Form.Label>
+          <Form.Label>School Email Address:</Form.Label>
           <Form.Control type="email" name="email" value={user.email} onChange={handleChange}/>
           <Form.Text className="text-muted">
             We'll never share your email with anyone else.
@@ -87,6 +85,10 @@ export default () => {
           <Form.Label>Password:</Form.Label>
           <Form.Control type="text" name="password" value={user.password} onChange={handleChange}/>
         </Form.Group>
+        <Form.Group>
+        <Form.Label>Re-enter Password:</Form.Label>
+        <Form.Control type="text" name="passwordCheck" value={user.passwordCheck} onChange={handleChange}/>
+      </Form.Group>
         <Button variant="primary" type="submit" value="Submit">Submit</Button>
       </Form>
     </Container>

@@ -10,7 +10,7 @@ export default (props) => {
       <Router>
         <Switch>
           <Route exact path="/">
-            {/*<Redirect to="/register" />*/}
+            {<Redirect to="/register" />}
             <HomePage />
           </Route>
           <Route path="/register">
@@ -24,3 +24,26 @@ export default (props) => {
     </div>
   );
 }
+
+//-----------
+
+// export default (props) => {
+//   return (
+//     <div className='h-100'>
+//       <Router>
+//         <Switch>
+//           <Route exact path="/">
+//             {/*<Redirect to="/register" />*/}
+//             <HomePage />
+//           </Route>
+//           <Route path="/register">
+//             <RegisterPage />
+//           </Route>
+//           <Route path='*'>
+//             <h1>Not Found</h1>
+//           </Route>
+//         </Switch>
+//       </Router>
+//     </div>
+//   );
+// }
