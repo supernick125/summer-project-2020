@@ -35,8 +35,10 @@ export default () => {
       this.setState({
         firstName: '',
         lastName: '',
+        gradYear: '',
         email: '',
-        password: ''
+        password: '',
+        passwordCheck: ''
       });
   }
 
