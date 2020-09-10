@@ -6,12 +6,13 @@ import './style.css';
 export default () => {
 
   const [user, setUser] = useState({
+    userType: '1',
     firstName: '',
     lastName: '',
-    gradYear: '',
+    graduationYear: '',
     email: '',
     password: '',
-    passwordCheck: ''
+    passwordCheck: '' 
   });
 
   const emailCheck = function() {
@@ -33,9 +34,10 @@ export default () => {
       });
       //reset state
       this.setState({
+        userType: '1',
         firstName: '',
         lastName: '',
-        gradYear: '',
+        graduationYear: '',
         email: '',
         password: '',
         passwordCheck: ''
@@ -52,7 +54,7 @@ export default () => {
     if (emailCheck() && passwordCheck()) {
       console.log(`Name: ${user.firstName} ${user.lastName} Email: ${user.email} Password: ${user.password}`);
       //Register new user
-      //registerUser();
+      registerUser();
     } else if (!emailCheck()) {
       alert('Please use your columbia.edu or barnard.edu email!')
     } else {
@@ -74,7 +76,7 @@ export default () => {
         </Form.Group>
         <Form.Group>
           <Form.Label>Graduation Year:</Form.Label>
-          <Form.Control type="text" name="gradYear" value={user.gradYear} onChange={handleChange}/>
+          <Form.Control type="text" name="graduationYear" value={user.graduationYear} onChange={handleChange}/>
         </Form.Group>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>School Email Address:</Form.Label>
