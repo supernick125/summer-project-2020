@@ -10,7 +10,7 @@ export default (props) => {
       <Router>
         <Switch>
           <Route exact path="/">
-            {<Redirect to="/register" />}
+            
             <HomePage />
           </Route>
           <Route path="/register">
@@ -25,6 +25,7 @@ export default (props) => {
   );
 }
 
+// {<Redirect to="/register" />}
 //-----------
 
 // export default (props) => {
