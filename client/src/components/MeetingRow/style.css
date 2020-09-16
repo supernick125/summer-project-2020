@@ -1,1 +1,9 @@
 /* MeetingRow stylesheet */
+.adjust {
+  height: 3em;
+  text-align: center;
+}
+
+#join {
+  margin-left: 0.5em;
+}

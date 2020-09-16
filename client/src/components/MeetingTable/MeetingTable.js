@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './style.css';
+import { Container, Row, Col } from 'react-bootstrap';
 
 import MeetingRow from './../MeetingRow/MeetingRow';
 
@@ -13,15 +14,17 @@ export default (props) => {
   });
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Host</th>
-          <th>Description</th>
-          <th>Start Time</th>
-        </tr>
-      </thead>
-      <tbody>{rows}</tbody>
-    </table>
+
+    <Container fluid className='p-0'>
+      <Row id='table-heading'>
+        <Col md={4}>Host</Col>
+        <Col md={4}>Description</Col>
+        <Col md={4}>Start Time</Col>
+      </Row>
+      <div>
+        {rows}
+      </div>
+    </Container>
+
   );
 }
