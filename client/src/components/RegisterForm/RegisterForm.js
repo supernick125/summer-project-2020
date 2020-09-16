@@ -11,14 +11,24 @@ export default () => {
     lastName: '',
     graduationYear: '',
     email: '',
+    emailSuffix: '', 
     password: '',
     passwordCheck: '' 
   });
 
-  const emailCheck = function() {
-    return(user.email.includes('columbia.edu') || user.email.includes('barnard.edu'))
-  }
 
+  const emailCheck = () => {
+    let i = user.email.length - 1;
+    let suffix = '';
+    
+    while(user.email[i] !== '@'){
+      suffix = user.email[i] + suffix;
+      i--;
+    }
+    setUser({...user, emailSuffix:suffix});
+    
+  }
+  
   const passwordCheck = function () {
     return(user.password === user.passwordCheck)
   }
@@ -39,6 +49,7 @@ export default () => {
         lastName: '',
         graduationYear: '',
         email: '',
+        emailSuffix: '',
         password: '',
         passwordCheck: ''
       });
@@ -51,12 +62,10 @@ export default () => {
 
   //Handle form submit
   const handleSubmit = (event) => {
-    if (emailCheck() && passwordCheck()) {
+    if (passwordCheck()) {
       console.log(`Name: ${user.firstName} ${user.lastName} Email: ${user.email} Password: ${user.password}`);
       //Register new user
       registerUser();
-    } else if (!emailCheck()) {
-      alert('Please use your columbia.edu or barnard.edu email!')
     } else {
       alert('Please re-enter the same password!')
     }
@@ -93,7 +102,7 @@ export default () => {
         <Form.Label>Re-enter Password:</Form.Label>
         <Form.Control type="text" name="passwordCheck" value={user.passwordCheck} onChange={handleChange}/>
       </Form.Group>
-        <Button variant="primary" type="submit" value="Submit">Submit</Button>
+        <Button variant="primary" type="submit" value="Submit" onClick={emailCheck}>Submit</Button>
       </Form>
     </Container>
   );
