@@ -1,10 +1,10 @@
 const pool = require('../db/');
 
-//getUsers - return all users
-const getUsers = async (req, res) => {
+//getNewsLetterUsers - return all users
+const getNewsLetterUsers = async (req, res) => {
   try {
     const response = await pool.query(
-      'SELECT * FROM account ORDER BY id ASC'
+      'SELECT * FROM newsletter_account ORDER BY id ASC'
     )
 
     res.status(200).json(response.rows);
@@ -13,16 +13,16 @@ const getUsers = async (req, res) => {
   }
 }
 
-//createUser - create new user
-const createUser = async (req, res) => {
+//createNewsLetterUsers - create new user
+const createNewsLetterUsers = async (req, res) => {
   try {
-    const {userType, firstName, lastName, graduationYear, email, password } = req.body
+    const { firstName, lastName, email } = req.body
     //check username
     //check email
     //hash password
     const user = await pool.query(
-      'INSERT INTO account (account_type_id, school_id, graduation_year, first_name, last_name, email_address, password, registered) VALUES ($1, 1, $2, $3, $4, $5, $6, now()) RETURNING id',
-      [userType, graduationYear, firstName, lastName, email, password], (err, result) => {
+      'INSERT INTO newsletter_account (account_type_id, school_id, first_name, last_name, email_address) VALUES (1, 1, $1, $2, $3) RETURNING id',
+      [firstName, lastName, email], (err, result) => {
         if (err) {
           return console.error('Error during query', err.stack)
         }
@@ -33,9 +33,9 @@ const createUser = async (req, res) => {
     const response = {
       user: {
         id: user,
-        graduationYear: graduationYear,
         firstname: firstName,
-        lastname: lastName
+        lastname: lastName,
+        email: email
       }
     }
 
@@ -47,12 +47,12 @@ const createUser = async (req, res) => {
   }
 }
 
-//deleteUser - delete a user
-const deleteUser = async (req, res) => {
+//deleteNewsLetterUsers - delete a user
+const deleteNewsLetterUsers = async (req, res) => {
   // try {
   //
   //   const user = await pool.query(
-  //     'DELETE FROM account WHERE id = $1', [id]
+  //     'DELETE FROM newsletter_account WHERE id = $1', [id]
   //   )
   //
   // } catch (error) {
@@ -60,12 +60,12 @@ const deleteUser = async (req, res) => {
   // }
 }
 
-//getName - return user's name
-const getName = async (req, res) => {
+//getNewsLetterUsersName - return user's name
+const getNewsLetterUsersName = async (req, res) => {
   try {
     const id = req.params.id;
     const response = await pool.query(
-      'SELECT first_name, last_name FROM account WHERE id = $1', [id]
+      'SELECT first_name, last_name FROM newsletter_account WHERE id = $1', [id]
     )
     if (response.rowCount == 0) return res.status(404).json({ message: 'User not found' });
 
@@ -80,12 +80,12 @@ const getName = async (req, res) => {
   }
 }
 
-//getEmail - return user's email
-const getEmail = async (req, res) => {
+//getNewsLetterUsersEmail - return user's email
+const getNewsLetterUsersEmail = async (req, res) => {
   try {
     const id = req.params.id;
     const response = await pool.query(
-      'SELECT email_address FROM account WHERE id = $1', [id]
+      'SELECT email_address FROM newsletter_account WHERE id = $1', [id]
     )
     if (response.rowCount == 0) return res.status(404).json({ message: 'User not found' });
 
@@ -101,9 +101,9 @@ const getEmail = async (req, res) => {
 
 //Export functions
 module.exports = {
-  getUsers,
-  createUser,
-  deleteUser,
-  getName,
-  getEmail
+  getNewsLetterUsers,
+  createNewsLetterUsers,
+  deleteNewsLetterUsers,
+  getNewsLetterUsersName,
+  getNewsLetterUsersEmail
 }

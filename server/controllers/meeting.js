@@ -1,5 +1,28 @@
 const pool = require('../db/');
 
+//getActiveMeetings - return all active meetings
+const getActiveMeetings = async (req, res) => {
+  try {
+    const meetings = await pool.query(
+      "SELECT meeting.id AS id, (a.first_name::text || ' '::text || a.last_name::text) AS host_name, start AS start_time FROM meeting JOIN account a ON (meeting.host_id = a.id) WHERE meeting.active=true ORDER BY start ASC"
+    );
+    const response = [];
+    meetings.rows.forEach((obj) => {
+      response.push(
+        {
+          id: obj.id,
+          hostName: obj.host_name,
+          startTime: obj.start_time
+        }
+      );
+    });
+    //console.log(response);
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(500).json({ message: 'There was an error while searching. Please try again later.'})
+  }
+}
+
 //getMeetings - return all meetings
 const getMeetings = async (req, res) => {
   try {
@@ -15,30 +38,29 @@ const getMeetings = async (req, res) => {
 //FUNCTIONS TO ADD
 
 //createMeeting - create new meeting
+//so far only works when virtual is true. I was thinking that maybe when virtual is false, we can input another insert statement for when virtual = false, insert address_id.
 const createMeeting = async (req, res) => {
   try {
     const { host, scheduledTime, virtual, location, attendeeNum } = req.body;
-    
+
     const meeting = await pool.query(
-      'INSERT INTO meeting (host_id, schedule_dt, created_dt, is_virtual, location_id, attendee_num) VALUES ($1, $2, now(), $3, $4, $5) RETURNING id',
-      [ host, scheduledTime, createdTime, virtual, location, attendeeNum ], (err, result) => {
+      'INSERT INTO meeting (host_id, start, virtual) VALUES ($1, $2, $3) RETURNING id',
+      [ host, scheduledTime, virtual ], (err, result) => {
         if (err) {
           return console.error('Error during query', err.stack)
         }
       }
     )
-    
+
     const response = {
       meeting: {
         id: meeting,
         host_id: host,
         schedule_dt: scheduledTime,
-        is_virtual: virtual,
-        location_id: location,
-        attendee_num: attendeeNum
+        is_virtual: virtual
       }
     }
-    
+
     console.log(response);
     return res.status(200).json(response);
   } catch (error) {
@@ -52,7 +74,7 @@ const deleteMeeting = async (req, res) => {
     const meetings = await pool.query(
       'DELETE FROM meeting WHERE id = $1', [id]
     )
-    
+
   } catch (error) {
     res.status(500).json({message: 'There is an error deleting the meeting. Please try again later.'})
   }
@@ -62,12 +84,12 @@ const deleteMeeting = async (req, res) => {
 const getTime = async (req, res) => {
   try {
     const meetings = await pool.query(
-      'SELECT schedule_dt FROM meeting WHERE id = $1', [id]
+      'SELECT start FROM meeting WHERE id = $1', [id]
     )
     if (response.rowCount == 0) return res.status(404).json({ message: 'User not found' });
-    
+
     const meeting_time = {
-      time: response.rows[0].register_dt
+      time: response.rows[0].start
     }
     res.status(200).json(meeting_time);
   } catch (error) {
@@ -76,34 +98,50 @@ const getTime = async (req, res) => {
 }
 
 //getLocation - return location of meeting or say its virtual
-const getLocation = () => {
-  // try {
-  //   const meeting = await pool.query(
-  //     'SELECT location_id FROM meetings WHERE id = $1', [id];
-  //   )
-  //   if (response.rowCount == 0) return res.status(404).json({ message: 'User not found' });
-  // 
-  //   const location = {
-  //     location: response.rows[0].location_id
-  //   }
-  //   res.status(200).json(location);
-  // } catch (error) {
-  //   res.status(500).json({message: 'There is an error retrieving the location. Please try again later.'})
-  // }
+//only got the function to work when virtual is false and gives a location. Not sure how to do the other way around, or what to output.
+const getLocation = async (req, res) => {
+  try {
+    const meeting = await pool.query(
+      'SELECT address_id FROM meeting WHERE id = $1 and virtual = false', [id]
+    )
+    if (response.rowCount == 0) return res.status(404).json({ message: 'User not found' });
+
+    const location = {
+      location: response.rows[0].address_id
+    }
+    res.status(200).json(location);
+  } catch (error) {
+    res.status(500).json({message: 'There is an error retrieving the location. Please try again later.'})
+  }
 }
 
 //getHost - return list of host id
-const getHost = () => {
-
+const getHost = async (req, res) => {
+  try {
+    const meeting = await pool.query(
+      'SELECT host_id FROM meeting WHERE active = true ORDER BY id ASC'
+    )
+    res.status(200).json(response.rows);
+  } catch (error) {
+    res.status(500).json({message:'There was an error while searching. Please try again later.'})
+  }
 }
 
 //getAttendees - return list of attendee ids
-const getAttendees = () => {
-
+const getAttendees = async (req, res) => {
+  try {
+    const meeting = await pool.query(
+      'SELECT account_id FROM account_meeting WHERE meeting_id = $1 ORDER BY id ASC', [id]
+    )
+    res.status(200).json(response.rows);
+  } catch (error) {
+    res.status(500).json({message:'There was an error while searching. Please try again later.'})
+  }
 }
 
 //Export functions
 module.exports = {
+  getActiveMeetings,
   getMeetings,
   createMeeting,
   deleteMeeting,

@@ -1,22 +1,50 @@
 import React from 'react';
-import DescriptionComp from './DescriptionComp';
-import AlumniForm from './AlumniForm';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import RegisterPage from './pages/Register/RegisterPage';
+import HomePage from './pages/Home/HomePage';
 
-class App extends React.Component {
-  render() {
-    return (
-        <div class="container-fluid h-100 mb-0">
-          <div class="row h-100">
-            <div id="description" class="col-md-7 p-3">
-              <DescriptionComp />
-            </div>
-            <div class="col-md-5 columbiaBlue p-3">
-              <AlumniForm />
-            </div>
-          </div>
-        </div>
-    );
-  }
+export default (props) => {
+  return (
+    <div className='h-100'>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            
+            <HomePage />
+          </Route>
+          <Route path="/register">
+            <RegisterPage />
+          </Route>
+          <Route path='*'>
+            <h1>Not Found</h1>
+          </Route>
+        </Switch>
+      </Router>
+    </div>
+  );
 }
 
-export default App;
+// {<Redirect to="/register" />}
+//-----------
+
+// export default (props) => {
+//   return (
+//     <div className='h-100'>
+//       <Router>
+//         <Switch>
+//           <Route exact path="/">
+//             {/*<Redirect to="/register" />*/}
+//             <HomePage />
+//           </Route>
+//           <Route path="/register">
+//             <RegisterPage />
+//           </Route>
+//           <Route path='*'>
+//             <h1>Not Found</h1>
+//           </Route>
+//         </Switch>
+//       </Router>
+//     </div>
+//   );
+// }
