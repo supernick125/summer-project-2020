@@ -41,11 +41,11 @@ const getMeetings = async (req, res) => {
 //so far only works when virtual is true. I was thinking that maybe when virtual is false, we can input another insert statement for when virtual = false, insert address_id.
 const createMeeting = async (req, res) => {
   try {
-    const { host, scheduledTime, virtual, location, attendeeNum } = req.body;
+    const { host, start, virtual} = req.body;
 
     const meeting = await pool.query(
       'INSERT INTO meeting (host_id, start, virtual) VALUES ($1, $2, $3) RETURNING id',
-      [ host, scheduledTime, virtual ], (err, result) => {
+      [ host, start, virtual ], (err, result) => {
         if (err) {
           return console.error('Error during query', err.stack)
         }
@@ -54,10 +54,9 @@ const createMeeting = async (req, res) => {
 
     const response = {
       meeting: {
-        id: meeting,
-        host_id: host,
-        schedule_dt: scheduledTime,
-        is_virtual: virtual
+        host: host,
+        start: start,
+        virtual: virtual
       }
     }
 
