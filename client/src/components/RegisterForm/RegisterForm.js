@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Axios from 'axios';
 import { Container, Form, Button } from 'react-bootstrap';
 import './style.css';
@@ -101,7 +102,9 @@ export default () => {
         <Form.Label>Re-enter Password:</Form.Label>
         <Form.Control type="text" name="passwordCheck" value={user.passwordCheck} onChange={handleChange}/>
       </Form.Group>
-        <Button variant="primary" type="submit" value="Submit" onClick={emailCheck}>Submit</Button>
+        <Link to="/home">
+          <Button variant="primary" type="submit" value="Submit" onClick={emailCheck}>Submit</Button>
+        </Link>
       </Form>
     </Container>
   );
