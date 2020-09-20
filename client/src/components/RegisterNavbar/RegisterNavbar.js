@@ -36,7 +36,9 @@ export default () => {
                 id="loginPassword" 
                 placeholder="" />
             </InputGroup>
-            <Button variant="outline-primary">Login</Button>
+            <Link to="/home">
+              <Button variant="outline-primary">Login</Button>
+            </Link>
           </Form>
         </Navbar.Collapse>
       </Navbar>
