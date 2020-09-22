@@ -21,3 +21,13 @@
   background-color: #aad5e8;
   text-align: center;
 }
+
+#error {
+  height: 100%;
+  margin-bottom: 0px;
+  padding-left: 5%;
+  padding-right: 5%;
+  text-align: center;
+  background-color: #0167b2;
+  color: white;
+}
