@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import './style.css';
 
 export default () => {
@@ -7,20 +7,23 @@ export default () => {
   return (
     <Container fluid className='body'>
       <div className='white'>
-        <h1>Meet with Columbia Alumni who are Industry Leaders:</h1>
+        <h1 className='heading'>Meet with Columbia Alumni who are Industry Leaders</h1>
         <br></br>
-        <h2>1. Sign up with your Columbia email</h2>
-        <h2>2. Check your inbox for upcoming conversations</h2>
+        <div classname='heading-list'>
+          <h2>1. Sign up with your Columbia Email</h2>
+          <h2>2. Browse Conversations with Our Alumni</h2>
+        </div>
         <br></br>
       </div>
       <div className='orange'>
-        <h4><em>Our Past Conversations:</em></h4>
-        <h2>Dr. Ricardo Hornos</h2>
-        <h4>Tony Award-Winning Producer and Screenwriter</h4>
-        <h2>Nick LaCava</h2>
-        <h4>Former Olympian and Delivery Unit Advisor at International Rescue Committee</h4>
-        <h2>Basil Hosmer</h2>
-        <h4>Facebook Software Engineer and Programming Language Inventor</h4>
+        <h2 className='subheading'><i>Our Past Conversations</i></h2>
+        <dl className='subheading-list'>
+          <dd> Dr. Ricardo Hornos &nbsp; <small className='job-description'> Tony Award-Winning Producer and Screenwriter </small> </dd>
+          <dd> Nick LaCava &nbsp; <small className='job-description'> Former Olympian and Delivery Unit Advisor at International Rescue Committee </small> </dd>
+          <dd> Basil Hosmer &nbsp;<small className='job-description'> Facebook Software Engineer and Programming Language Inventor </small> </dd>
+          <dd> Franklin Hedberg &nbsp;<small className='job-description'> Former Senior Editor for Time Inc. </small> </dd>
+          <dd> Clarence Rash &nbsp;<small className='job-description'> Physicist and Former Director of Helmet-Mounted Display Program at USAARL </small> </dd>
+        </dl>
       </div>
     </Container>
   );
