@@ -18,6 +18,9 @@ export default (props) => {
             <Route path="/home">
               <HomePage />
             </Route>
+            <Route path="/meetings">
+              <MeetingsPage />
+            </Route>
             <Route path='*'>
               <h1>Not Found</h1>
             </Route>

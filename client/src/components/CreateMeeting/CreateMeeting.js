@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import Axios from 'axios'
 import { Container, Form, Button } from 'react-bootstrap'
-import CreateAlumni from '../../components/CreateAlumni/CreateAlumni';
-import CreateMeeting from '../../components/CreateMeeting/CreateMeeting';
 import './style.css'
 
 export default () => {
@@ -116,61 +114,27 @@ export default () => {
   
   return (
     <Container>
-      <CreateAlumni />
-      <CreateMeeting />
+      <h1>Create a Meeting</h1>
+      
+      <Form className='form'>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>Host ID (Alumni Name)</Form.Label>
+          <Form.Control type="text" name="host" value={user.host} onChange={handleChange}/>
+        </Form.Group>
+
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Start (Start Time)</Form.Label>
+          <Form.Control type="text" name="start" value={user.start} onChange={handleChange}/>
+        </Form.Group>
+        <Form.Group controlId="formBasicCheckbox">
+          <Form.Check type="text" name="virtual" value={user.virtual} onChange={handleChange}/>
+        </Form.Group>
+        <Button variant="primary" type="submit" onClick={isMeeting}>
+          Submit
+        </Button>
+      </Form>
+
+
     </Container>
   );
 }
-// <h1>Create an Alumni Account</h1>
-      
-//       <Form className='form' onSubmit={handleSubmit}>
-//         <Form.Group>
-//           <Form.Label>First Name:</Form.Label>
-//           <Form.Control type="text" name="firstName" value={user.firstName} onChange={handleChange}/>
-//         </Form.Group>
-//         <Form.Group>
-//           <Form.Label>Last Name:</Form.Label>
-//           <Form.Control type="text" name="lastName" value={user.lastName} onChange={handleChange}/>
-//         </Form.Group>
-//         <Form.Group>
-//           <Form.Label>Graduation Year:</Form.Label>
-//           <Form.Control type="text" name="graduationYear" value={user.graduationYear} onChange={handleChange}/>
-//         </Form.Group>
-//         <Form.Group controlId="formBasicEmail">
-//           <Form.Label>School Email Address:</Form.Label>
-//           <Form.Control type="email" name="email" value={user.email} onChange={handleChange}/>
-//           <Form.Text className="text-muted">
-//             We'll never share your email with anyone else.
-//           </Form.Text>
-//         </Form.Group>
-//         <Form.Group>
-//           <Form.Label>Password:</Form.Label>
-//           <Form.Control type="text" name="password" value={user.password} onChange={handleChange}/>
-//         </Form.Group>
-//         <Form.Group>
-//         <Form.Label>Re-enter Password:</Form.Label>
-//         <Form.Control type="text" name="passwordCheck" value={user.passwordCheck} onChange={handleChange}/>
-//       </Form.Group>
-//         <Button variant="primary" type="submit" value="Submit" onClick={isRegister}>Submit</Button>
-//       </Form>
-
-    
-//       <h1>Create a Meeting</h1>
-      
-//       <Form className='form'>
-//         <Form.Group controlId="formBasicEmail">
-//           <Form.Label>Host ID (Alumni Name)</Form.Label>
-//           <Form.Control type="text" name="host" value={user.host} onChange={handleChange}/>
-//         </Form.Group>
-
-//         <Form.Group controlId="formBasicPassword">
-//           <Form.Label>Start (Start Time)</Form.Label>
-//           <Form.Control type="text" name="start" value={user.start} onChange={handleChange}/>
-//         </Form.Group>
-//         <Form.Group controlId="formBasicCheckbox">
-//           <Form.Check type="text" name="virtual" value={user.virtual} onChange={handleChange}/>
-//         </Form.Group>
-//         <Button variant="primary" type="submit" onClick={isMeeting}>
-//           Submit
-//         </Button>
-//       </Form>
