@@ -1,31 +1,18 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import RegisterPage from './pages/Register/RegisterPage';
-import HomePage from './pages/Home/HomePage';
-import MeetingsPage from './pages/Meetings/MeetingsPage'
+import { BrowserRouter as Router } from 'react-router-dom';
 
+import AppRoute from './routes/index';
+
+import { Provider as AuthProvider } from './context/Auth';
 
 export default (props) => {
-    return (
-      <div className='h-100'>
-        <Router>
-          <Switch>
-            <Route exact path="/">
-              {/*<Redirect to="/home" />*/}
-              <RegisterPage />
-            </Route>
-            <Route path="/home">
-              <HomePage />
-            </Route>
-            <Route path="/meetings">
-              <MeetingsPage />
-            </Route>
-            <Route path='*'>
-              <h1>Not Found</h1>
-            </Route>
-          </Switch>
-        </Router>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Router>
+        <AuthProvider>
+          <AppRoute />
+        </AuthProvider>
+      </Router>
+    </div>
+  );
+}
