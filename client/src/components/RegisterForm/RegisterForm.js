@@ -13,11 +13,13 @@ export default () => {
   const [login, setLogin] = useState(false);
 
   const [user, setUser] = useState({
-    userType: '1',
+    usertype: 1,
+    graduationyear: '',
     firstname: '',
     lastname: '',
     email: '',
-    password: ''
+    password: '',
+    passwordcheck: ''
   });
 
   const updateUser = (event) => {
@@ -40,10 +42,17 @@ export default () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        data: user
+        data: {
+          usertype: user.usertype,
+          graduationyear: user.graduationyear,
+          firstname: user.firstname,
+          lastname: user.lastname,
+          email: user.email,
+          password: user.password
+        }
       });
       setUser({
-        userType: '1',
+        userType: 1,
         firstname: '',
         lastname: '',
         email: '',
@@ -61,22 +70,32 @@ export default () => {
     }
   }
 
+  const sayHello = async (event) => {
+    try {
+      const resp = await Axios.get('/api/hello');
+      console.log(resp.data.message);
+    }catch(error) {
+      console.error(error);
+    }
+  }
+
   return login ? (
     <Redirect to='/home' />
   ) : (
     <Container fluid className='body'>
+      <button onClick={sayHello}>hello</button>
       <Form className='form' onSubmit={registerUser}>
         <Form.Group>
           <Form.Label>First Name:</Form.Label>
-          <Form.Control type="text" name="firstName" value={user.firstName} onChange={updateUser} required/>
+          <Form.Control type="text" name="firstname" value={user.firstname} onChange={updateUser} required/>
         </Form.Group>
         <Form.Group>
           <Form.Label>Last Name:</Form.Label>
-          <Form.Control type="text" name="lastName" value={user.lastName} onChange={updateUser} required/>
+          <Form.Control type="text" name="lastname" value={user.lastname} onChange={updateUser} required/>
         </Form.Group>
         <Form.Group>
           <Form.Label>Graduation Year:</Form.Label>
-          <Form.Control type="text" name="graduationYear" value={user.graduationYear} onChange={updateUser} required/>
+          <Form.Control type="text" name="graduationyear" value={user.graduationyear} onChange={updateUser} required/>
         </Form.Group>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>School Email Address:</Form.Label>

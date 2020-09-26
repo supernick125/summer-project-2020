@@ -1,23 +1,21 @@
 import React, { useState, useContext } from 'react';
-
 import Axios from 'axios';
 import { Redirect, Link } from 'react-router-dom';
 
-import './style.css';
 import { Container, Nav, Navbar, Form, FormControl, Col , InputGroup, Button } from 'react-bootstrap';
+import './style.css';
 
 import { Context as AuthContext } from '../../context/Auth';
 
 export default () => {
 
   const { setAuthUser } = useContext(AuthContext);
+  const [login, setLogin] = useState(false);
 
   const [user, setUser] = useState({
     email: '',
     password: ''
   });
-
-  const [login, setLogin] = useState(false);
 
   const updateUser = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
@@ -49,11 +47,13 @@ export default () => {
         action: 'LOGIN_USER',
         data: resp.data.user
       });
+      console.log("a");
       setCookie('x-auth-token', resp.data.accessToken);
       Axios.defaults.headers.common['x-auth-token'] = resp.data.accessToken;
       setLogin(true);
-    }catch(err) {
-      console.error('ERROR LOGGING IN');
+      console.log("b");
+    }catch(error) {
+      console.error(error);
     }
   }
 
@@ -70,21 +70,21 @@ export default () => {
         </Nav>
         <Form inline className="ml-auto mr-sm-2" onSubmit={loginUser}>
           <Form.Group controlId="loginEmail">
-            <FormControl 
-              type="email" 
+            <FormControl
+              type="email"
               name="email"
-              placeholder="Enter email" 
-              onChange={updateUser} 
-              value={user.email} 
+              placeholder="Enter email"
+              onChange={updateUser}
+              value={user.email}
               required />
           </Form.Group>
           <Form.Group controlId="loginPassword">
-            <FormControl 
-              type="password" 
+            <FormControl
+              type="password"
               name="password"
-              placeholder="Enter password" 
-              onChange={updateUser} 
-              value={user.password} 
+              placeholder="Enter password"
+              onChange={updateUser}
+              value={user.password}
               required />
           </Form.Group>
           <Button variant="primary" type="submit">
@@ -108,7 +108,7 @@ export default () => {
 <div>
   <button type='submit'>Login</button>
 </div>
-*/ 
+*/
 
 /* HERES THE FORM STYLING STUFF:
 <Form inline>

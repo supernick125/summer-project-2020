@@ -40,7 +40,7 @@ const updateUser = async (req, res) => {
 
 //Register new user
 const registerUser = async (req, res) => {
-  const { usertype, firstname, lastname, email, password } = req.body;
+  const { usertype, graduationyear, firstname, lastname, email, password } = req.body;
   try {
     const checkEmail = await pool.query('SELECT id FROM account WHERE email_address = $1', [email]);
     if(checkEmail.rowCount > 0) {
@@ -63,6 +63,7 @@ const registerUser = async (req, res) => {
     });
     return res.status(200).json(resp);
   }catch(error) {
+    console.log(error);
     return res.status(500).json({ message: 'There was an error while registering. Please try again later' });
   }
 }
@@ -75,9 +76,9 @@ const loginUser = async (req, res) => {
     if(!user.rowCount) {
       return res.status(404).json({ message: 'User not found. Please register and try again' });
     }
-    const checkPassword = await pool.query('SELECT password = crypt($1, password) FROM account WHERE email_address = $2', [password, email]);
-    console.log(checkPassword);
-    if(!checkPassword) {
+    const checkPassword = await pool.query('SELECT password = crypt($1, password) as password_check FROM account WHERE email_address = $2', [password, email]);
+    console.log(checkPassword.rows[0].password_check);
+    if(!checkPassword.rows[0].password_check) {
       return res.status(401).json({ message: 'Email and password do not match. Please try again later' });
     }
     const resp = {
