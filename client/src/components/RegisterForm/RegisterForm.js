@@ -93,9 +93,9 @@ export default () => {
           <Form.Label>Re-enter Password:</Form.Label>
           <Form.Control type="text" name="passwordCheck" value={user.passwordCheck} onChange={updateUser} required/>
         </Form.Group>
-        <div>
-          <button type='submit'>Register</button>
-        </div>
+        <Button variant="primary" type="submit">
+          Register
+        </Button>
       </Form>
     </Container>
   );

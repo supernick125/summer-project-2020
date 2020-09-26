@@ -4,7 +4,7 @@ import Axios from 'axios';
 import { Redirect, Link } from 'react-router-dom';
 
 import './style.css';
-import { Container, Nav, Navbar, Form, FormControl, InputGroup, Button } from 'react-bootstrap';
+import { Container, Nav, Navbar, Form, FormControl, Col , InputGroup, Button } from 'react-bootstrap';
 
 import { Context as AuthContext } from '../../context/Auth';
 
@@ -68,25 +68,47 @@ export default () => {
           <Nav.Link href="#home">Sign Up</Nav.Link>
           <Nav.Link href="#link">About Us</Nav.Link>
         </Nav>
-
-        <form onSubmit={loginUser}>
-          <div>
-            <label>Email Address</label>
-            <input type='email' name='email' onChange={updateUser} value={user.email} required />
-          </div>
-          <div>
-            <label>Password</label>
-            <input type='password' name='password' onChange={updateUser} value={user.password} required />
-          </div>
-          <div>
-            <button type='submit'>Login</button>
-          </div>
-        </form>
-
+        <Form inline className="ml-auto mr-sm-2" onSubmit={loginUser}>
+          <Form.Group controlId="loginEmail">
+            <FormControl 
+              type="email" 
+              name="email"
+              placeholder="Enter email" 
+              onChange={updateUser} 
+              value={user.email} 
+              required />
+          </Form.Group>
+          <Form.Group controlId="loginPassword">
+            <FormControl 
+              type="password" 
+              name="password"
+              placeholder="Enter password" 
+              onChange={updateUser} 
+              value={user.password} 
+              required />
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Login
+          </Button>
+        </Form>
       </Navbar.Collapse>
     </Navbar>
   );
 }
+
+/* Nick's stuff
+<div>
+  <label>Email Address</label>
+  <input type='email' name='email' onChange={updateUser} value={user.email} required />
+</div>
+<div>
+  <label>Password</label>
+  <input type='password' name='password' onChange={updateUser} value={user.password} required />
+</div>
+<div>
+  <button type='submit'>Login</button>
+</div>
+*/ 
 
 /* HERES THE FORM STYLING STUFF:
 <Form inline>

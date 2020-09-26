@@ -1,1 +1,11 @@
 /* RegisterNavbar Stylesheet */
+
+#loginEmail {
+  margin-right: 0.5em;
+  width: 14em;
+}
+
+#loginPassword {
+  margin-right: 0.5em;
+  width: 14em;
+}

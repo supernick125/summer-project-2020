@@ -2,7 +2,7 @@
 .body {
   height: 100%;
   font-family: Manrope;
-  font-weight: 500; 
+  font-weight: 500;
 }
 
 .orange {
@@ -32,7 +32,7 @@
 .subheading {
   font-family: 'Manrope'; 
   font-weight: 700; 
-  font-size: 5vmin;
+  font-size: 4vmin;
 }
 
 .subheading-list {

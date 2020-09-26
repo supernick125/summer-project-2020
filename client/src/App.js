@@ -7,7 +7,7 @@ import { Provider as AuthProvider } from './context/Auth';
 
 export default (props) => {
   return (
-    <div>
+    <div className="h-100">
       <Router>
         <AuthProvider>
           <AppRoute />
