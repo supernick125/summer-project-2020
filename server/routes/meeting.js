@@ -1,34 +1,25 @@
 const {
-  getActiveMeetings,
-  getMeetings,
   createMeeting,
-  deleteMeeting,
-  getTime,
-  getLocation,
-  getHost,
-  getAttendees
+  getActiveMeetings,
+  joinMeeting,
+  leaveMeeting,
+  deleteMeeting
 } = require('../controllers/meeting');
 const router = require('express').Router();
+
+//Create new meeting
+router.post('/', createMeeting);
 
 //Get all active meetings
 router.get('/active', getActiveMeetings);
 
-//Get all meetings
-router.get('/get', getMeetings);
+//Join meeting
+router.post('/join', joinMeeting);
 
-//Create new meeting
-router.post('/register', createMeeting);
+//Leave meeting
+router.delete('/leave', leaveMeeting);
 
-//Get meeting information
-router.get('/info/time', getTime);
-router.get('/info/location', getLocation);
-
-//Host info
-//Get host id
-router.get('/info/host/id', getHost);
-
-//Attendee info
-//Get list of attendees id
-router.get('/info/attendees/id', getAttendees);
+//Delete meeting
+router.delete('/:meetingId', deleteMeeting);
 
 module.exports = router;

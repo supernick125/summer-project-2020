@@ -9,8 +9,6 @@ import HomePage from '../pages/Home/HomePage';
 import RegisterPage from '../pages/Register/RegisterPage';
 import AdminPage from '../pages/Admin/AdminPage';
 
-const BASE_URL = '/ans/api';
-
 export default () => {
   const { authUser, setAuthUser } = useContext(AuthContext);
 
@@ -42,7 +40,7 @@ export default () => {
       if(!authUser.isAuth && getCookie('x-auth-token')) {
         Axios.defaults.headers.common['x-auth-token'] = getCookie('x-auth-token');
         try {
-          const resp = await Axios.get(`${BASE_URL}/auth/check`);
+          const resp = await Axios.get('api/auth/check');
           setAuthUser({
             action: 'LOGIN_USER',
             data: resp.data

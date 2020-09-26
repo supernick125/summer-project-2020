@@ -1,161 +1,121 @@
 const pool = require('../db/');
+const jwt = require('jsonwebtoken');
 
-//getUsers - return all users
-const getUsers = async (req, res) => {
+//Get user details
+const getUserDetails = async (req, res) => {
   try {
-    const response = await pool.query(
-      'SELECT * FROM account ORDER BY id ASC'
-    )
-
-    res.status(200).json(response.rows);
-  } catch (error) {
-    res.status(500).json({ message: 'There was an error while searching. Please try again later.'})
+    const { email } = req.params;
+    const loggedUserId = req.user.id;
+    const userDetails = await pool.query(
+      'SELECT id, school_id, graduation_year, first_name, last_name, email_address FROM account WHERE email_address = $1', [email]
+    );
+    if(userDetails.rowCount == 0) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    const resp = {
+      id: userDetails.rows[0].id,
+      schoolid: userDetails.rows[0].school_id,
+      graduationyear: userDetails.rows[0].graduation_year,
+      firstname: userDetails.rows[0].first_name,
+      lastname: userDetails.rows[0].last_name,
+      email: userDetails.rows[0].email_address
+    }
+    return res.status(200).json({ user: resp });
+  }catch(error) {
+    return res.status(500).json({ message: 'There was an error. Please try again later' });
   }
 }
 
-//createStudentUser - create new student user
-const createStudentUser = async (req, res) => {
+//Update user
+const updateUser = async (req, res) => {
+  const updatedData = req.body;
+  const loggedUserId = req.user.id;
+
   try {
-    const {userType, firstName, lastName, graduationYear, email, emailSuffix, password } = req.body
-    //check username
-    var sql = 'INSERT INTO account (account_type_id, school_id, graduation_year, first_name, last_name, email_address, password) SELECT DISTINCT ' + userType + ', school.id, ' + graduationYear + ', \'' + firstName + '\', \'' + lastName + '\', \'' + email + '\', \'' + password + '\' FROM school WHERE (school.name = \'Columbia University\' or school.name = \'Barnard College\') and school.email_suffix = \'' + emailSuffix + '\'';
-    //hash password
+
+  }catch(error) {
+    return res.status(500).json({ message: 'There was an error. Please try again later' });
+  }
+}
+
+//Register new user
+const registerUser = async (req, res) => {
+  const { usertype, firstname, lastname, email, password } = req.body;
+  try {
+    const checkEmail = await pool.query('SELECT id FROM account WHERE email_address = $1', [email]);
+    if(checkEmail.rowCount > 0) {
+      return res.status(409).json({ message: 'There is already an account with this email. Please try again with a different email address.' });
+    }
     const user = await pool.query(
-      sql, (err, result) => {
-        if (err) {
-          return console.error('Error during query', err.stack)
-        }
-        //return result.rows[0];
-      }
+      'INSERT INTO account (account_type_id, school_id, graduation_year, first_name, last_name, email_address, password) VALUES ($1, $2, $3, $4, $5, $6, crypt($7, gen_salt(\'bf\'))) RETURNING id',
+      [usertype, 1, graduationyear, firstname, lastname, email, password]
     )
-
-    const response = {
+    const resp = {
+      accessToken: '',
       user: {
-        graduationYear: graduationYear,
-        firstname: firstName,
-        lastname: lastName
+        id: user.rows[0].id,
+        firstname: firstname,
+        lastname: lastname
       }
     }
-
-    console.log(response);
-    //201
-    return res.status(200).json(response);
-  } catch (error) {
-    return res.status(500).json({ message: 'There was an error while registering. Please try again later.' });
+    resp.accessToken = jwt.sign({ user: user.rows[0].id }, process.env.JWT_PRIVATE, {
+      expiresIn: '3 days'
+    });
+    return res.status(200).json(resp);
+  }catch(error) {
+    return res.status(500).json({ message: 'There was an error while registering. Please try again later' });
   }
 }
 
-//createAlumniUser - create new alumni user
-const createAlumniUser = async (req, res) => {
+//Login user
+const loginUser = async (req, res) => {
+  const { email, password } = req.body;
   try {
-    const {userType, firstName, lastName, graduationYear, email, password } = req.body
-    //check username
-    var sql = 'INSERT INTO account (account_type_id, school_id, graduation_year, first_name, last_name, email_address, password) VALUES (' + userType + ', 1, ' + graduationYear + ', \'' + firstName + '\', \'' + lastName + '\', \'' + email + '\', \'' + password + '\')';
-    //hash password
-    const user = await pool.query(
-      sql, (err, result) => {
-        if (err) {
-          return console.error('Error during query', err.stack)
-        }
-        //return result.rows[0];
-      }
-    )
-
-    const response = {
+    const user = await pool.query('SELECT id, first_name, last_name FROM account WHERE email_address = $1', [email]);
+    if(!user.rowCount) {
+      return res.status(404).json({ message: 'User not found. Please register and try again' });
+    }
+    const checkPassword = await pool.query('SELECT password = crypt($1, password) FROM account WHERE email_address = $2', [password, email]);
+    console.log(checkPassword);
+    if(!checkPassword) {
+      return res.status(401).json({ message: 'Email and password do not match. Please try again later' });
+    }
+    const resp = {
+      accessToken: '',
       user: {
-        sql: sql,
-        graduationYear: graduationYear,
-        firstname: firstName,
-        lastname: lastName
+        id: user.rows[0].id,
+        firstname: user.rows[0].first_name,
+        lastname: user.rows[0].last_name,
+        email: email
       }
     }
-
-    console.log(response);
-    //201
-    return res.status(200).json(response);
-  } catch (error) {
-    return res.status(500).json({ message: 'There was an error while registering. Please try again later.' });
+    resp.accessToken = jwt.sign({ user: user.rows[0].id }, process.env.JWT_PRIVATE, {
+      expiresIn: '3 days'
+    });
+    return res.status(200).json(resp);
+  }catch(error) {
+    return res.status(500).json({ message: 'There was an error while logging in. Please try again later' });
   }
 }
 
-//deleteUser - delete a user
-const deleteUser = async (req, res) => {
-  // try {
-  //
-  //   const user = await pool.query(
-  //     'DELETE FROM account WHERE id = $1', [id]
-  //   )
-  //
-  // } catch (error) {
-  //   res.status(500).json({ message: 'There was an error while deleting. Please try again later.' });
-  // }
-}
-
-//getName - return user's name
-const getName = async (req, res) => {
+//Check user
+const checkUser = async (req, res) => {
   try {
-    const id = req.params.id;
-    const response = await pool.query(
-      'SELECT first_name, last_name FROM account WHERE id = $1', [id]
-    )
-    if (response.rowCount == 0) return res.status(404).json({ message: 'User not found' });
-
-    const name = {
-      first_name: response.rows[0].first_name,
-      last_name: response.rows[0].last_name
+    const user = await pool.query('SELECT id, first_name, last_name FROM account WHERE id = $1', [req.user.id]);
+    if(!user.rowCount) {
+      return res.status(404).json({ message: 'User not found' });
     }
-
-    return res.status(200).json(name);
-  } catch (error) {
-    return res.status(500).json({ message: 'There was an error while retrieving name. Please try again later.'});
-  }
-}
-
-//getEmail - return user's email
-const getEmail = async (req, res) => {
-  try {
-    const id = req.params.id;
-    const response = await pool.query(
-      'SELECT email_address FROM account WHERE id = $1', [id]
-    )
-    if (response.rowCount == 0) return res.status(404).json({ message: 'User not found' });
-
-    const email = {
-      email_address: response.rows[0].email_address
-    }
-
-    res.status(200).json(email);
-  } catch (error) {
-    res.status(500).json({ message: 'There was an error while retrieving email. Please try again later.'});
-  }
-}
-
-//getLogin - return id of user
-const getLogin = async (req, res) => {
-  try{
-    const { email, password } = req.body
-    const response = await pool.query(
-      'SELECT id FROM account WHERE account.account_type_id = 1 and account.email_address = $1 and account.password = $2', [email, password]
-    )
-    if (response.rowCount == 0) return res.status(404).json({ message: 'User not found' });
-    
-    const id_account = {
-      id: response.rows[0].id
-    }
-    
-    res.status(200).json(id_account);
-  } catch (error) {
-    res.status(500).json({ message: 'There was an error while retrieving the student id. Please try again later.'});   
+    return res.status(200).json(user.rows[0]);
+  }catch(error) {
+    return res.status(500).json({ message: 'There was an error. Please try again later' });
   }
 }
 
 //Export functions
 module.exports = {
-  getUsers,
-  createStudentUser,
-  createAlumniUser,
-  deleteUser,
-  getName,
-  getEmail,
-  getLogin
+  getUserDetails,
+  updateUser,
+  registerUser,
+  loginUser,
+  checkUser
 }

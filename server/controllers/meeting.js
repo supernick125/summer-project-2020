@@ -1,12 +1,31 @@
 const pool = require('../db/');
 
-//getActiveMeetings - return all active meetings
+//Create new meeting
+const createMeeting = async (req, res) => {
+  try {
+    const { starttime } = req.body;
+    const userId = req.user.id;
+    const virtual = true;
+    const meeting = await pool.query('INSERT INTO meeting (host_id, start, virtual) VALUES ($1, $2, $3) RETURNING id', [userId, starttime, virtual]);
+    const resp = {
+      id: meeting.rows[0].id,
+      hostid: userId,
+      starttime: starttime,
+      virtual: virtual
+    }
+    return res.status(200).json({ message: 'Meeting created', meeting: resp });
+  }catch(error) {
+    return res.status(500).json({ message: 'There was an error while creating meeting. Please try again later' });
+  }
+}
+
+//Return all active meetings
 const getActiveMeetings = async (req, res) => {
   try {
     const meetings = await pool.query(
-      "SELECT meeting.id AS id, (a.first_name::text || ' '::text || a.last_name::text) AS host_name, start AS start_time FROM meeting JOIN account a ON (meeting.host_id = a.id) WHERE meeting.active=true ORDER BY start ASC"
+      'SELECT meeting.id AS id, (a.first_name::text || \' \'::text || a.last_name::text) AS host_name, start AS start_time FROM meeting JOIN account a ON (meeting.host_id = a.id) WHERE meeting.active=true ORDER BY start ASC'
     );
-    const response = [];
+    const resp = [];
     meetings.rows.forEach((obj) => {
       response.push(
         {
@@ -16,136 +35,53 @@ const getActiveMeetings = async (req, res) => {
         }
       );
     });
-    //console.log(response);
-    res.status(200).json(response);
+    res.status(200).json(resp);
   } catch (error) {
-    res.status(500).json({ message: 'There was an error while searching. Please try again later.'})
+    res.status(500).json({ message: 'There was an error while searching. Please try again later' })
   }
 }
 
-//getMeetings - return all meetings
-const getMeetings = async (req, res) => {
+//Join meeting
+const joinMeeting = async (req, res) => {
+  const { meetingId } = req.body;
+  const loggedUserId = req.user.id;
   try {
-    const meetings = await pool.query(
-      'SELECT * FROM meeting ORDER BY id ASC'
-    )
-    res.status(200).json(response.rows);
-  } catch (error) {
-    res.status(500).json({ message: 'There was an error while searching. Please try again later.'})
-  }
-}
-
-//FUNCTIONS TO ADD
-
-//createMeeting - create new meeting
-//so far only works when virtual is true. I was thinking that maybe when virtual is false, we can input another insert statement for when virtual = false, insert address_id.
-const createMeeting = async (req, res) => {
-  try {
-    const { host, start, virtual} = req.body;
-
-    const meeting = await pool.query(
-      'INSERT INTO meeting (host_id, start, virtual) VALUES ($1, $2, $3) RETURNING id',
-      [ host, start, virtual ], (err, result) => {
-        if (err) {
-          return console.error('Error during query', err.stack)
-        }
-      }
-    )
-
-    const response = {
-      meeting: {
-        host: host,
-        start: start,
-        virtual: virtual
-      }
+    const join = await pool.query('INSERT INTO account_meeting (account_id, meeting_id) VALUES ($1, $2) RETURNING id', [loggedUserId, meetingId]);
+    const resp = {
+      attendid: join.rows[0].id
     }
-
-    console.log(response);
-    return res.status(200).json(response);
-  } catch (error) {
-    return res.status(500).json({ message: 'There was an error creating the meeting. Please try again later.'})
+    return res.status(300).json({ message: 'Meeting joined', content: resp });
+  }catch(error) {
+    return res.status(500).json({ message: 'There was an error while joining meeting. Please try again later' });
   }
 }
 
-//deleteMeeting - delete a meeting
+//Leave meeting
+const leaveMeeting = async (req, res) => {
+  const { attendId } = req.body;
+  try {
+    const leave = await pool.query('UPDATE account_meeting SET active = false WHERE id = $1', [attendId])
+  }catch(error) {
+    return res.status(500).json({ message: 'There was an error while leaving meeting. Please try again later' });
+  }
+}
+
+//Delete meeting
 const deleteMeeting = async (req, res) => {
+  const { meetId } = req.params;
+  const loggedUserId = req.user.id;
   try {
-    const meetings = await pool.query(
-      'DELETE FROM meeting WHERE id = $1', [id]
-    )
-
-  } catch (error) {
-    res.status(500).json({message: 'There is an error deleting the meeting. Please try again later.'})
+    await pool.query('UPDATE meeting SET active = false WHERE id = $1 AND host_id = $2', [meetingId, loggedUserId]);
+    return res.status(200).json({ message: 'Meeting deleted successfully' });
+  }catch(error) {
+    return res.status(500).json({ message: 'There was an error while deleting the meeting. Please try again later' });
   }
 }
 
-//getTime - return time meeting takes place
-const getTime = async (req, res) => {
-  try {
-    const meetings = await pool.query(
-      'SELECT start FROM meeting WHERE id = $1', [id]
-    )
-    if (response.rowCount == 0) return res.status(404).json({ message: 'User not found' });
-
-    const meeting_time = {
-      time: response.rows[0].start
-    }
-    res.status(200).json(meeting_time);
-  } catch (error) {
-    res.status(500).json({message: 'There is an error retrieving the meeting time. Please try again later.'})
-  }
-}
-
-//getLocation - return location of meeting or say its virtual
-//only got the function to work when virtual is false and gives a location. Not sure how to do the other way around, or what to output.
-const getLocation = async (req, res) => {
-  try {
-    const meeting = await pool.query(
-      'SELECT address_id FROM meeting WHERE id = $1 and virtual = false', [id]
-    )
-    if (response.rowCount == 0) return res.status(404).json({ message: 'User not found' });
-
-    const location = {
-      location: response.rows[0].address_id
-    }
-    res.status(200).json(location);
-  } catch (error) {
-    res.status(500).json({message: 'There is an error retrieving the location. Please try again later.'})
-  }
-}
-
-//getHost - return list of host id
-const getHost = async (req, res) => {
-  try {
-    const meeting = await pool.query(
-      'SELECT host_id FROM meeting WHERE active = true ORDER BY id ASC'
-    )
-    res.status(200).json(response.rows);
-  } catch (error) {
-    res.status(500).json({message:'There was an error while searching. Please try again later.'})
-  }
-}
-
-//getAttendees - return list of attendee ids
-const getAttendees = async (req, res) => {
-  try {
-    const meeting = await pool.query(
-      'SELECT account_id FROM account_meeting WHERE meeting_id = $1 ORDER BY id ASC', [id]
-    )
-    res.status(200).json(response.rows);
-  } catch (error) {
-    res.status(500).json({message:'There was an error while searching. Please try again later.'})
-  }
-}
-
-//Export functions
 module.exports = {
-  getActiveMeetings,
-  getMeetings,
   createMeeting,
-  deleteMeeting,
-  getTime,
-  getLocation,
-  getHost,
-  getAttendees
+  getActiveMeetings,
+  joinMeeting,
+  leaveMeeting,
+  deleteMeeting
 }
