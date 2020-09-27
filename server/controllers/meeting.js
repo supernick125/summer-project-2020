@@ -27,7 +27,7 @@ const getActiveMeetings = async (req, res) => {
     );
     const resp = [];
     meetings.rows.forEach((obj) => {
-      response.push(
+      resp.push(
         {
           id: obj.id,
           hostName: obj.host_name,
@@ -37,6 +37,7 @@ const getActiveMeetings = async (req, res) => {
     });
     res.status(200).json(resp);
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: 'There was an error while searching. Please try again later' })
   }
 }
@@ -46,12 +47,13 @@ const joinMeeting = async (req, res) => {
   const { meetingId } = req.body;
   const loggedUserId = req.user.id;
   try {
-    const join = await pool.query('INSERT INTO account_meeting (account_id, meeting_id) VALUES ($1, $2) RETURNING id', [loggedUserId, meetingId]);
+    const join = await pool.query('INSERT INTO account_meeting (account_id, meeting_id) VALUES ($1, $2)', [loggedUserId, meetingId]);//RETURNING id
     const resp = {
-      attendid: join.rows[0].id
+      attendid: 0//CHANGE THIS
     }
     return res.status(300).json({ message: 'Meeting joined', content: resp });
   }catch(error) {
+    console.log(error);
     return res.status(500).json({ message: 'There was an error while joining meeting. Please try again later' });
   }
 }

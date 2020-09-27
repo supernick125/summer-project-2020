@@ -7,19 +7,6 @@ import MeetingTable from './../MeetingTable/MeetingTable';
 
 export default () => {
 
-  let email = prompt('Login\n\nPlease enter your email');
-
-  let password = prompt('Login\n\nPlease enter your password');
-
-  function loginCheck (x, y) {
-    //Zamie put your check here
-    if (x === 'x' && y === 'y') {
-      return true
-    } else {
-      return false
-    }
-  };
-
   Axios.get('http://localhost:3001/api/meeting/active')
     .then(response => {
       var meetings = JSON.parse(JSON.stringify(response.data));
@@ -29,24 +16,14 @@ export default () => {
       console.error(error);
     });
 
-  if (loginCheck(email, password)) {
-    return (
-      <Container fluid id='container'>
-        <Jumbotron fluid id="header">
-          <h1 >Welcome to the Columbia University Dining Room!</h1>
-          <p>Connect with industry leaders who graduated from YOUR University for a 30-minute lunch conversation!</p>
-          <p>We are creating a REST Web service that connects alumni with current college students for meaningful and elucidating lunch discussions. Unlike typical mentor-mentee services, we provide 4 students at a time with a 30 minute discourse with an alumnus, with no further commitments.</p>
-        </Jumbotron>
-        <div id="meetings" className='h-100'>
-        </div>
-      </Container>
-    );
-  } else {
-    return (
-      <Container fluid id='error'>
-        <h1>Invalid Login</h1>
-        <h2>Please refresh the page and try to login again</h2>
-      </Container>
-    )
-  }
+  return (
+    <Container fluid id='container'>
+      <Jumbotron fluid id="header">
+        <h1 >Welcome to the Columbia University Dining Room!</h1>
+        <p>Connect with industry leaders who graduated from YOUR University for a 30-minute lunch conversation!</p>
+        <p>We are creating a REST Web service that connects alumni with current college students for meaningful and elucidating lunch discussions. Unlike typical mentor-mentee services, we provide 4 students at a time with a 30 minute discourse with an alumnus, with no further commitments.</p>
+      </Jumbotron>
+      <div id="meetings" className='h-100'></div>
+    </Container>
+  );
 }
