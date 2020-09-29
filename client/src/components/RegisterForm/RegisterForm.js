@@ -83,7 +83,7 @@ export default () => {
     <Redirect to='/home' />
   ) : (
     <Container fluid className='body'>
-      <button onClick={sayHello}>hello</button>
+      {/*<button onClick={sayHello}>hello</button>*/}
       <Form className='form' onSubmit={registerUser}>
         <Form.Group>
           <Form.Label>First Name:</Form.Label>
