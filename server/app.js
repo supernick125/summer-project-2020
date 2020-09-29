@@ -11,7 +11,8 @@ dotenv.config();
 // }
 
 //Port setup
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 5000;
+const path = require('path');
 
 //MIDDLEWARE
 app.use(cors());
@@ -27,6 +28,19 @@ app.use(function(req, res, next) {
 const mainRouter = require('./routes/index');
 
 app.use('/api', mainRouter);
+
+//STATIC FILES SERVED
+app.use(express.static(path.join(__dirname, '../client/build')));
+app.use('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
+
+// if (process.env.NODE_ENV === 'production') {
+//   App.use(Express.static(path.join(__dirname, '../client/dist')))
+//   App.use('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../client/dist/index.html'))
+//   })
+// }
 
 //PORT LISTENER
 app.listen(port, () => console.log(`App running on port ${port}.`));

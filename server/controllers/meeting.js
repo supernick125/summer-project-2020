@@ -4,8 +4,12 @@ const pool = require('../db/');
 const createMeeting = async (req, res) => {
   try {
     const { starttime } = req.body;
-    const userId = req.user.id;
+    const userId = req.body.hostid || req.user.id;
     const virtual = true;
+    const meetingCheck = await pool.query('SELECT id FROM meeting WHERE host_id = $1 AND start = $2 AND virtual = $3', [userId, starttime, virtual]);
+    if(meetingCheck.rowCount) {
+      return res.status(409).json({ message: 'This meeting has already been created' });
+    }
     const meeting = await pool.query('INSERT INTO meeting (host_id, start, virtual) VALUES ($1, $2, $3) RETURNING id', [userId, starttime, virtual]);
     const resp = {
       id: meeting.rows[0].id,
@@ -47,28 +51,34 @@ const joinMeeting = async (req, res) => {
   const { meetingId } = req.body;
   const loggedUserId = req.user.id;
   try {
-    const join = await pool.query('INSERT INTO account_meeting (account_id, meeting_id) VALUES ($1, $2)', [loggedUserId, meetingId]);//RETURNING id
-    const resp = {
-      attendid: 0//CHANGE THIS
+    const joinCheck = await pool.query('SELECT account_id FROM account_meeting WHERE account_id = $1 AND meeting_id = $2', [loggedUserId, meetingId]);
+    if(joinCheck.rowCount) {
+      return res.status(409).json({ message: 'Already attending this meeting' });
     }
-    return res.status(300).json({ message: 'Meeting joined', content: resp });
+    const join = await pool.query('INSERT INTO account_meeting (account_id, meeting_id) VALUES ($1, $2)', [loggedUserId, meetingId]);
+    return res.status(200).json({ message: 'Meeting joined successfully' });
   }catch(error) {
-    console.log(error);
     return res.status(500).json({ message: 'There was an error while joining meeting. Please try again later' });
   }
 }
 
 //Leave meeting
 const leaveMeeting = async (req, res) => {
-  const { attendId } = req.body;
+  const { meetingId } = req.body;
+  const loggedUserId = req.user.id;
   try {
-    const leave = await pool.query('UPDATE account_meeting SET active = false WHERE id = $1', [attendId])
+    const leaveCheck = await pool.query('SELECT account_id FROM account_meeting WHERE account_id = $1 AND meeting_id = $2', [loggedUserId, meetingId]);//TEMP CHANGE THIS
+    if(!leaveCheck.rowCount) {
+      return res.status(404).json({ message: 'User not registered for this meeting' });
+    }
+    const leave = await pool.query('UPDATE account_meeting SET active = false WHERE account_id = $1 AND meeting_id = $2', [loggedUserId, meetingId]);
+    return res.status(200).json({ message: 'Left meeting successfully' });
   }catch(error) {
     return res.status(500).json({ message: 'There was an error while leaving meeting. Please try again later' });
   }
 }
 
-//Delete meeting
+//Set meeting active to false
 const deleteMeeting = async (req, res) => {
   const { meetId } = req.params;
   const loggedUserId = req.user.id;
