@@ -4,7 +4,7 @@ const user = require('./user');
 const meeting = require('./meeting');
 const auth = require('./auth');
 
-const authUser = require('../services/Auth');
+const authUser = require('../services/auth');
 
 router.use('/user', authUser, user);
 
