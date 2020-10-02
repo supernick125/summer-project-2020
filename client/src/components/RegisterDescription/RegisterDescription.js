@@ -1,17 +1,18 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
+import Arch from '../svgs/Arch';
 import './style.css';
 
 export default () => {
 
   return (
-    <Container fluid className='body'>
+    <Container fluid className='description'>
       <div className='white'>
         <h1 className='heading'>Meet with Columbia Alumni who are Industry Leaders</h1>
         <br></br>
-        <div className='heading-list'>
-          <h2>1. Sign up with your Columbia Email</h2>
-          <h2>2. Browse Conversations with Our Alumni</h2>
+        <div>
+          <h2 className='heading-list'>1. Sign up with your Columbia Email</h2>
+          <h2 className='heading-list'>2. Browse Conversations with Our Alumni</h2>
         </div>
         <br></br>
       </div>
