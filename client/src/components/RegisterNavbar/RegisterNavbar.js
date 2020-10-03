@@ -61,15 +61,11 @@ export default () => {
   return login ? (
     <Redirect to='/home' />
   ) : (
-    <Navbar bg="light" expand="lg">
+    <Navbar className="bar" bg="light" expand="lg">
       <ASLogo className='svg'/>
       <Navbar.Brand href="#home">Alumni & Students</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mr-auto">
-          <Nav.Link href="#home">Sign Up</Nav.Link>
-          <Nav.Link href="#link">About Us</Nav.Link>
-        </Nav>
         <Form inline className="ml-auto mr-sm-2" onSubmit={loginUser}>
           <Form.Group controlId="loginEmail">
             <FormControl

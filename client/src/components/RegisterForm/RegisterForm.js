@@ -85,32 +85,61 @@ export default () => {
     <Container fluid className='body'>
       {/*<button onClick={sayHello}>hello</button>*/}
       <Form className='form' onSubmit={registerUser}>
-        <Form.Group>
+        <Form.Group controlID="registerFirstName">
           <Form.Label>First Name:</Form.Label>
-          <Form.Control type="text" name="firstname" value={user.firstname} onChange={updateUser} required/>
+          <Form.Control 
+            type="text" 
+            name="firstname" 
+            value={user.firstname} 
+            onChange={updateUser} 
+            required/>
         </Form.Group>
-        <Form.Group>
+        <Form.Group controlID="registerLastName">
           <Form.Label>Last Name:</Form.Label>
-          <Form.Control type="text" name="lastname" value={user.lastname} onChange={updateUser} required/>
+          <Form.Control 
+            type="text" 
+            name="lastname" 
+            value={user.lastname} 
+            onChange={updateUser} 
+            required/>
         </Form.Group>
-        <Form.Group>
+        <Form.Group controlID="registerGraduationYear">
           <Form.Label>Graduation Year:</Form.Label>
-          <Form.Control type="text" name="graduationyear" value={user.graduationyear} onChange={updateUser} required/>
+          <Form.Control 
+            type="text" 
+            name="graduationyear" 
+            value={user.graduationyear} 
+            onChange={updateUser} 
+            required/>
         </Form.Group>
-        <Form.Group controlId="formBasicEmail">
+        <Form.Group controlId="registerEmail">
           <Form.Label>School Email Address:</Form.Label>
-          <Form.Control type="email" name="email" value={user.email} onChange={updateUser} required/>
+          <Form.Control 
+            type="email" 
+            name="email" 
+            value={user.email} 
+            onChange={updateUser} 
+            required/>
           <Form.Text className="text-muted">
             We'll never share your email with anyone else.
           </Form.Text>
         </Form.Group>
-        <Form.Group>
+        <Form.Group controlID="registerPassword">
           <Form.Label>Password:</Form.Label>
-          <Form.Control type="text" name="password" value={user.password} onChange={updateUser} required/>
+          <Form.Control 
+            type="password" 
+            name="password" 
+            value={user.password} 
+            onChange={updateUser} required/>
         </Form.Group>
-        <Form.Group>
+        <Form.Group controlID="registerPasswordCheck">
           <Form.Label>Re-enter Password:</Form.Label>
-          <Form.Control type="text" name="passwordCheck" value={user.passwordCheck} onChange={updateUser} required/>
+          <Form.Control 
+            type="password" 
+            name="passwordCheck" 
+            value={user.passwordCheck} 
+            onChange={updateUser} 
+            required/>
         </Form.Group>
         <Button variant="primary" type="submit">
           Register
