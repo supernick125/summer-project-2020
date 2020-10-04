@@ -27,7 +27,7 @@ const createMeeting = async (req, res) => {
 const getActiveMeetings = async (req, res) => {
   try {
     const meetings = await pool.query(
-      'SELECT meeting.id AS id, (a.first_name::text || \' \'::text || a.last_name::text) AS host_name, start AS start_time FROM meeting JOIN account a ON (meeting.host_id = a.id) WHERE meeting.active=true ORDER BY start ASC'
+      'SELECT meeting.id AS id, (a.first_name::text || \' \'::text || a.last_name::text) AS host_name, description as description, start AS start_time FROM meeting JOIN account a ON (meeting.host_id = a.id) WHERE meeting.active=true ORDER BY start ASC'
     );
     const resp = [];
     meetings.rows.forEach((obj) => {
@@ -35,6 +35,7 @@ const getActiveMeetings = async (req, res) => {
         {
           id: obj.id,
           hostName: obj.host_name,
+          description: obj.description,
           startTime: obj.start_time
         }
       );
