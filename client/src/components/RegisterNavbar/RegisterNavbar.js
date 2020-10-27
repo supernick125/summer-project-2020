@@ -48,11 +48,9 @@ export default () => {
         action: 'LOGIN_USER',
         data: resp.data.user
       });
-      console.log("a");
       setCookie('x-auth-token', resp.data.accessToken);
       Axios.defaults.headers.common['x-auth-token'] = resp.data.accessToken;
       setLogin(true);
-      console.log("b");
     }catch(error) {
       console.error(error);
     }
