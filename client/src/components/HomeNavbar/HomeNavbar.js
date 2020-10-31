@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import Axios from 'axios';
+import ASLogo from '../svgs/ASLogo';
 import { Redirect, Link } from 'react-router-dom';
 
 import { Container, Nav, Navbar, Form, FormControl, Col , InputGroup, Button } from 'react-bootstrap';
@@ -23,13 +24,20 @@ export default () => {
   }
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar className="bar" bg="light" expand="lg">
+      <ASLogo className='svg'/>
       <Navbar.Brand href="#home">Alumni & Students</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
-        <a href="#" onClick={logoutUser}>
-          Log Out
-        </a>
+        <Form inline className=" ml-auto mr-sm-2">
+          <i className="fas fa-user-circle fa-2x" id="user-icon"></i>
+          <Button variant="primary" type="submit" id="logout-button" onClick={logoutUser}>
+            Log Out
+          </Button>
+          {/*<a href="#" id="logout-link" onClick={logoutUser}>
+            Log Out
+          </a>*/}
+        </Form>
       </Navbar.Collapse>
     </Navbar>
   );

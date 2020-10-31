@@ -1,1 +1,14 @@
 /* HomeNavbar Stylesheet */
+
+#user-icon {
+  margin-right: 0.5em;
+}
+
+#logout-button {
+  margin-right: 0.5em;
+}
+
+.bar {
+  font-family: Manrope;
+}
+
