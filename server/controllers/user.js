@@ -40,10 +40,14 @@ const updateUser = async (req, res) => {
 
 //Register new user
 const registerUser = async (req, res) => {
-  const { usertype, graduationyear, firstname, lastname, email, password } = req.body;
+  const { usertype, graduationyear, firstname, lastname, email, password, passwordCheck } = req.body;
   try {
-    const emailSuffix = email.split("@")[1].split(".")[0]; //Gets email suffix only
+    //Check password matching
+    if(password !== passwordCheck) {
+      return res.status(401).json({ message: 'Passwords do not match. Please try again.' });
+    }
     //Check email suffix
+    const emailSuffix = email.split("@")[1].split(".")[0]; //Gets email suffix only
     const checkSuffix = await pool.query('SELECT email_suffix = $1 as suffix_check FROM school WHERE id = 1', [emailSuffix]);
     if(!checkSuffix.rows[0].suffix_check) {
       return res.status(401).json({ message: 'Email does not match a partnered school. Please contact your school\'s alumni office for help.' });

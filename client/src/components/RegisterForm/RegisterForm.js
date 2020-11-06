@@ -19,7 +19,7 @@ export default () => {
     lastname: '',
     email: '',
     password: '',
-    passwordcheck: ''
+    passwordCheck: ''
   });
 
   const updateUser = (event) => {
@@ -48,7 +48,8 @@ export default () => {
           firstname: user.firstname,
           lastname: user.lastname,
           email: user.email,
-          password: user.password
+          password: user.password,
+          passwordCheck: user.passwordCheck
         }
       });
       setUser({
@@ -56,7 +57,8 @@ export default () => {
         firstname: '',
         lastname: '',
         email: '',
-        password: ''
+        password: '',
+        passwordCheck: ''
       });
       setAuthUser({
         action: 'LOGIN_USER',
@@ -87,38 +89,38 @@ export default () => {
       <Form className='form' onSubmit={registerUser}>
         <Form.Group controlID="registerFirstName">
           <Form.Label>First Name:</Form.Label>
-          <Form.Control 
-            type="text" 
-            name="firstname" 
-            value={user.firstname} 
-            onChange={updateUser} 
+          <Form.Control
+            type="text"
+            name="firstname"
+            value={user.firstname}
+            onChange={updateUser}
             required/>
         </Form.Group>
         <Form.Group controlID="registerLastName">
           <Form.Label>Last Name:</Form.Label>
-          <Form.Control 
-            type="text" 
-            name="lastname" 
-            value={user.lastname} 
-            onChange={updateUser} 
+          <Form.Control
+            type="text"
+            name="lastname"
+            value={user.lastname}
+            onChange={updateUser}
             required/>
         </Form.Group>
         <Form.Group controlID="registerGraduationYear">
           <Form.Label>Graduation Year:</Form.Label>
-          <Form.Control 
-            type="text" 
-            name="graduationyear" 
-            value={user.graduationyear} 
-            onChange={updateUser} 
+          <Form.Control
+            type="text"
+            name="graduationyear"
+            value={user.graduationyear}
+            onChange={updateUser}
             required/>
         </Form.Group>
         <Form.Group controlId="registerEmail">
           <Form.Label>School Email Address:</Form.Label>
-          <Form.Control 
-            type="email" 
-            name="email" 
-            value={user.email} 
-            onChange={updateUser} 
+          <Form.Control
+            type="email"
+            name="email"
+            value={user.email}
+            onChange={updateUser}
             required/>
           <Form.Text className="text-muted">
             We'll never share your email with anyone else.
@@ -126,19 +128,19 @@ export default () => {
         </Form.Group>
         <Form.Group controlID="registerPassword">
           <Form.Label>Password:</Form.Label>
-          <Form.Control 
-            type="password" 
-            name="password" 
-            value={user.password} 
+          <Form.Control
+            type="password"
+            name="password"
+            value={user.password}
             onChange={updateUser} required/>
         </Form.Group>
         <Form.Group controlID="registerPasswordCheck">
           <Form.Label>Re-enter Password:</Form.Label>
-          <Form.Control 
-            type="password" 
-            name="passwordCheck" 
-            value={user.passwordCheck} 
-            onChange={updateUser} 
+          <Form.Control
+            type="password"
+            name="passwordCheck"
+            value={user.passwordCheck}
+            onChange={updateUser}
             required/>
         </Form.Group>
         <Button variant="primary" type="submit">

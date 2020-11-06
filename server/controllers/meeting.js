@@ -1,7 +1,7 @@
 const pool = require('../db/');
 
 //Create new meeting
-const createMeeting = async (req, res) => {
+const createMeeting = async (req, res) => {//ADD DESCRIPTION HERE
   try {
     const { starttime } = req.body;
     const userId = req.body.hostid || req.user.id;
