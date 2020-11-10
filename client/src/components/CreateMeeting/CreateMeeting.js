@@ -6,8 +6,10 @@ import './style.css';
 export default () => {
 
   const [meeting, setMeeting] = useState({
-    hostid: 0,
-    starttime: ''
+    hostid: 1,
+    capacity: 5,
+    starttime: '2020-1-1 12:00:00',
+    description: 'Description'
   });
 
   const updateMeeting = (event) => {
@@ -26,8 +28,10 @@ export default () => {
         data: meeting
       });
       setMeeting({
-        hostid: '',
-        starttime: ''
+        hostid: 1,
+        capacity: 5,
+        starttime: '2020-1-1 12:00:00',
+        description: 'Description'
       })
     }catch(error) {
       console.error('Error creating meeting');
@@ -39,33 +43,43 @@ export default () => {
       <h1>Create a Meeting</h1>
       <Form className='form' onSubmit={createMeeting}>
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>Host ID (Alumni Name)</Form.Label>
-          <Form.Control 
-            type="text" 
-            name="hostid" 
-            value={meeting.hostid} 
-            onChange={updateMeeting} 
+          <Form.Label>Host ID</Form.Label>
+          <Form.Control
+            type="text"
+            name="hostid"
+            value={meeting.hostid}
+            onChange={updateMeeting}
+            required/>
+        </Form.Group>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>Capacity</Form.Label>
+          <Form.Control
+            type="text"
+            name="capacity"
+            value={meeting.capacity}
+            onChange={updateMeeting}
             required/>
         </Form.Group>
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Start (Start Time)</Form.Label>
-          <Form.Control 
-            type="text" 
-            name="starttime" 
-            value={meeting.starttime} 
-            onChange={updateMeeting} 
+          <Form.Control
+            type="text"
+            name="starttime"
+            value={meeting.starttime}
+            onChange={updateMeeting}
             required/>
         </Form.Group>
-        {/* Nick add your API stuff in the Form.Control below
-        also should probably update the createMeeting function*/}
-        {/* name="" value={} onChange={updateMeeting} required/ */}
-        <FormGroup>
+        <Form.Group>
           <Form.Label>Alumni Description</Form.Label>
-          <Form.Control  
-            as="textarea" 
+          <Form.Control
+            as="textarea"
             row="5"
-            cols="30"/>
-        </FormGroup>
+            cols="30"
+            name="description"
+            value={meeting.description}
+            onChange={updateMeeting}
+            required/>
+        </Form.Group>
         <Button variant="primary" type="submit">Submit</Button>
       </Form>
     </Container>

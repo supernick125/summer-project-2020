@@ -25,6 +25,7 @@ export default (props) => {
   }
 
   // Bugs: DO NOT schedule meetings 8PM - 12AM and not January 1 on any year PLEASE
+  //Another bug: the times are shifted an hour later ie: 1pm -> 2pm when displayed
 
   function isoToEST(isoTimeString) {
     const isoDate = new Date(isoTimeString)
@@ -47,12 +48,9 @@ export default (props) => {
       <Row>
         <Col className='adjust' md={4}>{meeting.hostName}</Col>
         <Col className='adjust' md={4}>{meeting.description}</Col>
-        <Col className='adjust' md={4}>
-          {isoToEST(meeting.startTime)}
-          <Button id='join' type='submit' size='sm' onClick={joinMeeting}>
-          Join
-          </Button>
-        </Col>
+        <Col className='adjust' md={4}>{isoToEST(meeting.startTime)}</Col>
+        <Col className='adjust' md={4}>{meeting.capacity}</Col>
+        <Col className='adjust' md={4}><Button id='join' type='submit' size='sm' onClick={joinMeeting}>Join</Button></Col>
       </Row>
     </Container>
   );
