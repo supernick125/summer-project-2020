@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import Axios from 'axios';
-import ASLogo from '../svgs/ASLogo';
+import Title from '../svgs/Title';
 import { Redirect, Link } from 'react-router-dom';
 
 import { Container, Nav, Navbar, Form, FormControl, Col , InputGroup, Button } from 'react-bootstrap';
@@ -25,8 +25,7 @@ export default () => {
 
   return (
     <Navbar className="bar" bg="light" expand="lg">
-      <ASLogo className='svg'/>
-      <Navbar.Brand href="#home">Alumni & Students</Navbar.Brand>
+      <Title className='svg'/>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Form inline className=" ml-auto mr-sm-2">
