@@ -37,9 +37,8 @@ export default () => {
   return (
     <Container fluid id='container'>
       <Jumbotron fluid id="header">
-        <h1 >Welcome to the Columbia University Dining Room!</h1>
-        <p>Connect with industry leaders who graduated from YOUR University for a 30-minute lunch conversation!</p>
-        <p>We are creating a REST Web service that connects alumni with current college students for meaningful and elucidating lunch discussions. Unlike typical mentor-mentee services, we provide 4 students at a time with a 30 minute discourse with an alumnus, with no further commitments.</p>
+        <h1>Connect with our Alumni Hosts</h1>
+        <h4>Ask these accomplished Columbia alumni for professional insights, career advice, or general information. They are ready to help and connect with you.</h4>
       </Jumbotron>
       <div id="meetings" className='h-100'>
         {!meetings.length ? (

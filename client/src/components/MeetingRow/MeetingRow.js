@@ -29,7 +29,8 @@ export default (props) => {
 
   function isoToEST(isoTimeString) {
     const isoDate = new Date(isoTimeString)
-    const hour = isoDate.getUTCHours() - 4
+    
+    const hour = isoDate.getUTCHours() - 5 /* Change 5 to 4 for Spring Day Light Savings*/
     const minute = ('0' + isoDate.getUTCMinutes()).slice(-2)
     const month = isoDate.toLocaleString('default', { month: 'long' })
     const date = isoDate.getUTCDate()
@@ -43,14 +44,27 @@ export default (props) => {
     }
   }
 
+  function toTag(str) {  
+    var i = str.indexOf('|')  
+    var newStr = str.substring(0, i)  
+    return newStr
+  }
+  
+  function toDescription(str) {  
+    var i = str.indexOf('|')  
+    var newStr = str.substring(i+1, str.length)  
+    return newStr
+  }
+
   return (
     <Container fluid className='p-0'>
       <Row>
-        <Col className='adjust' md={4}>{meeting.hostName}</Col>
-        <Col className='adjust' md={4}>{meeting.description}</Col>
-        <Col className='adjust' md={4}>{isoToEST(meeting.startTime)}</Col>
-        <Col className='adjust' md={4}>{meeting.capacity}</Col>
-        <Col className='adjust' md={4}><Button id='join' type='submit' size='sm' onClick={joinMeeting}>Join</Button></Col>
+        <Col className='adjust' md={2}><p><b>{meeting.hostName}</b></p></Col>
+        <Col className='adjust' md={2}><p id='tag'>{toTag(meeting.description)}</p></Col>
+        <Col className='adjust' md={2}>{toDescription(meeting.description)}</Col>
+        <Col className='adjust' md={2}>{isoToEST(meeting.startTime)}</Col>
+        <Col className='adjust' md={2}>{meeting.capacity}</Col>
+        <Col className='adjust' md={2}><Button id='join' type='submit' size='sm' onClick={joinMeeting}>Sign Up</Button></Col>
       </Row>
     </Container>
   );

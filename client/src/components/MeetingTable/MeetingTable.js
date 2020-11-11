@@ -16,10 +16,11 @@ export default (props) => {
   return (
     <Container fluid className='p-0'>
       <Row id='table-heading'>
-        <Col md={4}>Host</Col>
-        <Col md={4}>Description</Col>
-        <Col md={4}>Start Time</Col>
-        <Col md={4}>Capacity</Col>
+        <Col md={2}>Host</Col>
+        <Col md={2}></Col>
+        <Col md={2}>Description</Col>
+        <Col md={2}>Start Time</Col>
+        <Col md={2}>Capacity</Col>
       </Row>
       <div>
         {rows}
