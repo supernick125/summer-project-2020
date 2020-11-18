@@ -22,6 +22,8 @@ export default () => {
     });
     window.location.reload();
   }
+  
+  const name = authUser.user.first_name + ' ' + authUser.user.last_name;
 
   return (
     <Navbar className="bar" bg="light" expand="lg">
@@ -29,6 +31,7 @@ export default () => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Form inline className=" ml-auto mr-sm-2">
+          <p>{name}</p>
           <i className="fas fa-user-circle fa-2x" id="user-icon"></i>
           <Button variant="primary" type="submit" id="logout-button" onClick={logoutUser}>
             Log Out
