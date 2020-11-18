@@ -11,7 +11,8 @@ export default () => {
     firstname: '',
     lastname: '',
     email: '',
-    password: ''
+    password: '',
+    passwordCheck: ''
   });
 
   const updateUser = (event) => {
@@ -35,7 +36,8 @@ export default () => {
         firstname: '',
         lastname: '',
         email: '',
-        password: ''
+        password: '',
+        passwordCheck: ''
       })
     }catch(error) {
       console.error('Error creating user');
@@ -68,6 +70,10 @@ export default () => {
         <Form.Group>
           <Form.Label>Password:</Form.Label>
           <Form.Control type="text" name="password" value={user.password} onChange={updateUser} required/>
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Password Check:</Form.Label>
+          <Form.Control type="text" name="passwordCheck" value={user.passwordCheck} onChange={updateUser} required/>
         </Form.Group>
         <Button variant="primary" type="submit">Submit</Button>
       </Form>
