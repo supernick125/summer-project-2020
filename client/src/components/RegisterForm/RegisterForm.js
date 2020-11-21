@@ -18,6 +18,7 @@ export default () => {
     firstname: '',
     lastname: '',
     email: '',
+    emailSuffix: '', 
     password: '',
     passwordCheck: ''
   });
@@ -57,6 +58,7 @@ export default () => {
         firstname: '',
         lastname: '',
         email: '',
+        emailSuffix: '',
         password: '',
         passwordCheck: ''
       });
