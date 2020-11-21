@@ -1,5 +1,10 @@
-.body {
+/* Stylesheet for RegisterDescription.js */
+.description {
   height: 100%;
+  font-family: Manrope;
+  font-weight: 500;
+  background-image: url(../svgs/Arch.svg);
+  background-size: cover;
 }
 
 .orange {
@@ -10,4 +15,37 @@
 .white {
   color: white;
   padding: 2em 1em 1em 1em;
+}
+
+.heading {
+  font-family: 'Manrope'; 
+  font-weight: 900; 
+  font-size: 5vmin;
+}
+
+.heading-list {
+  font-family: 'Manrope'; 
+  font-weight: 800; 
+  font-size: 4vmin;
+  list-style-position: inside; 
+  position: relative;
+}
+
+.subheading {
+  font-family: 'Manrope'; 
+  font-weight: 700; 
+  font-size: 4vmin;
+}
+
+.subheading-list {
+  font-family: 'Manrope'; 
+  font-weight: 350;
+  font-size: 3vmin;
+  list-style-position: inside;
+}
+
+.job-description {
+  font-family: 'Manrope'; 
+  font-weight: 900; 
+  font-size: 2.5vmin;
 }

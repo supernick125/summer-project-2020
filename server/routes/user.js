@@ -1,23 +1,10 @@
-const {
-  getUsers,
-  createUser,
-  deleteUser,
-  getName,
-  getEmail,
-} = require('../controllers/user');
+const { getUserDetails, updateUser } = require('../controllers/user');
 const router = require('express').Router();
 
-//Get all users
-router.get('/list', getUsers);
+//Get user details
+router.get('/:username', getUserDetails);
 
-//Create new user
-router.post('/register', createUser);
-
-//Get user information
-router.get('/info/name/:id', getName);
-router.get('/info/email/:id', getEmail);
-
-//Update information
-//ADD LATER
+//Update user details
+router.post('/update', updateUser);
 
 module.exports = router;

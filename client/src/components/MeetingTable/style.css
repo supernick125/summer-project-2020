@@ -1,1 +1,7 @@
 /* MeetingTable stylesheet */
+
+#table-heading {
+  text-align: center;
+  padding-bottom: 1em;
+  font-weight: 900;
+}

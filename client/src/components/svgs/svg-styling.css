@@ -1,0 +1,35 @@
+/* The A&S Logo Styling, Decomposed */
+.ASLogo {
+  width: 5em;
+  padding-right: 0.5em;
+  margin-left: 1em;
+}
+
+#Body_Shadow {
+  mix-blend-mode: multiply;
+}
+
+/* Styling for A, Hat-Band, S of logo */
+[data-name = Hat-Band], [data-name = S-Letter], [data-name = A-Letter]  {
+  fill: black;
+}
+
+/* Styling Ampersand, Hat-Top */
+[data-name = Ampersand], [data-name = Hat-Top]{
+  fill: #62a7e4;
+}
+
+
+/* Styling for the Arch component */
+.arch-container {
+  width: 15em;
+  /* -webkit-filter: invert(100%); added this in for white background*/
+}
+
+.arch-background {
+  fill: #0167b2;
+}
+
+.arch-shape {
+  opacity: .65;
+}

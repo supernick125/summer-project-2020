@@ -5,7 +5,7 @@ const config = {
   port: 5432,
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
-  database: "alumni_connector"
+  database: "ans_db"
 };
 
 const pool = new Pool(config);

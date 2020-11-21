@@ -1,0 +1,22 @@
+/* RegisterNavbar Stylesheet */
+
+#loginEmail {
+  margin-right: 0.5em;
+  width: 14em;
+}
+
+#loginPassword {
+  margin-right: 0.5em;
+  width: 14em;
+}
+
+.bar {
+  font-family: Manrope;
+  padding-left: 2em;
+  margin-bottom: 0.4em;
+  margin-top: 0.3em;
+}
+
+.svg {
+  padding-left:0.5em;
+}

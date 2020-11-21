@@ -2,18 +2,22 @@ const router = require('express').Router();
 
 const user = require('./user');
 const meeting = require('./meeting');
-const newsletter = require('./newsletter');
+const auth = require('./auth');
 
-router.use('/user', user);
-router.use('/meeting', meeting);
-router.use('/newsletter', newsletter);
+const authUser = require('../services/auth');
+
+router.use('/user', authUser, user);
+
+router.use('/meeting', authUser, meeting);
+
+router.use('/auth', auth);
 
 //Test for communications
 router.get('/hello', (req, res) => {
   try {
-    res.json('Hello there!');
-  } catch (error) {
-    console.error(error.message);
+    return res.status(200).json({ message: 'Hello there!' });
+  }catch(error) {
+    return res.status(500).json({ message: "An error occurred" });
   }
 });
 

@@ -1,3 +1,5 @@
+/* roomStyle */
+
 html, body {
   font-family: 'Libre Baskerville', serif;
 }
@@ -32,7 +34,7 @@ html, body {
 }
 
 .countryBlueBG {
-  background-color: #0167b2; 
+  background-color: #0167b2;
 }
 
 /* .test {

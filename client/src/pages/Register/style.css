@@ -1,9 +1,11 @@
+/* RegisterPage Stylesheet */
+
 .body {
   /* font-family: 'Libre Baskerville', serif; */
   font-family: 'Noto Sans JP', sans-serif;
   height: 100%;
   margin: none;
-  padding: none;
+  padding: 0%;
 }
 
 .countryBlue {

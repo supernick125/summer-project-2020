@@ -1,1 +1,17 @@
 /* MeetingRow stylesheet */
+.adjust {
+  text-align: center;
+}
+
+#join {
+  margin-left: 0.5em;
+}
+
+#tag {
+  font-size: 75%;    
+  padding: 0.6em 0.85em;     
+  display: inline-block;    
+  color: #fff;    
+  background-color: #0167b2;
+  border-radius: 10px;
+}
