@@ -43,7 +43,7 @@ export default () => {
           const resp = await Axios.get('api/auth/check');
           setAuthUser({
             action: 'LOGIN_USER',
-            data: resp.data
+            data: resp.data.user
           });
         } catch(e) {
           document.cookie = 'x-auth-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';

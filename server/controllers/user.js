@@ -111,11 +111,19 @@ const loginUser = async (req, res) => {
 //Check user
 const checkUser = async (req, res) => {
   try {
-    const user = await pool.query('SELECT id, first_name, last_name FROM account WHERE id = $1', [req.user.id]);
+    const user = await pool.query('SELECT id, first_name, last_name, email_address FROM account WHERE id = $1', [req.user.id]);
     if(!user.rowCount) {
       return res.status(404).json({ message: 'User not found' });
     }
-    return res.status(200).json(user.rows[0]);
+    const resp = {
+      user: {
+        id: user.rows[0].id,
+        firstname: user.rows[0].first_name,
+        lastname: user.rows[0].last_name,
+        email: user.rows[0].email_address
+      }
+    }
+    return res.status(200).json(resp);
   }catch(error) {
     return res.status(500).json({ message: 'There was an error. Please try again later' });
   }

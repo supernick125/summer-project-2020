@@ -22,8 +22,8 @@ export default () => {
     });
     window.location.reload();
   }
-  
-  const name = authUser.user.first_name + ' ' + authUser.user.last_name;
+
+  const name = authUser.user.firstname + ' ' + authUser.user.lastname;
 
   return (
     <Navbar className="bar" bg="light" expand="lg">
@@ -36,9 +36,6 @@ export default () => {
           <Button variant="primary" type="submit" id="logout-button" onClick={logoutUser}>
             Log Out
           </Button>
-          {/*<a href="#" id="logout-link" onClick={logoutUser}>
-            Log Out
-          </a>*/}
         </Form>
       </Navbar.Collapse>
     </Navbar>

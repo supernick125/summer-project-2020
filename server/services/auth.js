@@ -9,7 +9,7 @@ const checkAuth = (req, res, next) => {
     if(err) {
       return res.status(500).json({ message: 'Failed to authenticate' });
     }
-    console.log(data);
+    //console.log(data);
     req.user = { id: data.user };
     next();
   });
