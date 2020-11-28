@@ -1,0 +1,70 @@
+.body
+{
+				background-color: #00a651;
+}
+
+#header
+{
+        color: white;
+}
+
+#fullContainer
+{
+				margin-top: 10vh;
+				margin-left: 12.5vw;
+				font-size: 20px;
+				line-height: 2.5;
+        background-color: #00a651;
+}
+
+#profile
+{
+				margin-left: 2vw;
+}
+
+#editButton
+{
+				position: absolute;
+				right: 12.5vw;
+				border-color: white;
+				height: 30px;
+}
+
+#backArrow {
+				position: absolute;
+				right: 12.5vw;
+}
+
+#biography
+{
+				margin-left: 2vw;
+				font-size: 18px;
+				line-height: 1.6;
+}
+
+#bioForm
+{
+				display:none;
+}
+
+#logout
+{
+				margin-top: 2vh;
+				background-color: gray;
+				border-radius: 25px;
+}
+
+#logout:hover
+{
+				background-color: red;
+}
+
+.downArrow
+{
+    background-image: url(./DownArrow.png);
+}
+
+.Arrow
+{
+    background-image: url(./Arrow.png);
+}
