@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import './style.css';
 import Arrow from './Arrow.png';
 import DownArrow from './DownArrow.png'
 
+import { Context as AuthContext } from '../../context/Auth';
+
 export default () => {
+
+  const { authUser, setAuthUser } = useContext(AuthContext);
+
+  const name= authUser.user.firstname + " " + authUser.user.lastname;
 
   function initialize()
   {
   					//<!--This will be replaced with database stuff-->
-  					var name="John Doe";
+  					var name= authUser.user.firstname + " " + authUser.user.lastname;
   					var email="jd1234@columbia.edu";
   					var gradYear=2023;
   					var biography="From Wikipedia: \"John Doe\" (for males) and \"Jane Doe\" (for females) are multiple-use names that are used when the true name of a person is unknown or is being intentionally concealed.[1][2][3] In the context of law enforcement in the United States, such names are often used to refer to a corpse whose identity is unknown or unconfirmed. Secondly, such names are also often used to refer to a hypothetical \"everyman\" in other contexts, in a manner similar to \"John Q. Public\" or \"Joe Public\". There are many variants to the above names, including \"John Roe\", \"Richard Roe\", \"Jane Roe\" and \"Baby Doe\", \"Janie Doe\" or \"Johnny Doe\" (for children).";
@@ -21,7 +27,7 @@ export default () => {
 
   function initName()
   {
-      return "John Doe";
+      return name;
   }
 
   function initEmail()

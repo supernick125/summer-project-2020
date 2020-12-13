@@ -8,6 +8,7 @@ import { Context as AuthContext } from '../context/Auth';
 import HomePage from '../pages/Home/HomePage';
 import RegisterPage from '../pages/Register/RegisterPage';
 import AdminPage from '../pages/Admin/AdminPage';
+import Account from '../pages/Account/Account';
 
 export default () => {
   const { authUser, setAuthUser } = useContext(AuthContext);
@@ -64,6 +65,9 @@ export default () => {
         </Route>
         <Route exact path='/admin'>
           <AdminPage />
+        </Route>
+        <Route>
+          <Account />
         </Route>
         <Route exact path='/404'>
           <h1>Not found</h1>
