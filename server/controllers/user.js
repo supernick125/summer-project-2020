@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 //Get user details
 const getUserDetails = async (req, res) => {
   try {
-    const { email } = req.params;
+    const { email } = req.query;
     const loggedUserId = req.user.id;
     const userDetails = await pool.query(
       'SELECT id, school_id, graduation_year, first_name, last_name, email_address FROM account WHERE email_address = $1', [email]

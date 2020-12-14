@@ -1,21 +1,44 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import './style.css';
 import Arrow from './Arrow.png';
-import DownArrow from './DownArrow.png'
+import DownArrow from './DownArrow.png';
+import Axios from 'axios';
 
 import { Context as AuthContext } from '../../context/Auth';
 
 export default () => {
 
   const { authUser, setAuthUser } = useContext(AuthContext);
-
-  const name= authUser.user.firstname + " " + authUser.user.lastname;
-
+  
+  const [currentUser, setCurrentUser] = useState({
+    name: '',
+    email: '',
+    graduationyear: ''
+  });
+  
+  const getUserInfo = () => {
+    Axios.get("api/user/:username/", { params: { email: authUser.user.email } })
+      .then(resp => {
+        console.log(resp);
+        console.log(resp.data);
+        
+        setCurrentUser({
+          name: resp.data.user.firstname + " " + resp.data.user.lastname,
+          email: resp.data.user.email,
+          graduationyear:resp.data.user.graduationyear
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+  
+  
   function initialize()
   {
   					//<!--This will be replaced with database stuff-->
   					var name= authUser.user.firstname + " " + authUser.user.lastname;
-  					var email="jd1234@columbia.edu";
+  					var email= authUser.user.email;
   					var gradYear=2023;
   					var biography="From Wikipedia: \"John Doe\" (for males) and \"Jane Doe\" (for females) are multiple-use names that are used when the true name of a person is unknown or is being intentionally concealed.[1][2][3] In the context of law enforcement in the United States, such names are often used to refer to a corpse whose identity is unknown or unconfirmed. Secondly, such names are also often used to refer to a hypothetical \"everyman\" in other contexts, in a manner similar to \"John Q. Public\" or \"Joe Public\". There are many variants to the above names, including \"John Roe\", \"Richard Roe\", \"Jane Roe\" and \"Baby Doe\", \"Janie Doe\" or \"Johnny Doe\" (for children).";
 
@@ -25,19 +48,22 @@ export default () => {
   					document.getElementById("biography").innerHTML=biography;
   }
 
+  // Bug: keeps on retrieving information from the database nonstop
+  //      -- will have to fix later, but still functional as is. 
   function initName()
-  {
-      return name;
+  {   
+      getUserInfo();
+      return currentUser.name;
   }
 
   function initEmail()
   {
-      return "jd1234@columbia.edu";
+      return currentUser.email;
   }
 
   function initGradYear()
   {
-      return 2023;
+      return currentUser.graduationyear;
   }
 
   function initBio()
