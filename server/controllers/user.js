@@ -7,7 +7,7 @@ const getUserDetails = async (req, res) => {
     const { email } = req.query;
     const loggedUserId = req.user.id;
     const userDetails = await pool.query(
-      'SELECT id, school_id, graduation_year, first_name, last_name, email_address FROM account WHERE email_address = $1', [email]
+      'SELECT id, school_id, graduation_year, first_name, last_name, email_address, biography FROM account WHERE email_address = $1', [email]
     );
     if(userDetails.rowCount == 0) {
       return res.status(404).json({ message: 'User not found' });
@@ -18,7 +18,8 @@ const getUserDetails = async (req, res) => {
       graduationyear: userDetails.rows[0].graduation_year,
       firstname: userDetails.rows[0].first_name,
       lastname: userDetails.rows[0].last_name,
-      email: userDetails.rows[0].email_address
+      email: userDetails.rows[0].email_address,
+      biography: userDetails.rows[0].biography
     }
     return res.status(200).json({ user: resp });
   }catch(error) {

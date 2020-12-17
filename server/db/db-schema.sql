@@ -38,6 +38,7 @@ CREATE TABLE account (
   last_name text NOT NULL,
   email_address text NOT NULL,
   password text NOT NULL,
+  biography text,
   registered timestamptz DEFAULT now() NOT NULL,
   active boolean DEFAULT true NOT NULL,
   last_update timestamptz DEFAULT now() NOT NULL
