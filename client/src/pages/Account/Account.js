@@ -290,30 +290,5 @@ export default () => {
       		</div>
         </div>
     );
-  
-  return (
-    <div id="header">
-      <style>{'body { background-color: #00a651; }'}</style>
-      	<body onload="initialize()" class="text-white">
-      		<div id="fullContainer" class="w-75">
-      			<h1><b>Student Profile</b> <img src={"Arrow"} alt="Arrow"/></h1>
-
-      			<div id="profile">
-      				<h4><p id='tag'>{initName()}</p></h4>
-      				<h4><p id='tag'>{initEmail()}</p></h4>
-      				<div>Graduation Year: <h4><p id='tag'>{initGradYear()}</p></h4></div>
-
-      				<label for="biography">Biography&nbsp;</label><img src="{DownArrow}" alt="DownArrow"/><button onclick="bioInput(true)" id="editButton" class="btn btn-primary btn-sm">Edit</button>
-      				<div><h4><p id='tag'>{initBio()}</p></h4></div>
-      				<div id="bioForm" class="form-group">
-      					<textarea id="textBox" class="form-control" rows="8"></textarea>
-      					<button onclick="bioInput(false)" class="btn btn-primary">Submit</button>
-      				</div>
-      			</div>
-
-      			<button id="logout" class="btn">Logout</button>
-      		</div>
-        </body>
-    </div>
-  );
+  }
 }
