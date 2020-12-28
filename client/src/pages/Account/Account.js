@@ -34,43 +34,88 @@ export default () => {
         console.error(error);
       });
   }
-  
-  
-  function initialize()
-  {
-  					//<!--This will be replaced with database stuff-->
-  					var name= authUser.user.firstname + " " + authUser.user.lastname;
-  					var email= authUser.user.email;
-  					var gradYear=2023;
-  					var biography="From Wikipedia: \"John Doe\" (for males) and \"Jane Doe\" (for females) are multiple-use names that are used when the true name of a person is unknown or is being intentionally concealed.[1][2][3] In the context of law enforcement in the United States, such names are often used to refer to a corpse whose identity is unknown or unconfirmed. Secondly, such names are also often used to refer to a hypothetical \"everyman\" in other contexts, in a manner similar to \"John Q. Public\" or \"Joe Public\". There are many variants to the above names, including \"John Roe\", \"Richard Roe\", \"Jane Roe\" and \"Baby Doe\", \"Janie Doe\" or \"Johnny Doe\" (for children).";
-
-  					document.getElementById("name").innerHTML=name;
-  					document.getElementById("email").innerHTML=email;
-  					document.getElementById("gradYear").innerHTML=gradYear;
-  					document.getElementById("biography").innerHTML=biography;
-  }
 
   // Bug: keeps on retrieving information from the database nonstop
   //      -- will have to fix later, but still functional as is. 
-  function initName()
-  {   
-      getUserInfo();
-      return currentUser.name;
-  }
-
   function initEmail()
   {
-      return currentUser.email;
+    getUserInfo();
+    return currentUser.email;
+  }
+      
+  function initFirstName()
+  {
+    return "John";
+  }
+  
+  function initLastName()
+  {
+    return "Doe";
+  }
+  
+  function initGradYear()
+  {
+    return currentUser.graduationyear;
+  }
+  
+  function initBio()
+  {
+    return currentUser.biography;
+  }
+
+  function initPhoneNum()
+  {
+    return 1234567890;
+  }
+
+  function initHometown()
+  {
+    return "Earth";
+  }
+
+  function initHighSchool()
+  {
+    return "Brooklyn Technical High School";
+  }
+      
+  function initSchool()
+  {
+    return "Columbia University";
   }
 
   function initGradYear()
   {
-      return currentUser.graduationyear;
+    return 2023;
   }
 
-  function initBio()
+  function initMajor()
   {
-      return currentUser.biography;
+    return "Computer Science";
+  }
+      
+  function initMajorTwo()
+  {
+    return "Computer Engineering";
+  }
+  
+  function initMinor()
+  {
+    return "Electrical Engineering";
+  }
+      
+  function initPrimaryIndustry()
+  {
+    return "Web Development";
+  }
+      
+  function initSecondaryIndustry()
+  {
+    return "Cybersecurity";
+  }
+      
+  function initCities()
+  {
+    return "New York";
   }
 
   function bioInput(show)
@@ -92,7 +137,160 @@ export default () => {
   							document.getElementById("biography").style.display="block";
             }
   }
+  
+  //if true, return becomes editable version. If false, return is static.
+  function edit()
+  {
+            return false;
+  }
 
+  if(!edit())
+  {
+    return (
+      <div id="header" onload="getUserInfo()">
+      <style>{'body { background-color: #00a651; }'}</style>
+      		<div id="fullContainer" className="w-75 text-white">
+      			<div>
+              <h1><b>Student Profile</b> <img src={Arrow} alt="Arrow"/><button id="edit">edit</button></h1>
+            </div>
+
+      				<div id="profile">
+      					<h3>Personal Information</h3>
+      						<div id="personalInfo">
+      							<div><b><label htmlFor="email">Email:&nbsp;</label></b><span id="email">{initEmail()}</span></div>
+
+      							<div><b><label htmlFor="firstName">First Name:&nbsp;</label></b><span id="firstName">{initFirstName()}</span></div>
+
+      							<div><b><label htmlFor="lastName">Last Name:&nbsp;</label></b><span id="lastName">{initLastName()}</span></div>
+
+      							<div><b><label htmlFor="phoneNum">Primary Contact Number:&nbsp;</label></b><span id="phoneNum">{initPhoneNum()}</span></div>
+
+      							<div><b><label htmlFor="hometown">Hometown:&nbsp;</label></b><span id="hometown">{initHometown()}</span></div>
+
+      							<div><b><label htmlFor="highSchool">High School:&nbsp;</label></b><span id="highSchool">{initHighSchool()}</span></div>
+      						</div>
+      					<h3>Academic Information</h3>
+      						<div id="academicInfo">
+      							<div><b><label htmlFor="school">School:&nbsp;</label></b><span id="school">{initSchool()}</span></div>
+
+      							<div><b><label htmlFor="gradYear">Graduation Year:&nbsp;</label></b><span id="gradYear">{initGradYear()}</span></div>
+
+      							<div><b><label htmlFor="major">Major:&nbsp;</label></b><span id="major">{initMajor()}</span></div>
+
+      							<div><b><label htmlFor="majorTwo">2nd Major:&nbsp;</label></b><span id="majorTwo">{initMajorTwo()}</span></div>
+
+      							<div><b><label htmlFor="minor">Minor or Concentration:&nbsp;</label></b><span id="minor">{initMinor()}</span></div>
+      						</div>
+      					<h3>Industry Information</h3>
+      						<div id="industryInfo">
+      							<div><b><label htmlFor="primaryIndustry">Primary Industry Interest:&nbsp;</label></b><span id="primaryIndustry">{initPrimaryIndustry()}</span></div>
+
+      							<div><b><label htmlFor="secondaryIndustry">Secondary Industry Interest:&nbsp;</label></b><span id="secondaryIndustry">{initSecondaryIndustry()}</span></div>
+
+      							<div><b><label htmlFor="cities">Particular Cities of Interest:&nbsp;</label></b><span id="cities">{initCities()}</span></div>
+      						</div>
+      					<h3>Biography Information</h3>
+      						<label htmlFor="biography">Biography&nbsp;</label><img src={DownArrow} alt="DownArrow"/>
+      						<div><h4><p id='biography'>{initBio()}</p></h4></div>
+      			</div>
+            <button id="logout">Logout</button>
+      		</div>
+        </div>
+    );
+  }else
+  {
+    return (
+      <div id="header" onload="getUserInfo()">
+      <style>{'body { background-color: #00a651; }'}</style>
+      		<div id="fullContainer" className="w-75 text-white">
+      			<h1><b>Student Profile</b> <img src={Arrow} alt="Arrow"/></h1>
+      				<div id="profile">
+      					<h3>Personal Information</h3>
+      						<div id="personalInfo">
+      							<div><b><label htmlFor="email">Email:&nbsp;</label></b></div>
+      							<div id="emailForm" className="form-group">
+      								<input id="emailBox" type="email" className="form-control" value={initEmail()}/>
+      							</div>
+
+      							<div><b><label htmlFor="firstName">First Name:&nbsp;</label></b><span id="firstName">{initFirstName()}</span></div>
+
+      							<div><b><label htmlFor="lastName">Last Name:&nbsp;</label></b><span id="lastName">{initLastName()}</span></div>
+
+      							<div><b><label htmlFor="phoneNum">Primary Contact Number:&nbsp;</label></b></div>
+      							<div id="phoneForm" className="form-group">
+      								<input id="phoneBox"  className="form-control" value={initPhoneNum()}/>
+      							</div>
+
+      							<div><b><label htmlFor="hometown">Hometown:&nbsp;</label></b></div>
+      							<div id="hometownForm" className="form-group">
+      								<input id="hometownBox"  className="form-control" value="Hometown"/>
+      							</div>
+
+      							<div><b><label htmlFor="highSchool">High School:&nbsp;</label></b></div>
+      							<div id="highSchoolForm" className="form-group">
+      								<input id="highSchoolBox"  className="form-control" value={initHighSchool()}/>
+      							</div>
+      						</div>
+      					<h3>Academic Information</h3>
+      						<div id="academicInfo">
+      							<div><b><label htmlFor="school">School:&nbsp;</label></b></div>
+      							<div id="schoolForm" className="form-group">
+      								<input id="schoolBox"  className="form-control" value={initSchool()}/>
+      							</div>
+
+      							<div><b><label htmlFor="gradYear">Graduation Year:&nbsp;</label></b></div>
+      							<div id="gradYearForm" className="form-group">
+      								<input id="gradYearBox"  className="form-control" value={initGradYear()}/>
+      							</div>
+
+      							<div><b><label htmlFor="major">Major:&nbsp;</label></b></div>
+      							<div id="majorForm" className="form-group">
+      								<input id="majorBox"  className="form-control" value={initMajor()}/>
+      							</div>
+
+      							<div><b><label htmlFor="majorTwo">2nd Major:&nbsp;</label></b></div>
+      							<div id="majorTwoForm" className="form-group">
+      								<input id="majorTwoBox"  className="form-control" value={initMajorTwo()}/>
+      							</div>
+
+      							<div><b><label htmlFor="minor">Minor or Concentration:&nbsp;</label></b></div>
+      							<div id="minorForm" className="form-group">
+      								<input id="minorBox"  className="form-control" value={initMinor()}/>
+      							</div>
+      						</div>
+      					<h3>Industry Information</h3>
+      						<div id="industryInfo">
+      							<div><b><label htmlFor="primaryIndustry">Primary Industry Interest:&nbsp;</label></b></div>
+      							<div id="primaryIndustryForm" className="form-group">
+      								<input id="primaryIndustryBox"  className="form-control" value={initPrimaryIndustry()}/>
+      							</div>
+
+      							<div><b><label htmlFor="secondaryIndustry">Secondary Industry Interest:&nbsp;</label></b></div>
+      							<div id="secondaryIndustryForm" className="form-group">
+      								<input id="secondaryIndustryBox"  className="form-control" value={initSecondaryIndustry()}/>
+      							</div>
+
+      							<div><b><label htmlFor="cities">Particular Cities of Interest:&nbsp;</label></b></div>
+      							<div id="citiesForm" className="form-group">
+      								<input id="citiesBox"  className="form-control" value={initCities()}/>
+      							</div>
+      						</div>
+      					<h3>Biography Information</h3>
+      						<label htmlFor="biography">Biography&nbsp;</label><img src={DownArrow} alt="DownArrow"/>
+                  <div id="bio" className="form-group">
+                    <textarea id="bioBox"  className="form-control" rows="8" value={initBio()}/>
+                  </div>
+      			</div>
+            <div>
+              <button id="edit">Save Edits</button>
+            </div>
+            <div>
+              <button id="logout">Logout</button>
+            </div>
+      		</div>
+        </div>
+    );
+  
   return (
     <div id="header">
       <style>{'body { background-color: #00a651; }'}</style>
