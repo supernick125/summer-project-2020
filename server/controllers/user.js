@@ -7,7 +7,7 @@ const getUserDetails = async (req, res) => {
     const { email } = req.query;
     const loggedUserId = req.user.id;
     const userDetails = await pool.query(
-      'SELECT id, school_id, graduation_year, first_name, last_name, email_address, biography FROM account WHERE email_address = $1', [email]
+      'SELECT account.id, school_id, graduation_year, first_name, last_name, email_address, phone_number, hometown, high_school, biography, school, major, major2, minor, primary_industry_interest, secondary_industry_interest, cities_of_interest FROM account, personal_info, academic_info, industry_info WHERE email_address = $1 AND personal_info.account_id = (SELECT id FROM account WHERE email_address = $1) AND academic_info.account_id = (SELECT id FROM account WHERE email_address = $1) AND industry_info.account_id = (SELECT id FROM account WHERE email_address = $1)', [email]
     );
     if(userDetails.rowCount == 0) {
       return res.status(404).json({ message: 'User not found' });
@@ -19,10 +19,21 @@ const getUserDetails = async (req, res) => {
       firstname: userDetails.rows[0].first_name,
       lastname: userDetails.rows[0].last_name,
       email: userDetails.rows[0].email_address,
-      biography: userDetails.rows[0].biography
+      phone_number: userDetails.rows[0].phone_number,
+      hometown: userDetails.rows[0].hometown,
+      high_school: userDetails.rows[0].high_school,
+      biography: userDetails.rows[0].biography,
+      school: userDetails.rows[0].school,
+      major: userDetails.rows[0].major,
+      major2: userDetails.rows[0].major2,
+      minor: userDetails.rows[0].minor,
+      primary_industry_interest: userDetails.rows[0].primary_industry_interest,
+      secondary_industry_interest: userDetails.rows[0].secondary_industry_interest,
+      cities_of_interest: userDetails.rows[0].cities_of_interest
     }
     return res.status(200).json({ user: resp });
   }catch(error) {
+    console.error(error);
     return res.status(500).json({ message: 'There was an error. Please try again later' });
   }
 }
@@ -62,6 +73,20 @@ const registerUser = async (req, res) => {
       'INSERT INTO account (account_type_id, school_id, graduation_year, first_name, last_name, email_address, password) VALUES ($1, $2, $3, $4, $5, $6, crypt($7, gen_salt(\'bf\'))) RETURNING id',
       [usertype, 1, graduationyear, firstname, lastname, email, password]
     )
+    if (usertype === 1) {
+      const personal_info = await pool.query(
+        'INSERT INTO personal_info (account_id) VALUES ($1)', [user.rows[0].id]
+      )
+      const academic_info = await pool.query(
+        'INSERT INTO academic_info (account_id) VALUES ($1)', [user.rows[0].id]
+      )
+      const industry_info = await pool.query(
+        'INSERT INTO industry_info (account_id) VALUES ($1)', [user.rows[0].id]
+      )
+      const updates = await pool.query(
+        'UPDATE account SET personal_id = (SELECT id FROM personal_info WHERE account_id = $1), academic_id = (SELECT id FROM academic_info WHERE account_id = $1), industry_id = (SELECT id FROM industry_info WHERE account_id = $1) WHERE id = $1', [user.rows[0].id]
+      )
+    }
     const resp = {
       accessToken: '',
       user: {
@@ -75,6 +100,7 @@ const registerUser = async (req, res) => {
     });
     return res.status(200).json(resp);
   }catch(error) {
+    console.error(error);
     return res.status(500).json({ message: 'There was an error while registering. Please try again later' });
   }
 }

@@ -11,10 +11,21 @@ export default () => {
   const { authUser, setAuthUser } = useContext(AuthContext);
   
   const [currentUser, setCurrentUser] = useState({
-    name: '',
+    first_name: '',
+    last_name: '',
     email: '',
     graduationyear: '',
-    biography: ''
+    phone_number: '',
+    hometown: '',
+    high_school: '',
+    biography: '',
+    school: '',
+    major: '',
+    major2: '',
+    minor: '',
+    primary_industry_interest: '',
+    secondary_industry_interest: '',
+    cities_of_interest: ''
   });
   
   const getUserInfo = () => {
@@ -24,10 +35,21 @@ export default () => {
         console.log(resp.data);
         
         setCurrentUser({
-          name: resp.data.user.firstname + " " + resp.data.user.lastname,
+          first_name: resp.data.user.firstname,
+          last_name: resp.data.user.lastname,
           email: resp.data.user.email,
           graduationyear: resp.data.user.graduationyear,
-          biography: resp.data.user.biography
+          phone_number: resp.data.user.phone_number,
+          hometown: resp.data.user.hometown,
+          high_school: resp.data.user.high_school,
+          biography: resp.data.user.biography,
+          school: resp.data.user.school,
+          major: resp.data.user.major,
+          major2: resp.data.user.major2,
+          minor: resp.data.user.minor,
+          primary_industry_interest: resp.data.user.primary_industry_interest,
+          secondary_industry_interest: resp.data.user.secondary_industry_interest,
+          cities_of_interest: resp.data.user.cities_of_interest
         });
       })
       .catch(error => {
@@ -45,12 +67,12 @@ export default () => {
       
   function initFirstName()
   {
-    return "John";
+    return currentUser.first_name;
   }
   
   function initLastName()
   {
-    return "Doe";
+    return currentUser.last_name;
   }
   
   function initGradYear()
@@ -65,57 +87,52 @@ export default () => {
 
   function initPhoneNum()
   {
-    return 1234567890;
+    return currentUser.phone_number;
   }
 
   function initHometown()
   {
-    return "Earth";
+    return currentUser.hometown;
   }
 
   function initHighSchool()
   {
-    return "Brooklyn Technical High School";
+    return currentUser.high_school;
   }
       
   function initSchool()
   {
-    return "Columbia University";
-  }
-
-  function initGradYear()
-  {
-    return 2023;
+    return currentUser.school;
   }
 
   function initMajor()
   {
-    return "Computer Science";
+    return currentUser.major;
   }
       
   function initMajorTwo()
   {
-    return "Computer Engineering";
+    return currentUser.major2;
   }
   
   function initMinor()
   {
-    return "Electrical Engineering";
+    return currentUser.minor;
   }
       
   function initPrimaryIndustry()
   {
-    return "Web Development";
+    return currentUser.primary_industry_interest;
   }
       
   function initSecondaryIndustry()
   {
-    return "Cybersecurity";
+    return currentUser.secondary_industry_interest;
   }
       
   function initCities()
   {
-    return "New York";
+    return currentUser.cities_of_interest;
   }
 
   function bioInput(show)
