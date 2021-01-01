@@ -19,3 +19,8 @@ INSERT INTO school (name, email_suffix, address_id) VALUES ('COLUMBIA UNIVERSITY
 
 INSERT INTO account_type (account_type) VALUES ('STUDENT');
 INSERT INTO account_type (account_type) VALUES ('ALUMNUS');
+
+--
+-- Extensions
+--
+CREATE EXTENSION pgcrypto;
