@@ -27,41 +27,41 @@ export default () => {
     secondary_industry_interest: '',
     cities_of_interest: ''
   });
-  
-  const getUserInfo = () => {
-    Axios.get("api/user/:username/", { params: { email: authUser.user.email } })
-      .then(resp => {
-        console.log(resp);
-        console.log(resp.data);
-        
-        setCurrentUser({
-          first_name: resp.data.user.firstname,
-          last_name: resp.data.user.lastname,
-          email: resp.data.user.email,
-          graduationyear: resp.data.user.graduationyear,
-          phone_number: resp.data.user.phone_number,
-          hometown: resp.data.user.hometown,
-          high_school: resp.data.user.high_school,
-          biography: resp.data.user.biography,
-          school: resp.data.user.school,
-          major: resp.data.user.major,
-          major2: resp.data.user.major2,
-          minor: resp.data.user.minor,
-          primary_industry_interest: resp.data.user.primary_industry_interest,
-          secondary_industry_interest: resp.data.user.secondary_industry_interest,
-          cities_of_interest: resp.data.user.cities_of_interest
-        });
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }
 
-  // Bug: keeps on retrieving information from the database nonstop
-  //      -- will have to fix later, but still functional as is. 
+  useEffect(() => {
+    const getUserInfo = async () => {
+      Axios.get("api/user/:username/", { params: { email: authUser.user.email } })
+        .then(resp => {
+          console.log(resp);
+          console.log(resp.data);
+          
+          setCurrentUser({
+            first_name: resp.data.user.firstname,
+            last_name: resp.data.user.lastname,
+            email: resp.data.user.email,
+            graduationyear: resp.data.user.graduationyear,
+            phone_number: resp.data.user.phone_number,
+            hometown: resp.data.user.hometown,
+            high_school: resp.data.user.high_school,
+            biography: resp.data.user.biography,
+            school: resp.data.user.school,
+            major: resp.data.user.major,
+            major2: resp.data.user.major2,
+            minor: resp.data.user.minor,
+            primary_industry_interest: resp.data.user.primary_industry_interest,
+            secondary_industry_interest: resp.data.user.secondary_industry_interest,
+            cities_of_interest: resp.data.user.cities_of_interest
+          });
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+    getUserInfo();
+  }, []);
+
   function initEmail()
   {
-    getUserInfo();
     return currentUser.email;
   }
       
