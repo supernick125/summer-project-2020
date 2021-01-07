@@ -27,7 +27,9 @@ export default () => {
     secondary_industry_interest: '',
     cities_of_interest: ''
   });
-
+  
+  const [editable, setEditable] = useState({edit: false});
+  
   useEffect(() => {
     const getUserInfo = async () => {
       Axios.get("api/user/:username/", { params: { email: authUser.user.email } })
@@ -58,8 +60,23 @@ export default () => {
         });
     }
     getUserInfo();
-  }, []);
-
+  }, [editable.edit]);
+  
+  const logoutUser = (event) => {
+    event.preventDefault();
+    document.cookie = 'x-auth-token= ; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    delete Axios.defaults.headers.common['x-auth-token'];
+    setAuthUser({
+      action: 'LOGOUT_USER',
+      payload: null
+    });
+    window.location.reload();
+  }
+  
+  const updateCurrentUser = (event) => {
+    setCurrentUser({ ...currentUser, [event.target.name]: event.target.value });
+  }
+  
   function initEmail()
   {
     return currentUser.email;
@@ -158,9 +175,15 @@ export default () => {
   //if true, return becomes editable version. If false, return is static.
   function edit()
   {
-            return false;
+      return editable.edit
   }
-
+  
+  function refresh()
+  {
+      var change = !editable.edit;
+      setEditable({edit: change});
+  }
+  
   if(!edit())
   {
     return (
@@ -168,7 +191,8 @@ export default () => {
       <style>{'body { background-color: #00a651; }'}</style>
       		<div id="fullContainer" className="w-75 text-white">
       			<div>
-              <h1><b>Student Profile</b> <img src={Arrow} alt="Arrow"/><button id="edit">edit</button></h1>
+              <h1><b>Student Profile</b> <img src={Arrow} alt="Arrow"/>
+              <button type="button" id="edit" onClick={refresh}>edit</button></h1>
             </div>
 
       				<div id="profile">
@@ -210,7 +234,7 @@ export default () => {
       						<label htmlFor="biography">Biography&nbsp;</label><img src={DownArrow} alt="DownArrow"/>
       						<div><h4><p id='biography'>{initBio()}</p></h4></div>
       			</div>
-            <button id="logout">Logout</button>
+            <button id="logout" onClick={logoutUser}>Logout</button>
       		</div>
         </div>
     );
@@ -226,7 +250,7 @@ export default () => {
       						<div id="personalInfo">
       							<div><b><label htmlFor="email">Email:&nbsp;</label></b></div>
       							<div id="emailForm" className="form-group">
-      								<input id="emailBox" type="email" className="form-control" value={initEmail()}/>
+      								<input id="emailBox" type="email" name="email" className="form-control" value={initEmail()} onChange={updateCurrentUser}/>
       							</div>
 
       							<div><b><label htmlFor="firstName">First Name:&nbsp;</label></b><span id="firstName">{initFirstName()}</span></div>
@@ -235,74 +259,74 @@ export default () => {
 
       							<div><b><label htmlFor="phoneNum">Primary Contact Number:&nbsp;</label></b></div>
       							<div id="phoneForm" className="form-group">
-      								<input id="phoneBox"  className="form-control" value={initPhoneNum()}/>
+      								<input id="phoneBox" type="phone_number" name="phone_number" className="form-control" value={initPhoneNum()} onChange={updateCurrentUser}/>
       							</div>
 
       							<div><b><label htmlFor="hometown">Hometown:&nbsp;</label></b></div>
       							<div id="hometownForm" className="form-group">
-      								<input id="hometownBox"  className="form-control" value="Hometown"/>
+      								<input id="hometownBox" type="hometown" name="hometown" className="form-control" value={initHometown()} onChange={updateCurrentUser}/>
       							</div>
 
       							<div><b><label htmlFor="highSchool">High School:&nbsp;</label></b></div>
       							<div id="highSchoolForm" className="form-group">
-      								<input id="highSchoolBox"  className="form-control" value={initHighSchool()}/>
+      								<input id="highSchoolBox" type="high_school" name="high_school" className="form-control" value={initHighSchool()} onChange={updateCurrentUser}/>
       							</div>
       						</div>
       					<h3>Academic Information</h3>
       						<div id="academicInfo">
       							<div><b><label htmlFor="school">School:&nbsp;</label></b></div>
       							<div id="schoolForm" className="form-group">
-      								<input id="schoolBox"  className="form-control" value={initSchool()}/>
+      								<input id="schoolBox" type="school" name="school" className="form-control" value={initSchool()} onChange={updateCurrentUser}/>
       							</div>
 
       							<div><b><label htmlFor="gradYear">Graduation Year:&nbsp;</label></b></div>
       							<div id="gradYearForm" className="form-group">
-      								<input id="gradYearBox"  className="form-control" value={initGradYear()}/>
+      								<input id="gradYearBox" type="graduationyear" name="graduationyear" className="form-control" value={initGradYear()} onChange={updateCurrentUser}/>
       							</div>
 
       							<div><b><label htmlFor="major">Major:&nbsp;</label></b></div>
       							<div id="majorForm" className="form-group">
-      								<input id="majorBox"  className="form-control" value={initMajor()}/>
+      								<input id="majorBox" type="major" name="major" className="form-control" value={initMajor()} onChange={updateCurrentUser}/>
       							</div>
 
       							<div><b><label htmlFor="majorTwo">2nd Major:&nbsp;</label></b></div>
       							<div id="majorTwoForm" className="form-group">
-      								<input id="majorTwoBox"  className="form-control" value={initMajorTwo()}/>
+      								<input id="majorTwoBox" type="major2" name="major2" className="form-control" value={initMajorTwo()} onChange={updateCurrentUser}/>
       							</div>
 
       							<div><b><label htmlFor="minor">Minor or Concentration:&nbsp;</label></b></div>
       							<div id="minorForm" className="form-group">
-      								<input id="minorBox"  className="form-control" value={initMinor()}/>
+      								<input id="minorBox" type="minor" name="minor" className="form-control" value={initMinor()} onChange={updateCurrentUser}/>
       							</div>
       						</div>
       					<h3>Industry Information</h3>
       						<div id="industryInfo">
       							<div><b><label htmlFor="primaryIndustry">Primary Industry Interest:&nbsp;</label></b></div>
       							<div id="primaryIndustryForm" className="form-group">
-      								<input id="primaryIndustryBox"  className="form-control" value={initPrimaryIndustry()}/>
+      								<input id="primaryIndustryBox" type="primary_industry_interest" name="primary_industry_interest" className="form-control" value={initPrimaryIndustry()} onChange={updateCurrentUser}/>
       							</div>
 
       							<div><b><label htmlFor="secondaryIndustry">Secondary Industry Interest:&nbsp;</label></b></div>
       							<div id="secondaryIndustryForm" className="form-group">
-      								<input id="secondaryIndustryBox"  className="form-control" value={initSecondaryIndustry()}/>
+      								<input id="secondaryIndustryBox" type="secondary_industry_interest" name="secondary_industry_interest" className="form-control" value={initSecondaryIndustry()} onChange={updateCurrentUser}/>
       							</div>
 
       							<div><b><label htmlFor="cities">Particular Cities of Interest:&nbsp;</label></b></div>
       							<div id="citiesForm" className="form-group">
-      								<input id="citiesBox"  className="form-control" value={initCities()}/>
+      								<input id="citiesBox" type="cities_of_interest" name="cities_of_interest" className="form-control" value={initCities()} onChange={updateCurrentUser}/>
       							</div>
       						</div>
       					<h3>Biography Information</h3>
       						<label htmlFor="biography">Biography&nbsp;</label><img src={DownArrow} alt="DownArrow"/>
                   <div id="bio" className="form-group">
-                    <textarea id="bioBox"  className="form-control" rows="8" value={initBio()}/>
+                    <textarea id="bioBox" type="biography" name="biography" className="form-control" rows="8" value={initBio()} onChange={updateCurrentUser}/>
                   </div>
       			</div>
             <div>
-              <button id="edit">Save Edits</button>
+              <button type="button" id="edit" onClick={refresh}>Save Edits</button>
             </div>
             <div>
-              <button id="logout">Logout</button>
+              <button id="logout" onClick={logoutUser}>Logout</button>
             </div>
       		</div>
         </div>
