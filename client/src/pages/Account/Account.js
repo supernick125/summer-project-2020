@@ -62,6 +62,24 @@ export default () => {
     getUserInfo();
   }, [editable.edit]);
   
+  const makeChanges = async () => {
+    try {
+      const resp = await Axios({
+        method: 'POST',
+        url: '/api/user/update',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: currentUser
+      });
+      console.log(resp);
+      console.log(resp.data);
+    } catch (error) {
+      console.error(error);
+      console.error("Failed to update the user.");
+    }
+  }
+  
   const logoutUser = (event) => {
     event.preventDefault();
     document.cookie = 'x-auth-token= ; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
@@ -180,6 +198,10 @@ export default () => {
   
   function refresh()
   {
+      if (editable.edit === true) {
+          makeChanges();
+      }
+      
       var change = !editable.edit;
       setEditable({edit: change});
   }
@@ -187,7 +209,7 @@ export default () => {
   if(!edit())
   {
     return (
-      <div id="header" onload="getUserInfo()">
+      <div id="header">
       <style>{'body { background-color: #00a651; }'}</style>
       		<div id="fullContainer" className="w-75 text-white">
       			<div>
@@ -241,17 +263,14 @@ export default () => {
   }else
   {
     return (
-      <div id="header" onload="getUserInfo()">
+      <div id="header">
       <style>{'body { background-color: #00a651; }'}</style>
       		<div id="fullContainer" className="w-75 text-white">
       			<h1><b>Student Profile</b> <img src={Arrow} alt="Arrow"/></h1>
       				<div id="profile">
       					<h3>Personal Information</h3>
       						<div id="personalInfo">
-      							<div><b><label htmlFor="email">Email:&nbsp;</label></b></div>
-      							<div id="emailForm" className="form-group">
-      								<input id="emailBox" type="email" name="email" className="form-control" value={initEmail()} onChange={updateCurrentUser}/>
-      							</div>
+      							<div><b><label htmlFor="email">Email:&nbsp;</label></b><span id="email">{initEmail()}</span></div>
 
       							<div><b><label htmlFor="firstName">First Name:&nbsp;</label></b><span id="firstName">{initFirstName()}</span></div>
 
