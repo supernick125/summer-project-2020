@@ -22,14 +22,25 @@
 
 psql -U postgres
 <password you chose during install>
-CREATE DATABASE alumni_connector;
+CREATE DATABASE ans_db;
 \q
 psql -U postgres -d alumni_connector -f <file path of db-schema.sql>
 (DB schema is now created)
 
 For all future logins:
-psql -U postgres -d alumni_connector
+psql -U postgres -d ans_db
 <password>
+
+## PSQL UPDATING ans_db DATABASE
+psql -U postgres
+<password>
+DROP DATABASE ans_db;
+CREATE DATABASE ans_db;
+\q
+psql -U postgres -d ans_db -f <file path of db-schema.sql>
+psql -U postgres -d ans_db -f <file path of db-init.sql>
+(DB schema, initialized fields, and extensions are now created)
+
 
 ## Some helpful sample links
 
