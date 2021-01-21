@@ -1,4 +1,3 @@
-
 *
 {
 	word-wrap: break-word;
@@ -148,39 +147,4 @@ h3
 #logout:hover
 {
 	background-color: red;
-}
-
-.body
-{
-				background-color: #00a651;
-}
-
-#header
-{
-        color: white;
-}
-
-#profile
-{
-				margin-left: 2vw;
-}
-
-#backArrow {
-				position: absolute;
-				right: 12.5vw;
-}
-
-#bioForm
-{
-				display:none;
-}
-
-.downArrow
-{
-    background-image: url(./DownArrow.png);
-}
-
-.Arrow
-{
-    background-image: url(./Arrow.png);
 }
