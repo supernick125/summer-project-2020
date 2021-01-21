@@ -210,8 +210,15 @@ export default () => {
       setEditable({edit: change});
   }
 
+  function reload()
+  {
+    window.location.reload();
+  }
+
   if(!edit())
   {
+    if(11>11) //Replace with initFirstName().length + initLastName().length > 11
+    {
       return (
   			<div id="fullContainer">
   				<div id="block1" className="blocks">
@@ -254,11 +261,60 @@ export default () => {
   				<button type="button" id="editButton" onClick={refresh}>edit</button>
   				<button id="logout">Logout</button>
   			</div>
-  	);
+  	   );
+     }else{
+       return (
+    		<div id="fullContainer">
+    				<div id="block1" className="blocks">
+    					<div id="block1left">
+    						<img id="profilePicture" src={ProfileIcon}/>
+    					</div>
+    					<div id="block1right">
+    						<div id="firstName">{initFirstName()}</div>
+    						<div id="lastName">{initLastName()}</div>
+    						<h2 id="studentoralumni">{"Student"} in {initSchool()}</h2>
+    						<h2>Class of <span id="gradYear">{initGradYear()}</span></h2>
+    					</div>
+    				</div>
+    				<div id="block2" className="blocks">
+    					<div id="block2left">
+    						<h3 id="phoneNum"><img className="icons" src={PhoneIcon}/>{initPhoneNum()}</h3>
+    						<h3 id="email"><img className="icons" src={EmailIcon}/>{initEmail()}</h3>
+    						<h3 id="hometown"><img className="icons" src={HomeIcon}/>{initHometown()}</h3>
+    					</div>
+    					<div id="block2right">
+    						<h2>Academics</h2>
+    						<h3 id="school">School: {initSchool()}</h3>
+    						<h3 id="major">Major: {initMajor()}, {initMajorTwo()}</h3>
+    						<h3 id="minor">Minor/Concentration: {initMinor()}</h3>
+    						<h3 id="highSchool">High School: {initHighSchool()}</h3>
+    					</div>
+    				</div>
+    				<div id="block3" className="blocks">
+    					<div id="block3left">
+    						<h2>Biography</h2>
+    						<h3 id="biography">{initBio()}</h3>
+    					</div>
+    					<div id="block3right">
+    						<h2>Career</h2>
+    						<h3 id="primaryIndustry">Primary Industry Interest: {initPrimaryIndustry()}</h3>
+    						<h3 id="secondaryIndustry">Secondary Industry Interest: {initSecondaryIndustry()}</h3>
+    						<h3 id="cities">Particular Cities of Interest: {initCities()}</h3>
+    					</div>
+    				</div>
+
+            <button type="button" id="editButton" onClick={refresh}>edit</button>
+    				<button id="logout">Logout</button>
+    			</div>
+    	);
+    }
   }else
   {
+    if(11<11) //Replace with initFirstName().length + initLastName().length > 11
+    {
       return (
         <div id="fullContainer">
+        <button onClick={reload}>Refresh Page</button>
             <div id="block1" className="blocks">
               <div id="block1left">
                 <img id="profilePicture" src={ProfileIcon}/>
@@ -334,5 +390,84 @@ export default () => {
             <button id="logout">Logout</button>
           </div>
       );
+    }else
+    {
+      	return (
+      			<div id="fullContainer">
+      				<div id="block1" className="blocks">
+      					<div id="block1left">
+      						<img id="profilePicture" src={ProfileIcon}/>
+      					</div>
+      					<div id="block1right">
+      						<h1 id="name">{initFirstName()} {initLastName()}</h1>
+                  <h2 id="studentoralumni">{"Student"} in {initSchool()}</h2>
+                  <h2>Class of <span id="gradYear">{initGradYear()}</span></h2>
+                  <div id="gradYearForm" className="form-group">
+    								<input id="gradYearBox" type="graduationyear" name="graduationyear" className="form-control" value={initGradYear()} onChange={updateCurrentUser}/>
+    							</div>
+                </div>
+              </div>
+              <div id="block2" className="blocks">
+                <div id="block2left">
+                  <h3 id="phoneNum"><img className="icons" src={PhoneIcon}/>Phone Number: {initPhoneNum()}</h3>
+    							<div id="phoneForm" className="form-group">
+    								<input id="phoneBox" type="phone_number" name="phone_number" className="form-control" value={initPhoneNum()} onChange={updateCurrentUser}/>
+    							</div>
+                  <h3 id="email"><img className="icons" src={EmailIcon}/>Email: {initEmail()}</h3>
+                  <h3 id="hometown"><img className="icons" src={HomeIcon}/>Hometown: {initHometown()}</h3>
+    							<div id="hometownForm" className="form-group">
+    								<input id="hometownBox" type="hometown" name="hometown" className="form-control" value={initHometown()} onChange={updateCurrentUser}/>
+    							</div>
+                </div>
+                <div id="block2right">
+                  <h2>Academics</h2>
+                  <h3 id="school">School: {initSchool()}</h3>
+    							<div id="schoolForm" className="form-group">
+    								<input id="schoolBox" type="school" name="school" className="form-control" value={initSchool()} onChange={updateCurrentUser}/>
+    							</div>
+                  <h3 id="major">Major: {initMajor()}, {initMajorTwo()}</h3>
+                  <div id="majorForm" className="form-group">
+    								<input id="majorBox" type="major" name="major" className="form-control" value={initMajor()} onChange={updateCurrentUser}/>
+    							</div>
+                  <h3 id="minor">Minor/Concentration: {initMinor()}</h3>
+                  <div id="minorForm" className="form-group">
+    								<input id="minorBox" type="minor" name="minor" className="form-control" value={initMajorTwo()} onChange={updateCurrentUser}/>
+    							</div>
+                  <h3 id="highSchool">High School: {initHighSchool()}</h3>
+    							<div id="highSchoolForm" className="form-group">
+    								<input id="highSchoolBox" type="high_school" name="high_school" className="form-control" value={initHighSchool()} onChange={updateCurrentUser}/>
+    							</div>
+                </div>
+              </div>
+              <div id="block3" className="blocks">
+                <div id="block3left">
+                  <h2>Biography</h2>
+                  <h3 id="biography">{initBio()}</h3>
+                  <div id="bio" className="form-group">
+                    <textarea id="bioBox" type="biography" name="biography" className="form-control" rows="8" value={initBio()} onChange={updateCurrentUser}/>
+                  </div>
+                </div>
+                <div id="block3right">
+                  <h2>Career</h2>
+                  <h3 id="primaryIndustry">Primary Industry Interest: {initPrimaryIndustry()}</h3>
+                  <div id="primaryIndustryForm" className="form-group">
+    								<input id="primaryIndustryBox" type="primary_industry_interest" name="primary_industry_interest" className="form-control" value={initPrimaryIndustry()} onChange={updateCurrentUser}/>
+    							</div>
+                  <h3 id="secondaryIndustry">Secondary Industry Interest: {initSecondaryIndustry()}</h3>
+                  <div id="secondaryIndustryForm" className="form-group">
+    								<input id="secondaryIndustryBox" type="secondary_industry_interest" name="secondary_industry_interest" className="form-control" value={initSecondaryIndustry()} onChange={updateCurrentUser}/>
+    							</div>
+                  <h3 id="cities">Particular Cities of Interest: {initCities()}</h3>
+                  <div id="citiesForm" className="form-group">
+    								<input id="citiesBox" type="cities_of_interest" name="cities_of_interest" className="form-control" value={initCities()} onChange={updateCurrentUser}/>
+    							</div>
+                </div>
+              </div>
+
+              <button type="button" id="editButton" onClick={refresh}>Confirm</button>
+              <button id="logout">Logout</button>
+            </div>
+          );
+    }
   }
 }
