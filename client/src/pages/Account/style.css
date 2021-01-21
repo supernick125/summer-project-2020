@@ -28,6 +28,11 @@ h3
 	width: 90vw;
 }
 
+.form-control
+{
+	width: 200px;
+}
+
 #block1left
 {
 	height: 225px;
