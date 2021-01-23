@@ -25,6 +25,26 @@ export default () => {
 
   const name = authUser.user.firstname + ' ' + authUser.user.lastname;
 
+  //test function to send email
+  const sendEmail = async (event) => {
+    event.preventDefault();
+    try {
+      const resp = await Axios({
+        method: 'POST',
+        url: '/api/user/email',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: {
+          subject: 'Confirm your email',
+          text: 'Confirmation code: 12345'
+        }
+      });
+    }catch(error) {
+      console.error(error);
+    }
+  }
+
   return (
     <Navbar className="bar" bg="light" expand="lg">
       <Title className='svg'/>

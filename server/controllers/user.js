@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 //Get user details
 const getUserDetails = async (req, res) => {
   try {
-    const { email } = req.query;
+    const { email } = req.query;//TYPO?
     const loggedUserId = req.user.id;
     const userDetails = await pool.query(
       'SELECT account.id, school_id, graduation_year, first_name, last_name, email_address, phone_number, hometown, high_school, biography, school, major, major2, minor, primary_industry_interest, secondary_industry_interest, cities_of_interest FROM account, personal_info, academic_info, industry_info WHERE email_address = $1 AND personal_info.account_id = (SELECT id FROM account WHERE email_address = $1) AND academic_info.account_id = (SELECT id FROM account WHERE email_address = $1) AND industry_info.account_id = (SELECT id FROM account WHERE email_address = $1)', [email]
@@ -156,11 +156,56 @@ const checkUser = async (req, res) => {
   }
 }
 
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'ansconnect2020@gmail.com',
+    pass: process.env.EMAIL_PASS
+  }
+});
+
+//Send email
+const sendEmail = async (req, res) => {
+  const { subject, text } = req.body;
+  try {
+    const user = await pool.query('SELECT email_address FROM account WHERE id = $1', [req.user.id]);
+    if (!user.rowCount) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    const testOptions = {
+      from: 'ansconnect2020@gmail.com',
+      to: 'gk2533@columbia.edu',
+      //to: user.rows[0].email_address,
+      subject: subject,
+      text: text
+    }
+    transporter.sendMail(testOptions, (error, info) => {
+      if (error) {
+        console.error(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+    const resp = {
+      user: {
+        id: user.rows[0].id,
+        email: user.rows[0].email_address
+      }
+    }
+    return res.status(200).json(resp);
+  }catch(error) {
+    return res.status(500).json({ message: 'There was an error while sending email. Please try again later', error: error });
+  }
+}
+
 //Export functions
 module.exports = {
   getUserDetails,
   updateUser,
   registerUser,
   loginUser,
-  checkUser
+  checkUser,
+  sendEmail
 }
