@@ -1,1 +1,88 @@
 /* HomePage Stylesheet */
+
+body
+{
+  margin: 0px;
+}
+h1
+{
+  margin: 0px;
+}
+
+#banner
+{
+  background-color: #0167B2;
+  color: white;
+  border: 1px #0167B2 solid;
+  padding-left: 10vw;
+  padding-right: 10vw;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 10px;
+}
+
+#profile
+{
+  border-radius: 25px 25px 0px 0px;
+  background-color: #AAD5E8;
+  margin-left: 15vw;
+  margin-right: 15vw;
+  padding-left: 20px;
+  padding-right: 20px;
+  vertical-align: top;
+}
+
+#profilePicture
+{
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+}
+
+#profileInfo
+{
+  display: inline-block;
+}
+#timeline
+{
+  background-color: #F1F1F1;
+  margin-left: 15vw;
+  margin-right: 15vw;
+  padding-top: 10px;
+  text-align: center;
+}
+#scrollmenu
+{
+  margin-top: 10px;
+  overflow: auto;
+  white-space: nowrap;
+}
+.meetings
+{
+  background-color: white;
+  width: 225px;
+  height: 43vh;
+  display: inline-block;
+  text-align: center;
+  border-radius: 25px;
+  margin: 10px;
+  margin-top: 30px;
+  white-space: normal;
+}
+.icons
+{
+  background-color: #F1F1F1;
+  width: 60px;
+  border-radius: 5px;
+  margin-top: -30px;
+}
+.calendarButtons
+{
+  border: 1px grey solid;
+  border-radius: 25px;
+  width: 100px;
+}
+#scrollmenu div:hover
+{
+  background-color: lightblue;
+}

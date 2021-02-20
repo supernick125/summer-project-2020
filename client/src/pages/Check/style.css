@@ -1,0 +1,34 @@
+body
+{
+  margin: 0px;
+  background-color: #0167B2;
+  text-align: center;
+}
+#logo
+{
+  margin-top: 15vh;
+  width: 40vw;
+}
+#check
+{
+  margin-top: 10vh;
+  font-size: 30px;
+  color: white;
+}
+#dontsee
+{
+  margin-top: 25vh;
+  font-size: 20px;
+  color: #B49598;
+}
+#resendButton
+{
+  margin-top: 10px;
+  color: #B49598;
+  background-color: #0167B2;
+  font-size: 25px;
+  border: 2px #B49598 solid;
+  border-radius: 50px;
+  width: 200px;
+  height: 75px;
+}

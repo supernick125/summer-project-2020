@@ -47,7 +47,7 @@ export default () => {
 
   return (
     <Navbar className="bar" bg="light" expand="lg">
-      <Title className='svg'/>
+      <Link to='/'><Title className='svg'/></Link>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Form inline className=" ml-auto mr-sm-2">
