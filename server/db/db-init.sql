@@ -21,6 +21,23 @@ INSERT INTO account_type (account_type) VALUES ('STUDENT');
 INSERT INTO account_type (account_type) VALUES ('ALUMNUS');
 
 --
+-- Subject / Major list
+--
+
+INSERT INTO subject (name) VALUES ('ENGLISH');
+INSERT INTO subject (name) VALUES ('MATHEMATICS');
+INSERT INTO subject (name) VALUES ('BIOLOGY');
+INSERT INTO subject (name) VALUES ('CHEMISTRY');
+INSERT INTO subject (name) VALUES ('COMPUTER SCIENCE');
+INSERT INTO subject (name) VALUES ('PHYSICS');
+INSERT INTO subject (name) VALUES ('INTERNATIONAL RELATIONS');
+INSERT INTO subject (name) VALUES ('ANTHROPOLOGY');
+INSERT INTO subject (name) VALUES ('HISTORY');
+INSERT INTO subject (name) VALUES ('ART');
+INSERT INTO subject (name) VALUES ('ART HISTORY');
+
+
+--
 -- Extensions
 --
 CREATE EXTENSION pgcrypto;
