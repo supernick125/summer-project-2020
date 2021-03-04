@@ -1,6 +1,15 @@
 const pool = require('../db/');
 const jwt = require('jsonwebtoken');
 
+//TODO
+//Function to pair mentor and mentee (add row to mentor with ids)
+//Function to return list of all students (accounts with student type)
+//Function to return list of all alumni (accounts with alumni type)
+//Function to return list of all personal meetings (meetings with current user in them - check account_meeting table)
+//Create personal meeting (create meeting with mentor pair attending)
+//Edit meeting summary? clarify this
+
+
 //Get user details
 const getUserDetails = async (req, res) => {
   try {
@@ -43,12 +52,12 @@ const updateUser = async (req, res) => {
   try {
     const {first_name, last_name, email, graduationyear, phone_number, hometown, high_school, biography, school, major, major2, minor, primary_industry_interest, secondary_industry_interest, cities_of_interest} = req.body;
     const userId = req.user.id;
-    
+
     const userInfo = await pool.query('UPDATE account SET graduation_year = $2 WHERE id = $1', [userId, graduationyear]);
     const personalInfo = await pool.query('UPDATE personal_info SET phone_number = $2, hometown = $3, high_school = $4, biography = $5 WHERE account_id = $1', [userId, phone_number, hometown, high_school, biography]);
     const academicInfo = await pool.query('UPDATE academic_info SET school = $2, major = $3, major2 = $4, minor = $5 WHERE account_id = $1', [userId, school, major, major2, minor]);
     const industryInfo = await pool.query('UPDATE industry_info SET primary_industry_interest = $2, secondary_industry_interest = $3, cities_of_interest = $4 WHERE account_id = $1', [userId, primary_industry_interest, secondary_industry_interest, cities_of_interest]);
-    
+
     return res.status(200).json({ message: 'User successfully updated'});
   }catch(error) {
     return res.status(500).json({ message: 'There was an error. Please try again later' });
