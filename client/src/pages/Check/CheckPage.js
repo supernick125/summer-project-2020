@@ -6,7 +6,7 @@ import './style.css'
 
 export default () => {
   return (
-    <div>
+    <div id="checkPage">
       <img alt="" id="logo" src={Logo}/>
       <div id="check">Please check your email to activate your account link.</div>
       <div id="dontsee">Don't see an email?</div>
