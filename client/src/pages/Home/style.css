@@ -1,15 +1,15 @@
 /* HomePage Stylesheet */
 
-body
+#homePage body
 {
   margin: 0px;
 }
-h1
+#homePage h1
 {
   margin: 0px;
 }
 
-#banner
+#homePage #banner
 {
   background-color: #0167B2;
   color: white;
@@ -21,7 +21,7 @@ h1
   margin-bottom: 10px;
 }
 
-#profile
+#homePage #profile
 {
   border-radius: 25px 25px 0px 0px;
   background-color: #AAD5E8;
@@ -32,18 +32,18 @@ h1
   vertical-align: top;
 }
 
-#profilePicture
+#homePage #profilePicture
 {
   width: 100px;
   height: 100px;
   display: inline-block;
 }
 
-#profileInfo
+#homePage #profileInfo
 {
   display: inline-block;
 }
-#timeline
+#homePage #timeline
 {
   background-color: #F1F1F1;
   margin-left: 15vw;
@@ -51,38 +51,39 @@ h1
   padding-top: 10px;
   text-align: center;
 }
-#scrollmenu
+#homePage #scrollmenu
 {
   margin-top: 10px;
   overflow: auto;
   white-space: nowrap;
 }
-.meetings
+#homePage .meetings
 {
   background-color: white;
   width: 225px;
   height: 43vh;
   display: inline-block;
+  vertical-align: top;
   text-align: center;
   border-radius: 25px;
   margin: 10px;
   margin-top: 30px;
   white-space: normal;
 }
-.icons
+#homePage .icons
 {
   background-color: #F1F1F1;
   width: 60px;
   border-radius: 5px;
   margin-top: -30px;
 }
-.calendarButtons
+#homePage .calendarButtons
 {
   border: 1px grey solid;
   border-radius: 25px;
   width: 100px;
 }
-#scrollmenu div:hover
+#homePage #scrollmenu div:hover
 {
   background-color: lightblue;
 }
