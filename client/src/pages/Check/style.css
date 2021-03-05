@@ -1,27 +1,27 @@
-body
+#checkPage body
 {
   margin: 0px;
   background-color: #0167B2;
   text-align: center;
 }
-#logo
+#checkPage #logo
 {
   margin-top: 15vh;
   width: 40vw;
 }
-#check
+#checkPage #check
 {
   margin-top: 10vh;
   font-size: 30px;
   color: white;
 }
-#dontsee
+#checkPage #dontsee
 {
   margin-top: 25vh;
   font-size: 20px;
   color: #B49598;
 }
-#resendButton
+#checkPage #resendButton
 {
   margin-top: 10px;
   color: #B49598;
