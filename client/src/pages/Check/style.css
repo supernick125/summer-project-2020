@@ -1,8 +1,8 @@
-#checkPage body
+#checkPage
 {
-  margin: 0px;
   background-color: #0167B2;
   text-align: center;
+  height: 100vh;
 }
 #checkPage #logo
 {
