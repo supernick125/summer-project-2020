@@ -9,6 +9,7 @@ import HomePage from '../pages/Home/HomePage';
 import RegisterPage from '../pages/Register/RegisterPage';
 import AdminPage from '../pages/Admin/AdminPage';
 import Account from '../pages/Account/Account';
+import CheckPage from '../pages/Account/CheckPage';
 
 export default () => {
   const { authUser, setAuthUser } = useContext(AuthContext);
@@ -68,6 +69,9 @@ export default () => {
         </Route>
         <Route>
           <Account />
+        </Route>
+        <Route>
+          <CheckPage />
         </Route>
         <Route exact path='/404'>
           <h1>Not found</h1>
