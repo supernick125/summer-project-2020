@@ -61,17 +61,17 @@ export default () => {
     if(location.pathname in authRoutes) return <Redirect to='/home' />
     return (
       <Switch>
-        <Route exact path='/home'>
-          <HomePage />
-        </Route>
         <Route exact path='/admin'>
           <AdminPage />
         </Route>
-        <Route>
+        <Route exact path='/account'>>
           <Account />
         </Route>
-        <Route>
+        <Route exact path='/check'>
           <CheckPage />
+        </Route>
+        <Route>
+          <HomePage />
         </Route>
         <Route exact path='/404'>
           <h1>Not found</h1>
