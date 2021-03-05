@@ -1,38 +1,38 @@
-*
+#accountPage *
 {
 	word-wrap: break-word;
 }
 
-h1
+#accountPage h1
 {
 	font-weight: bold;
 	font-size: 80px;
 }
 
-h2
+#accountPage h2
 {
 	font-weight: semibold;
 	font-size: 40px;
 }
 
-h3
+#accountPage h3
 {
 	font-size: 20px;
 }
 
-.blocks
+#accountPage .blocks
 {
 	border: 3px outset black;
 	margin-bottom: 30px;
 	width: 90vw;
 }
 
-.form-control
+#accountPage .form-control
 {
 	width: 200px;
 }
 
-#block1left
+#accountPage #block1left
 {
 	height: 225px;
 	display: inline-block;
@@ -40,14 +40,14 @@ h3
 	margin-right: 30px;
 }
 
-#block1right
+#accountPage #block1right
 {
 	display: inline-block;
 	vertical-align: top;
 	margin-right: 30px;
 }
 
-#profilePicture
+#accountPage #profilePicture
 {
 	width: 225px;
 	height: 225px;
@@ -57,21 +57,21 @@ h3
 	padding-right: 20%;
 }
 
-#firstName
+#accountPage #firstName
 {
 	font-weight: bold;
 	line-height: normal;
 	font-size: 40px;
 }
 
-#lastName
+#accountPage #lastName
 {
 	font-weight: bold;
 	line-height: normal;
 	font-size: 40px;
 }
 
-#block2left
+#accountPage #block2left
 {
 	width: 445px;
 	display: inline-block;
@@ -80,14 +80,14 @@ h3
 	margin-right: 30px;
 }
 
-#block2right
+#accountPage #block2right
 {
 	display: inline-block;
 	vertical-align: top;
 	margin-right: 30px;
 }
 
-.icons
+#accountPage .icons
 {
 	width: 40px;
 	height: 40px;
@@ -95,7 +95,7 @@ h3
 	margin-right: 20px;
 }
 
-#block3left
+#accountPage #block3left
 {
 	height: auto;
 	width: 540px;
@@ -104,7 +104,7 @@ h3
 	margin-right: 30px;
 }
 
-#block3right
+#accountPage #block3right
 {
 	height: auto;
 	display: inline-block;
@@ -112,7 +112,7 @@ h3
 	margin-right: 30px;
 }
 
-#editButton
+#accountPage #editButton
 {
 	margin-top: 2vh;
 	background-color: gray;
@@ -121,7 +121,7 @@ h3
 	width: 90px;
 }
 
-#fullContainer
+#accountPage
 {
 	padding-top: 10vh;
 	padding-left: 5vw;
@@ -130,12 +130,12 @@ h3
 	line-height: 2.5;
 }
 
-#biography
+#accountPage #biography
 {
 	line-height: 1.6;
 }
 
-#logout
+#accountPage #logout
 {
 	margin-top: 2vh;
 	background-color: gray;
@@ -144,7 +144,7 @@ h3
 	width: 90px;
 }
 
-#logout:hover
+#accountPage #logout:hover
 {
 	background-color: red;
 }
