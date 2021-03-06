@@ -12,3 +12,7 @@
   font-family: Manrope;
 }
 
+.bar #name
+{
+	margin: 10px;
+}
