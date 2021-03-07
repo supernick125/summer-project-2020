@@ -1,1 +1,108 @@
 /* AdminPage Stylesheet */
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+.double-column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 2;
+}
+
+.blue-column {
+  background-color: blue;
+  height: 100px;
+}
+
+.green-column {
+    height: 100px;
+    background-color: green;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.wrap {
+  width: 320px;
+  border: 1px solid #ccc;
+  height: 480px;
+  overflow: auto;
+  position: relative;
+}
+
+.top-header .menu-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 18px 20px;
+}
+
+.fix-search .top-header {
+  background: #eee;
+}
+
+.search {
+  position: absolute;
+  top: 155px;
+  left: 20px;
+  right: 20px;
+}
+
+.search input {
+  width: 265px;
+  border: 1px solid #ccc;
+  padding: 8px;
+  font-size: 15px;
+  -webkit-transition: width 0.2s;
+  transition: width 0.2s;
+  -webkit-appearance: none;
+}
+
+.fix-search .search {
+  position: fixed;
+  top: 10px;
+}
+
+.fix-search .search input {
+  width: 250px;
+}
+
+.top {
+  height: 250px;
+  padding-top: 40px;
+}
+
+main {
+  padding: 0 20px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+main div {
+  width: 125px;
+  height: 80px;
+  background: #ccc;
+  margin: 0 0 20px 0;
+}
