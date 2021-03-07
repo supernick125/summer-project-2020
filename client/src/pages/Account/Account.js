@@ -1,10 +1,14 @@
 import React, { useState, useContext, useEffect } from 'react';
 import './style.css';
+import Arrow from './Arrow.png';
+import DownArrow from './DownArrow.png';
 import Axios from 'axios';
 import ProfileIcon from './img/account_circle-24px.svg'
 import PhoneIcon from './img/phone-24px.svg'
 import EmailIcon from './img/mail-24px.svg'
 import HomeIcon from './img/home-24px.svg'
+import HomeNavbar from '../../components/HomeNavbar/HomeNavbar';
+import { Redirect, Link } from 'react-router-dom';
 
 import { Context as AuthContext } from '../../context/Auth';
 
