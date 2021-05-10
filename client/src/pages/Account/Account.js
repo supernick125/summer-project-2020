@@ -1,7 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
 import './style.css';
-import Arrow from './Arrow.png';
-import DownArrow from './DownArrow.png';
 import Axios from 'axios';
 import ProfileIcon from './img/account_circle-24px.svg'
 import PhoneIcon from './img/phone-24px.svg'
